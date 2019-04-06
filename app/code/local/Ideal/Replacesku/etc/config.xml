@@ -1,0 +1,147 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Ideal_Replacesku>
+            <version>0.1.0</version>
+        </Ideal_Replacesku>
+    </modules>
+    <frontend>
+        <routers>
+            <replacesku>
+                <use>standard</use>
+                <args>
+                    <module>Ideal_Replacesku</module>
+                    <frontName>replacesku</frontName>
+                </args>
+            </replacesku>
+        </routers>
+        <layout>
+            <updates>
+                <replacesku>
+                    <file>replacesku.xml</file>
+                </replacesku>
+            </updates>
+        </layout>
+    </frontend>
+    <!-- <admin>
+        <routers>
+			<replacesku>
+				<use>admin</use>
+				<args>
+					<module>Ideal_Replacesku</module>
+					<frontName>replacesku</frontName>
+				</args>
+			</replacesku>
+        </routers>
+    </admin> -->
+    <admin>
+	    <routers>
+	        <adminhtml>
+	            <args>
+	                <modules>
+	                    <replacesku after="Ideal_Adminhtml">Ideal_Replacesku_Adminhtml</replacesku>
+	                </modules>
+	            </args>
+	        </adminhtml>
+	    </routers>
+	</admin>
+    
+    <adminhtml>
+		<menu>
+			<catalog module="replacesku">
+        		<children>
+					<replacesku module="replacesku">
+						<title>Replace SKU</title>
+						<sort_order>13</sort_order>
+						<action>adminhtml/replacesku/new/</action>
+					</replacesku>
+				</children>
+			</catalog>
+		</menu>
+		<!--<acl>
+			<resources>
+				<all>
+					<title>Allow Everything</title>
+				</all>
+				<admin>
+					<children>
+						<Ideal_Replacesku>
+							<title>Replacesku Module</title>
+							<sort_order>10</sort_order>
+						</Ideal_Replacesku>
+					</children>
+				</admin>
+			</resources>
+		</acl>-->
+		
+		<acl>
+            <resources>
+                <admin>
+                    <children>
+                        <catalog>
+                            <children>
+								<replacesku>
+										<title>Replace SKU</title>
+								</replacesku>
+							</children>
+                        </catalog>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+		
+		<layout>
+			<updates>
+				<replacesku>
+					<file>replacesku.xml</file>
+				</replacesku>
+			</updates>
+		</layout>
+    </adminhtml>   
+    <global>
+        <models>
+            <replacesku>
+                <class>Ideal_Replacesku_Model</class>
+                <resourceModel>replacesku_mysql4</resourceModel>
+            </replacesku>
+            <replacesku_mysql4>
+                <class>Ideal_Replacesku_Model_Mysql4</class>
+                <entities>
+                    <replacesku>
+                        <table>replacesku</table>
+                    </replacesku>
+                </entities>
+            </replacesku_mysql4>
+        </models>
+        <resources>
+            <replacesku_setup>
+                <setup>
+                    <module>Ideal_Replacesku</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </replacesku_setup>
+            <replacesku_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </replacesku_write>
+            <replacesku_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </replacesku_read>
+        </resources>
+        <blocks>
+            <replacesku>
+                <class>Ideal_Replacesku_Block</class>
+            </replacesku>
+        </blocks>
+        <helpers>
+            <replacesku>
+                <class>Ideal_Replacesku_Helper</class>
+            </replacesku>
+        </helpers>
+    </global>
+</config>

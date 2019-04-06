@@ -1,0 +1,196 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Dolphin_Specialorder>
+            <version>0.1.0</version>
+        </Dolphin_Specialorder>
+    </modules>
+    <frontend>
+        <routers>
+            <specialorder>
+                <use>standard</use>
+                <args>
+                    <module>Dolphin_Specialorder</module>
+                    <frontName>specialorder</frontName>
+                </args>
+            </specialorder>
+        </routers>
+        <layout>
+            <updates>
+                <specialorder>
+                    <file>specialorder.xml</file>
+                </specialorder>
+            </updates>
+        </layout>
+    </frontend>
+    <admin>
+        <routers>
+			<specialorder>
+				<use>admin</use>
+				<args>
+					<module>Dolphin_Specialorder</module>
+					<frontName>specialorder</frontName>
+				</args>
+			</specialorder>
+        </routers>
+    </admin>
+    <adminhtml>
+		<menu>
+		
+		 <message translate="title">
+                <title>Messages</title>
+                <sort_order>71</sort_order>  
+                <children>	
+                   <specialorder module="specialorder">
+					<title>Special Order Requests</title> 
+					<sort_order>104</sort_order>
+					<action>specialorder/adminhtml_specialorder</action>               
+					<!--<children>
+						<items module="specialorder">
+							<title>Manage Requests</title>
+							<sort_order>0</sort_order>
+							<action>specialorder/adminhtml_specialorder</action>
+						</items>
+						<settings module="specialorder">
+                    		<title>Settings</title>
+			                <sort_order>1000</sort_order>
+		                    <action>adminhtml/system_config/edit/section/specialorder</action>
+		                </settings>
+					</children>-->
+				</specialorder>
+                </children>
+             </message>
+		
+		
+		
+			
+		</menu>
+		 
+		<acl>
+			<resources>
+				<all>
+					<title>Allow Everything</title>
+				</all>
+				<admin>
+					<children>
+						 <message translate="title" module="specialorder">
+				                <title>Messages</title>
+				                <sort_order>71</sort_order>
+				                <depends><module>Message_Specialorder</module></depends>
+				                <children>
+				                   <specialorder module="specialorder">
+									<title>Diamond Requests</title> 
+									<sort_order>71</sort_order>               
+									<children>
+										<items module="specialorder">
+											<title>Manage Requests</title>
+											<sort_order>0</sort_order>											
+										</items>
+										<settings module="specialorder">
+				                    		<title>Settings</title>
+							                <sort_order>1000</sort_order>						                   
+						                </settings>
+									</children>
+								</specialorder>
+				                </children>
+            			 </message>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+		<layout>
+			<updates>
+				<specialorder>
+					<file>specialorder.xml</file>
+				</specialorder>
+			</updates>
+		</layout>
+    </adminhtml>   
+    <global>
+        <models>
+            <specialorder>
+                <class>Dolphin_Specialorder_Model</class>
+                <resourceModel>specialorder_mysql4</resourceModel>
+            </specialorder>
+            <specialorder_mysql4>
+                <class>Dolphin_Specialorder_Model_Mysql4</class>
+                <entities>
+                    <specialorder>
+                        <table>specialorder</table>
+                    </specialorder>
+                </entities>
+            </specialorder_mysql4>
+        </models>
+        <resources>
+            <specialorder_setup>
+                <setup>
+                    <module>Dolphin_Specialorder</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </specialorder_setup>
+            <specialorder_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </specialorder_write>
+            <specialorder_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </specialorder_read>
+        </resources>
+        <template>
+            <email>
+                <!--<specialorder_email_email_template translate="label" module="specialorder">
+                    <label>Custom Contact New Form</label>
+                    <file>custom_contact_new_form.html</file>
+                    <type>html</type>
+                </specialorder_email_email_template>
+                <specialorder_email_autoemail_template translate="label" module="specialorder">
+                    <label>Auto Custom Specialorder Form</label>
+                    <file>auto_custom_specialorder_form.html</file>
+                    <type>html</type>
+                </specialorder_email_autoemail_template>-->
+            </email>
+        </template>
+         <template>
+            <email>
+                <specialorder_email_specialorder_template translate="label" module="specialorder">
+                    <label>Custom Contact Specialorder Form</label>
+                    <file>specialorder_custom_form.html</file>
+                    <type>html</type>
+                </specialorder_email_specialorder_template>
+                <specialorder_email_autoemail_template translate="label" module="specialorder">
+                    <label>Auto Custom Specialorder Form</label>
+                    <file>auto_custom_specialorder_form.html</file>
+                    <type>html</type>
+                </specialorder_email_autoemail_template>
+            </email>
+        </template>
+        <blocks>
+            <specialorder>
+                <class>Dolphin_Specialorder_Block</class>
+            </specialorder>
+        </blocks>
+        <helpers>
+            <specialorder>
+                <class>Dolphin_Specialorder_Helper</class>
+            </specialorder>
+        </helpers>
+    </global>
+    <default>
+        <specialorder>
+            <contacts>
+                <enabled>1</enabled>
+            </contacts>
+            <email>
+                <recipient_email><![CDATA[hello@example.com]]></recipient_email>
+                <sender_email_identity>custom2</sender_email_identity>
+                <email_template>specialorder_email_email_template</email_template>
+                <autoemail_template>specialorder_email_autoemail_template</autoemail_template>
+            </email>
+        </specialorder>
+    </default>
+</config>

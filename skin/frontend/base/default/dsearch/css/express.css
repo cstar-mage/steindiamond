@@ -1,0 +1,159 @@
+.pr-review-points-attr-wrapper .pr-attribute-group{ float:none; width:auto; border:0; margin-top:1em;}
+.pr-snapshot-body{ font-size:14px;}
+.pr-customer-media-user { display:block;}
+.pr-customer-media-wrapper {
+  width:auto;
+  padding-right:10px;
+}
+.pr-snapshot-body-wrapper .pr-other-attributes {
+  padding: 0;
+}
+.pr-other-attributes-list li.pr-other-attribute-label {
+ background:none;
+ font-family:"economica";
+ font-size:14px;
+ padding:0;
+  margin:0;
+  width: auto;
+  float:none;
+  letter-spacing:0.25px; margin-right: 0; }
+.pr-attribute-label-pros{ color:black;}
+.pr-review-engine { color:#333; margin-bottom:10px;}
+.pr-snapshot-head { background: #f2f2f2; border: none; font-size: 12px; padding: 0; }
+.pr-snapshot-head p { line-height: normal; }
+.pr-snapshot-head-wrapper { padding: .5em .5em .5em 15px; }
+.pr-snapshot-title { font-size:12px;}
+.pr-snapshot-cobrand { font-size: 100%; }
+.pr-snapshot-body { padding: 0; background: none; border: 0; }
+.pr-snapshot-body-wrapper { zoom: 1; padding: 20px 35px; border: 0; }
+.similar_div_similar
+.pr-attribute-label-pros, .pr-attribute-label-cons, .pr-attribute-label-bestuses { color:black; }
+.pr-snapshot-title{font-family:"economica"; letter-spacing:0.25px;}
+.pr-snapshot-cobrand{ color:black;}
+.pr-snapshot-rating { font-size: 12px; }
+.pr-snapshot-rating .pr-rating { display: none; }
+.pr-snapshot-consensus { display: none; }
+*html .pr-review-points .pr-review-points-attr-wrapper .pr-attribute-group { width: auto; }
+.pr-review-points-attr-wrapper .pr-attribute-group .pr-attribute-key {font-family:"economica";}
+.pr-other-attributes-list li.pr-other-attributes-group {
+ clear:both;
+ overflow:hidden;
+  margin: 1em 0;
+}
+.pr-review-points-attr-wrapper .pr-attribute-group .pr-attribute-value { width: 73%; float: left; padding: 0; }
+.pr-review-points-attr-wrapper .pr-attribute-bestuses{ display:none;}
+.pr-review-points-attr-wrapper .pr-last { margin-right: 0;  }
+.pr-attribute-key p { background-color: #FFFFFF; line-height: 1.4em; margin: 0; padding: 0 0.8em 0 0; letter-spacing:0.25px;}
+.pr-snapshot-attribute-value-list { height: auto; }
+.pr-attribute-value-list li { padding-right: 4px; font-size:14px; }
+.pr-snapshot-write-review { margin: 0; background: none; }
+.pr-review-sort { text-align: right; background-color: #F1F5F9; zoom: 1; border: 0; }
+.pr-review-sort-wrapper { padding: 5px 18px 5px 24px; overflow: hidden;background-color:#9aabd4; color:white;}
+.pr-review-count {font-family:"economica"; font-size: 12px; float: left; margin: 0; vertical-align: bottom; font-weight: bold; line-height: 1.4em; text-transform:uppercase; line-height:25px; letter-spacing:0.75px; }
+.pr-review-sort-box { float: right; }
+.pr-review-sort-box p.pr-review-sort-by { display: inline; margin: 0 .3em 0 0; padding: 0;  vertical-align: baseline; font-size:12px;font-family:"economica";text-transform:uppercase; line-height:25px; letter-spacing:0.75px; }
+.pr-review-sort-box select{ font-size:13px; color:#000;font-family: 'economica'; }
+.pr-page-count{ color:#808080;}
+.pr-pagination-top .pr-nav-back-to-top{ display:none;}
+.pr-pagination-top { text-align: right; padding: .7em 24px; border-bottom: 1px solid #ccc; margin-bottom: 0; background-color:#f2f2f2; border:0; }
+
+.pr-pagination-bottom { background-color:#f2f2f2; text-align: right; padding: 1em 15px; overflow: hidden; zoom: 1; }
+.pr-pagination-bottom .pr-nav-back-to-top a{ color:#333; text-decoration:underline;}
+.pr-pagination-bottom .pr-nav-back-to-top a:hover{ color:#9aabd4;}
+.pr-review-rating-wrapper, .pr-review-main-wrapper { overflow: hidden; float: none; width: auto;  }
+.pr-page-nav{ color:#999;}
+.pr-page-nav .pr-page-next a{ color:#333;}
+.pr-page-nav .pr-page-next a:hover{ color:#9aabd4;}
+.pr-page-nav .pr-page-prev a{ color:#333;}
+.pr-page-nav .pr-page-prev a:hover{ color:#9aabd4;}
+.pr-review-rating { margin-bottom: 8px; margin-bottom:0; }
+.pr-review-rating-headline { display:block; clear:both; font-size: 18px; line-height: 16px; padding: 0; margin: 0;font-family:"economica"; text-transform:uppercase; font-weight: normal; padding-top:0.8em;}
+.pr-review-rating .pr-rating { display: none; }
+.pr-review-author-info-wrapper { padding-right: 2px; float: none; width: auto; margin-bottom: 8px; }
+.pr-review-author { margin-bottom: 10px; float: none; width: auto; font-size: 14px; }
+.pr-review-author-date { padding:0; text-transform: uppercase; float: right; margin: 0 0 0 1em; background: none; border: 0; font-size: 14px; color:#818181;letter-spacing:0.75px;}
+.pr-review-most-helpful { margin-bottom: 1.5em; color:#818181; letter-spacing:0.75px; }
+.pr-review-author-affinity-wrapper { display: none; }
+.pr-review-author-badge-wrapper, .pr-review-author-verified { display: inline; }
+.pr-review-author-verified-buyer-wrapper .pr-verified-buyer{}
+.pr-review-author-verified-buyer-wrapper a{ display:inline-block;width:84px; height:21px; vertical-align:middle; background:url(../img/icon/badge_vp_en_US.gif) left top no-repeat;}
+.pr-review-author-verified-buyer-wrapper a img{display:none;}
+.pr-review-author-badge-wrapper img, .pr-review-author-badge-wrapper a { border: 0; }
+img.pr-verified { vertical-align: middle; }
+.pr-review-author p { margin: 0; display: inline; padding-right: 2px; }
+.pr-review-author p span { font-weight: normal; }
+.pr-review-wrap { border-bottom: 1px solid #ebebeb; padding: 25px 35px; margin: 0; }
+.pr-review-wrap .pr-review-points .pr-review-points-attr-wrapper { padding: 0; }
+.pr-review-wrap .pr-review-points .pr-review-points-attr-wrapper .pr-attribute-group { clear: both; border: 0; float: none; width: auto;margin-top:1em;}
+.pr-review-wrap .pr-review-points .pr-review-points-attr-wrapper .pr-attribute-group .pr-attribute-key p { background-color: #fff; padding: 0;padding-right: 0.8em; margin: 0; line-height: 1.4em; }
+.pr-attribute-bestuses .pr-attribute-label-bestuses {  }
+.pr-review-wrap .pr-review-points .pr-review-points-attr-wrapper .pr-attribute-group .pr-attribute-value { padding: 0; float: left; width: 67%; margin: 0; }
+.pr-review-text {}
+.pr-review-text .pr-comments-header { font-family: "economica"; text-transform:uppercase; font-size:14px; color:black;}
+.pr-review-text .pr-comments-header em{font-style:normal;}
+.pr-review-tools { padding-bottom: 4px; }
+.pr-review-tools p { text-align:right; display:block; margin-bottom:0; font-style:normal; font-size:14px; color:#7f7f7f;}
+.pr-review-tools p a{ color:#333333; text-decoration:underline;}
+.pr-review-tools p a:hover{color:#9aabd4;}
+.pr-clear { clear: both; }
+.pr-snippet-read-write a.pr-snippet-link { }
+.pr-snapshot-footer { clear: both; padding: 0.4em 0px; text-align: right; background: none; display: inline; margin-top: -27px; position: relative; z-index: 3; float: right;font-family:"economica"; font-size:12px; text-transform:uppercase;}
+.pr-snapshot-footer .pr-write-review-link div, .pr-snapshot-footer .pr-write-review-link { display: inline; padding: 0; float: right; }
+.pr-snapshot-footer .pr-write-review-link {color:#9aabd4; letter-spacing:0.5px; text-decoration:underline;}
+.pr-snippet-stars { border: 0; background: white; padding: .3em; float:none; overflow:hidden;margin-right:0;}
+
+.pr-snippet-read-write a.pr-snippet-link span:before{ content:"(";}
+.pr-snippet-read-write a.pr-snippet-link span:after{ content:")";}
+.pr-snippet-stars .pr-snippet-rating-decimal { display: none; }
+.pr-snippet-stars .pr-stars-small { background-image:url("../img/bg/stars_small.gif"); float:none; height:18px; width:101px; float:right;}
+.pr-snippet-read-write {border: 0; padding: 0.3em 0; font-size:10px; text-align:right; }
+.pr-snippet-wrapper { font-size:10px; border: 0; padding-left: 0; background: white; }
+.pr-snippet-review-count { display: none; }
+.pr-snippet-read-write a.pr-snippet-link { color: #000; text-decoration: underline; }
+.pr-snippet-read-write a.pr-snippet-link:hover{color:#9aabd4;}
+.pr-snippet { margin-top: -6px; margin-bottom: 10px; zoom: 1; }
+.pr-snippet-read-write a.pr-snippet-link span {float: right; font-weight:normal; font-style:italic;}
+.pr-snippet-read-reviews { border-right: 0px; float: none; padding: 0; }
+.pr-snippet-write-review { float:none; padding:0;}
+.pr-contents { border: 0; padding: 0; background: white; }
+.pr-contents-wrapper { background: none; border: 0; padding: 0;}
+*html .pr-contents-wrapper { width: auto; }
+.pr-review-bottom-line-wrapper { display: none; }
+.pr-snapshot-rating-wrapper { font-weight: bold;padding:0; }
+.pr-snapshot-rating-wrapper:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+.pr-snapshot-rating-wrapper { display: inline-block; }
+/* Hides from IE-mac \*/
+
+* html .pr-snapshot-rating-wrapper { height: 1%; }
+.pr-snapshot-rating-wrapper { display: block; }
+/* End hide from IE-mac */
+.pr-snapshot-rating .pr-stars, .pr-review-faceoff .pr-stars, .pr-modal-container .pr-stars, .pr-modal-container .pr-review-faceoff-review-content .pr-stars {
+  width: 105px;
+}
+.pr-stars-small { background-image: url("../img/bg/stars_small.gif");height: 18px;
+    line-height: 18px;
+    width: 100px; }
+.pr-snapshot-rating .pr-stars { background-image: url("../img/bg/stars.gif"); }
+#pr-snapshot-histogram-header { font-size: 12px; }
+#pr-snapshot-histogram-content { font-size: 11px; font-weight: normal; }
+.pr-customer-media-user, .pr-pic .pr-caption, .pr-pic .pr-pic-tags { font-size: 14px; }
+.pr-snapshot-no-ratings { padding: 40px 0 110px;}
+.pr-snapshot-no-ratings .pr-write-review-link { float: none; }
+.pr-snapshot-average-based-on-text{font-family: 'economica';font-size:10px; text-transform:uppercase; letter-spacing:0.5px;}
+.pr-review-most-helpful p{ font-size:14px;}
+.pr-customer-media{margin-top:0;}
+.pr-review-text p{margin-top:0;}
+.pr-snapshot-rating-wrapper:before{ font-family:"economica"; text-transform:uppercase; font-weight:normal; line-height:26px; content:"overview"; float:left; font-size:26px; color:black; margin-right:5px; display:block;}
+.pr-snapshot-rating-wrapper .pr-snapshot-rating{ float:left; padding-top:3px;}
+.pr-other-attributes ul, .pr-other-attributes-histogram ul, .pr-other-attributes-subratings ul{ font-size:14px;}
+@media (max-width: 767px) {
+ .pr-snippet-stars{ float:left; padding-left:0;}
+ .pr-snippet-read-write{text-align:left;}
+ .pr-snippet-read-reviews:after{ content:''; display:block; clear:both;}
+ .pr-snippet-read-write a.pr-snippet-link{ float:left;}
+}
+
+/* Hide empty Pros or Cons */
+.pr-empty{display:none;}
+
+badge_vp_en_US.gif

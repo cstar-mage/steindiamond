@@ -1,0 +1,444 @@
+<div class="stud_earring_main">
+
+	<div class="stud_earring_sub">
+		
+		<div class="searing_title">
+			<h1>Diamond Stud Earrings</h1>
+			<p>Our diamond studs are the perfect gift for any occasion. Browse our wide selection below for a variety of sizes and metals.</p>
+		</div>
+		
+		
+		<div class="main-product"> 
+			
+			<h2>18K White gold round 4 prong diamond stud earrings</h2>
+			<p><span class="avgcolor">Average color: F/G</span> <span class="avgclarity">Average Clarity: VS</span></p>
+			<div class="sub-product">
+				
+				<div class="main-pro-img">
+					<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/diamond_studs_1024 x1024.jpg'; ?>">
+				</div>
+				
+				<div class="all-simple-pro">
+					<ul>
+						<li>
+							<!-- <a href="<?php echo mage::getBaseUrl(); ?>"> -->
+							<img class="simple-img"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/1-2-carat-round.png'; ?>" />
+							<span class="simple-ctw">1/2 CT.TW</span> 
+							<span class="simple-pro-price"><a href="/diamond-studs-10085.html" color="#bbbbbb">$1,085</a></span>
+							<!-- </a> -->
+						</li>
+						<li>
+							<img class="simple-img"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/3-4-carat-round.png'; ?>" />
+							<span class="simple-ctw">3/4 CT.TW</span>
+							<span class="simple-pro-price"><a href="/diamond-studs-10086.html" color="#bbbbbb">$2,075</a></span>
+						</li>
+						<li>
+							<img class="simple-img"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/1-carat-round.png'; ?>" />
+							<span class="simple-ctw">1 CT.TW</span>
+							<span class="simple-pro-price"><a href="/diamond-studs-10087.html" color="#bbbbbb">$4,050</a></span>
+						</li>
+						<li>
+							<img class="simple-img"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/1-1-2-carat-round.png'; ?>" />
+							<span class="simple-ctw">1 1/2 CT.TW</span>
+							<span class="simple-pro-price"><a href="/diamond-studs-10088.html" color="#bbbbbb">$5,800</a></span>
+						</li>
+						<li>
+							<img class="simple-img"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/2-carat-round.png'; ?>" />
+							<span class="simple-ctw">2 CT.TW</span>
+							<span class="simple-pro-price"><a href="/diamond-studs-10089.html" color="#bbbbbb">$12,500</a></span>
+						</li>
+						<li>
+							<img class="simple-img"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/3-carat-round.png'; ?>" />
+							<span class="simple-ctw">3 CT.TW</span>
+							<span class="simple-pro-price"><a href="/diamond-studs-10090.html" color="#bbbbbb">$25,938</a></span>
+						</li>
+						<li>
+							<img class="simple-img"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/4-carat-round.png'; ?>" />
+							<span class="simple-ctw">4 CT.TW</span>
+							<span class="simple-pro-price"><a href="/diamond-studs-10091.html" color="#bbbbbb">$43,298</a></span>
+						</li>
+					</ul>
+				</div>
+				
+			</div>			
+		
+		</div>
+		
+		<div class="main-product"> 
+			
+			<h2>Platinum round 4 prong diamond stud earrings</h2>
+			<p><span class="avgcolor">Average color: F/G</span> <span class="avgclarity">Average Clarity: VS</span></p>
+			<div class="sub-product">
+				
+				<div class="main-pro-img">
+					<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/diamond_studs_1024 x1024.jpg'; ?>">
+				</div>
+				
+				<div class="all-simple-pro">
+					<ul>
+						<li>
+							<!-- <a href="<?php echo mage::getBaseUrl(); ?>"> -->
+							<img class="simple-img"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/1-2-carat-round.png'; ?>" />
+							<span class="simple-ctw">1/2 CT.TW</span> 
+							<span class="simple-pro-price"><a href="/diamond-studs-10100.html">$1,185</a></span>
+							<!-- </a> -->
+						</li>
+						<li>
+							<img class="simple-img"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/3-4-carat-round.png'; ?>" />
+							<span class="simple-ctw">3/4 CT.TW</span>
+							<span class="simple-pro-price"><a href="/diamond-studs-10101.html">$2,175</a></span>
+						</li>
+						<li>
+							<img class="simple-img"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/1-carat-round.png'; ?>" />
+							<span class="simple-ctw">1 CT.TW</span>
+							<span class="simple-pro-price"><a href="/diamond-studs-10102.html">$4,250</a></span>
+						</li>
+						<li>
+							<img class="simple-img"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/1-1-2-carat-round.png'; ?>" />
+							<span class="simple-ctw">1 1/2 CT.TW</span>
+							<span class="simple-pro-price"><a href="/diamond-studs-10103.html">$6,000</a></span>
+						</li>
+						<li>
+							<img class="simple-img"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/2-carat-round.png'; ?>" />
+							<span class="simple-ctw">2 CT.TW</span>
+							<span class="simple-pro-price"><a href="/diamond-studs-10104.html">$12,800</a></span>
+						</li>
+						<li>
+							<img class="simple-img"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/3-carat-round.png'; ?>" />
+							<span class="simple-ctw">3 CT.TW</span>
+							<span class="simple-pro-price"><a href="/diamond-studs-10105.html">$26,338</a></span>
+						</li>
+						<li>
+							<img class="simple-img"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/4-carat-round.png'; ?>" />
+							<span class="simple-ctw">4 CT.TW</span>
+							<span class="simple-pro-price"><a href="/diamond-studs-10106.html">$43,798</a></span>
+						</li>
+					</ul>
+				</div>
+				
+			</div>			
+		
+		</div>
+		
+		<div class="main-product"> 
+			
+			<h2>18k Yellow Gold round 4 prong diamond stud earrings</h2>
+			<p><span class="avgcolor">Average color: F/G</span> <span class="avgclarity">Average Clarity: VS</span></p>
+			<div class="sub-product">
+				
+				<div class="main-pro-img">
+					<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/diamond_stud_yellow_gold_1500_x_1500.jpg'; ?>">
+				</div>
+				
+				<div class="all-simple-pro">
+					<ul>
+						<li>
+							<!-- <a href="<?php echo mage::getBaseUrl(); ?>"> -->
+							<img class="simple-img"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/1-2-carat-round.png'; ?>" />
+							<span class="simple-ctw">1/2 CT.TW</span> 
+							<span class="simple-pro-price"><a href="/diamond-studs-10093.html">$1,085</a></span>
+							<!-- </a> -->
+						</li>
+						<li>
+							<img class="simple-img"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/3-4-carat-round.png'; ?>" />
+							<span class="simple-ctw">3/4 CT.TW</span>
+							<span class="simple-pro-price"><a href="/diamond-studs-10094.html">$2,075</a></span>
+						</li>
+						<li>
+							<img class="simple-img"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/1-carat-round.png'; ?>" />
+							<span class="simple-ctw">1 CT.TW</span>
+							<span class="simple-pro-price"><a href="/diamond-studs-10095.html">$4,050</a></span>
+						</li>
+						<li>
+							<img class="simple-img"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/1-1-2-carat-round.png'; ?>" />
+							<span class="simple-ctw">1 1/2 CT.TW</span>
+							<span class="simple-pro-price"><a href="/diamond-studs-10096.html">$5,800</a></span>
+						</li>
+						<li>
+							<img class="simple-img"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/2-carat-round.png'; ?>" />
+							<span class="simple-ctw">2 CT.TW</span>
+							<span class="simple-pro-price"><a href="/diamond-studs-10097.html">$12,500</a></span>
+						</li>
+						<li>
+							<img class="simple-img"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/3-carat-round.png'; ?>" />
+							<span class="simple-ctw">3 CT.TW</span>
+							<span class="simple-pro-price"><a href="/diamond-studs-10098.html">$25,938</a></span>
+						</li>
+						<li>
+							<img class="simple-img"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/4-carat-round.png'; ?>" />
+							<span class="simple-ctw">4 CT.TW</span>
+							<span class="simple-pro-price"><a href="/diamond-studs-10099.html">$43,298</a></span>
+						</li>
+					</ul>
+				</div>
+				
+			</div>			
+		
+		</div>
+		
+			<div class="main-product"> 
+			
+			<h2>14k White Gold round 4 prong diamond stud earrings</h2>
+			<p><span class="avgcolor">Average color: G/H</span> <span class="avgclarity">Average Clarity: SI</span></p>
+			<div class="sub-product">
+				
+				<div class="main-pro-img">
+					<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/diamond_studs_1024 x1024.jpg'; ?>">
+				</div>
+				
+				<div class="all-simple-pro">
+					<ul>
+						<li>
+							<!-- <a href="<?php echo mage::getBaseUrl(); ?>"> -->
+							<img class="simple-img"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/1-2-carat-round.png'; ?>" />
+							<span class="simple-ctw">1/2 CT.TW</span> 
+							<span class="simple-pro-price"><a href="/diamond-studs-10108.html">$900</a></span>
+							<!-- </a> -->
+						</li>
+						<li>
+							<img class="simple-img"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/3-4-carat-round.png'; ?>" />
+							<span class="simple-ctw">3/4 CT.TW</span>
+							<span class="simple-pro-price"><a href="/diamond-studs-10109.html">$1,800</a></span>
+						</li>
+						<li>
+							<img class="simple-img"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/1-carat-round.png'; ?>" />
+							<span class="simple-ctw">1 CT.TW</span>
+							<span class="simple-pro-price"><a href="/diamond-studs-10110.html">$3,650</a></span>
+						</li>
+						<li>
+							<img class="simple-img"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/1-1-2-carat-round.png'; ?>" />
+							<span class="simple-ctw">1 1/2 CT.TW</span>
+							<span class="simple-pro-price"><a href="/diamond-studs-10111.html">$5,200</a></span>
+						</li>
+						<li>
+							<img class="simple-img"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/2-carat-round.png'; ?>" />
+							<span class="simple-ctw">2 CT.TW</span>
+							<span class="simple-pro-price"><a href="/diamond-studs-10112.html">$11,450</a></span>
+						</li>
+					</ul>
+				</div>
+				
+			</div>			
+		
+		</div>
+		
+			<div class="main-product"> 
+			
+			<h2>14k Rose Gold round 4 prong diamond stud earrings</h2>
+			<p><span class="avgcolor">Average color: G/H</span> <span class="avgclarity">Average Clarity: SI</span></p>
+			<div class="sub-product">
+				
+				<div class="main-pro-img">
+					<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/diamond_studs_rose_gold_1000_x_1000.jpg'; ?>">
+				</div>
+				
+				<div class="all-simple-pro">
+					<ul>
+						<li>
+							<!-- <a href="<?php echo mage::getBaseUrl(); ?>"> -->
+							<img class="simple-img"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/1-2-carat-round.png'; ?>" />
+							<span class="simple-ctw">1/2 CT.TW</span> 
+							<span class="simple-pro-price"><a href="/diamond-studs-10118.html">$900</a></span>
+							<!-- </a> -->
+						</li>
+						<li>
+							<img class="simple-img"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/3-4-carat-round.png'; ?>" />
+							<span class="simple-ctw">3/4 CT.TW</span>
+							<span class="simple-pro-price"><a href="/diamond-studs-10119.html">$1,800</a></span>
+						</li>
+						<li>
+							<img class="simple-img"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/1-carat-round.png'; ?>" />
+							<span class="simple-ctw">1 CT.TW</span>
+							<span class="simple-pro-price"><a href="/diamond-studs-10120.html">$3,650</a></span>
+						</li>
+						<li>
+							<img class="simple-img"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/1-1-2-carat-round.png'; ?>" />
+							<span class="simple-ctw">1 1/2 CT.TW</span>
+							<span class="simple-pro-price"><a href="/diamond-studs-10121.html">$5,200</a></span>
+						</li>
+						<li>
+							<img class="simple-img"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/2-carat-round.png'; ?>" />
+							<span class="simple-ctw">2 CT.TW</span>
+							<span class="simple-pro-price"><a href="/diamond-studs-10122.html">$11,450</a></span>
+						</li>
+					</ul>
+				</div>
+				
+			</div>			
+		
+		</div>
+		
+		<div class="main-product"> 
+			
+			<h2>14k Yellow Gold round 4 prong diamond stud earrings</h2>
+			<p><span class="avgcolor">Average color: G/H</span> <span class="avgclarity">Average Clarity: SI</span></p>
+			<div class="sub-product">
+				
+				<div class="main-pro-img">
+					<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/diamond_stud_yellow_gold_1500_x_1500.jpg'; ?>">
+				</div>
+				
+				<div class="all-simple-pro">
+					<ul>
+						<li>
+							<!-- <a href="<?php echo mage::getBaseUrl(); ?>"> -->
+							<img class="simple-img"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/1-2-carat-round.png'; ?>" />
+							<span class="simple-ctw">1/2 CT.TW</span> 
+							<span class="simple-pro-price"><a href="/diamond-studs-10113.html">$900</a></span>
+							<!-- </a> -->
+						</li>
+						<li>
+							<img class="simple-img"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/3-4-carat-round.png'; ?>" />
+							<span class="simple-ctw">3/4 CT.TW</span>
+							<span class="simple-pro-price"><a href="/diamond-studs-10114.html">$1,800</a></span>
+						</li>
+						<li>
+							<img class="simple-img"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/1-carat-round.png'; ?>" />
+							<span class="simple-ctw">1 CT.TW</span>
+							<span class="simple-pro-price"><a href="/diamond-studs-10115.html">$3,650</a></span>
+						</li>
+						<li>
+							<img class="simple-img"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/1-1-2-carat-round.png'; ?>" />
+							<span class="simple-ctw">1 1/2 CT.TW</span>
+							<span class="simple-pro-price"><a href="/diamond-studs-10116.html">$5,200</a></span>
+						</li>
+						<li>
+							<img class="simple-img"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/2-carat-round.png'; ?>" />
+							<span class="simple-ctw">2 CT.TW</span>
+							<span class="simple-pro-price"><a href="/diamond-studs-10117.html">$11,450</a></span>
+						</li>
+					</ul>
+				</div>
+				
+			</div>			
+		
+		</div>
+		
+		<div class="main-product"> 
+			
+			<h2>18k White Gold martini round 4 prong diamond stud earrings</h2>
+			<p><span class="avgcolor">Average color: F/G</span> <span class="avgclarity">Average Clarity: VS</span></p>
+			<div class="sub-product">
+				
+				<div class="main-pro-img">
+					<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/1613-martini-setting-diamond-studs-platinum-300x300.jpg'; ?>">
+				</div>
+				
+				<div class="all-simple-pro">
+					<ul>
+						<li>
+							<!-- <a href="<?php echo mage::getBaseUrl(); ?>"> -->
+							<img class="simple-img"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/1-2-carat-round.png'; ?>" />
+							<span class="simple-ctw">1/2 CT.TW</span> 
+							<span class="simple-pro-price"><a href="/diamond-studs-10123.html">$1085</a></span>
+							<!-- </a> -->
+						</li>
+						<li>
+							<img class="simple-img"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/3-4-carat-round.png'; ?>" />
+							<span class="simple-ctw">3/4 CT.TW</span>
+							<span class="simple-pro-price"><a href="/diamond-studs-10124.html">$2,075</a></span>
+						</li>
+						<li>
+							<img class="simple-img"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/1-carat-round.png'; ?>" />
+							<span class="simple-ctw">1 CT.TW</span>
+							<span class="simple-pro-price"><a href="/diamond-studs-10125.html">$4,050</a></span>
+						</li>
+						<li>
+							<img class="simple-img"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/1-1-2-carat-round.png'; ?>" />
+							<span class="simple-ctw">1 1/2 CT.TW</span>
+							<span class="simple-pro-price"><a href="/diamond-studs-10126.html">$5,800</a></span>
+						</li>
+						<li>
+							<img class="simple-img"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/2-carat-round.png'; ?>" />
+							<span class="simple-ctw">2 CT.TW</span>
+							<span class="simple-pro-price"><a href="/diamond-studs-10127.html">$12,500</a></span>
+						</li>
+						<li>
+							<img class="simple-img"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/3-carat-round.png'; ?>" />
+							<span class="simple-ctw">3 CT.TW</span>
+							<span class="simple-pro-price"><a href="/diamond-studs-10128.html">$25,938</a></span>
+						</li>
+						<li>
+							<img class="simple-img"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/4-carat-round.png'; ?>" />
+							<span class="simple-ctw">4 CT.TW</span>
+							<span class="simple-pro-price"><a href="/diamond-studs-10129.html">$43,298</a></span>
+						</li>
+					</ul>
+				</div>
+				
+			</div>			
+		
+		</div>
+		
+		<div class="main-product"> 
+			
+			<h2>Platinum princess 4 prong diamond stud earrings</h2>
+			<p><span class="avgcolor">Average color: H/I</span> <span class="avgclarity">Average Clarity: VS</span></p>
+			<div class="sub-product">
+				
+				<div class="main-pro-img">
+					<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/Princess_Cut_Stud_Profile.jpg'; ?>">
+				</div>
+				
+				<div class="all-simple-pro">
+					<ul>
+						<li>
+							<!-- <a href="<?php echo mage::getBaseUrl(); ?>"> -->
+							<img class="simple-img"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/1-2-carat-round.png'; ?>" />
+							<span class="simple-ctw">1/2 CT.TW</span> 
+							<span class="simple-pro-price"><a href="/diamond-studs-10131.html">$730</a></span>
+							<!-- </a> -->
+						</li>
+						<li>
+							<img class="simple-img"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/3-4-carat-round.png'; ?>" />
+							<span class="simple-ctw">3/4 CT.TW</span>
+							<span class="simple-pro-price"><a href="/diamond-studs-10132.html">$1,550</a></span>
+						</li>
+						<li>
+							<img class="simple-img"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/1-carat-round.png'; ?>" />
+							<span class="simple-ctw">1 CT.TW</span>
+							<span class="simple-pro-price"><a href="/diamond-studs-10133.html">$2,750</a></span>
+						</li>
+						<li>
+							<img class="simple-img"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/1-1-2-carat-round.png'; ?>" />
+							<span class="simple-ctw">1 1/2 CT.TW</span>
+							<span class="simple-pro-price"><a href="/diamond-studs-10134.html">$5,200</a></span>
+						</li>
+						<li>
+							<img class="simple-img"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/2-carat-round.png'; ?>" />
+							<span class="simple-ctw">2 CT.TW</span>
+							<span class="simple-pro-price"><a href="/diamond-studs.html">$9,500</a></span>
+						</li>
+					</ul>
+				</div>
+				
+			</div>			
+		
+		</div>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+			
+	</div>
+
+</div>

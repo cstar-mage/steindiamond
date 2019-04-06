@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <Ideal_Ringbuilder>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <Mage_Catalog />
+                <Mage_Checkout />
+                <Ideal_Diamondsearch />
+            </depends>
+        </Ideal_Ringbuilder>
+    </modules>
+</config>

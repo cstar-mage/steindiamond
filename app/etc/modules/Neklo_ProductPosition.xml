@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+NOTICE OF LICENSE
+
+This source file is subject to the NekloEULA that is bundled with this package in the file ICENSE.txt.
+
+It is also available through the world-wide-web at this URL: http://store.neklo.com/LICENSE.txt
+
+Copyright (c)  Neklo (http://store.neklo.com/)
+-->
+<config>
+    <modules>
+        <Neklo_ProductPosition>
+            <active>true</active>
+            <codePool>community</codePool>
+            <depends>
+                <Neklo_Core/>
+            </depends>
+            <extension_name>Drag &amp; Drop Product Position</extension_name>
+            <url>product-position-extension-for-magento</url>
+            <encoding>42a</encoding>
+        </Neklo_ProductPosition>
+    </modules>
+</config>

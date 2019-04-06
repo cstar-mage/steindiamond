@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Unirgy_Storelocationreport>
+            <active>true</active>
+            <codePool>community</codePool>
+            <depends>
+            	<Unirgy_StoreLocator />
+            </depends>
+        </Unirgy_Storelocationreport>
+    </modules>
+</config> 

@@ -1,0 +1,1477 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+ * Product additional attributes template
+ *
+ * @see Mage_Catalog_Block_Product_View_Attributes
+ */
+?>
+<?php
+$_helper = $this->helper('catalog/output');
+$_product = $this->getProduct()
+?>
+<!---------------------------------------------------- Desktop tab Start ---------------------------------------------------------->
+<?php if($_additional = $this->getAdditionalData()): ?>
+    <h2 class="prod-table-title"><?php echo $this->__('Specifications') ?></h2>
+    <div class="data-table deskspecification" id="product-attribute-specs-table">
+
+        <?php
+
+        $setId = $_product->getAttributeSetId(); // Attribute set Id
+        $groups = Mage::getModel('eav/entity_attribute_group')
+            ->getResourceCollection()
+            ->setAttributeSetFilter($setId)
+            ->setSortOrder()
+            ->load();
+
+        $attributeCodes = array();
+        ?>
+        <?php
+        foreach ($groups as $group) {
+
+            $productType = $_product->getResource()->getAttribute('product_type')->getFrontend()->getValue($_product);
+
+            if($productType == 'Fashion Ring'){
+                if($group->getAttributeGroupName() == 'Ring Information'){ // set name
+                    $groupName          = $group->getAttributeGroupName();
+                    $groupId            = $group->getAttributeGroupId();
+                    ?>
+                    <?php
+                    $html = "";
+                    ?>
+                    <?php
+                    $attributes = Mage::getResourceModel('catalog/product_attribute_collection')
+                        ->setAttributeGroupFilter($group->getId())
+                        ->addVisibleFilter()
+                        ->checkConfigurableProducts()
+                        ->load();
+                    //echo"<pre>";	print_r($attributes->getData());
+                    if ($attributes->getSize() > 0) {
+                        $i = 0;
+
+                        foreach ($attributes->getItems() as $attribute) {
+
+                            /* @var $child Mage_Eav_Model_Entity_Attribute */
+                            $attributeCodes[] = $attribute->getAttributeCode();
+                            $attributeCodes1[] = $attribute->getIsVisibleOnFront();
+                            $attrfrontname[] = $attribute->getFrontendLabel();
+                            //echo $attribute->getFrontendInput();
+
+
+                            ?>
+                            <?php //$attributesetting = $_helper->productAttribute($_product, $_product->$attributeCodes[$i], $attributeCodes[$i]);
+                            if($attribute->getFrontendInput() == 'text'){
+                                $attributesetting = $_helper->productAttribute($_product, $_product->$attributeCodes[$i], $attributeCodes[$i]);
+
+                            } else if($attribute->getFrontendInput() == 'multiselect'){
+
+                                $attributesetting = $_product->getAttributeText($attributeCodes[$i]);
+                                if(is_array($attributesetting)) {
+                                    $attributesetting = implode(',',$attributesetting);
+                                    $attributesetting = str_replace('Most Popular','',$attributesetting);
+                                    $attributesetting = rtrim($attributesetting,',');
+
+                                }
+                            }else{
+                                $attributesetting = $_product->getAttributeText($attributeCodes[$i]);
+                                //echo"<pre>";	print_r($attributesetting);
+                            }
+                            ?>
+
+                            <?php
+
+                            if($attributeCodes1[$i] == 1){ ?>
+                                <?php
+                                //	echo"<pre>";	print_r($attributesetting);
+                                $html .= '<div class="prod-attrib"><span class="prod-attrib-name">'.$attrfrontname[$i].'</span>';
+                                if($attributesetting != ""){
+                                    $html .= '<span class="prod-attrib-value">'.$attributesetting.'</span></div>';
+                                }
+                                else{
+                                    $html .= '<span class="prod-attrib-value">N/A</span></div>';
+                                }
+                                ?>
+                            <?php } ?>
+                            <?php $i++;  }
+                    }
+                }
+            }
+
+        } ?>
+
+
+        <?php
+        foreach ($groups as $group) {
+
+            $productType = $_product->getResource()->getAttribute('product_type')->getFrontend()->getValue($_product);
+
+            if($productType == 'Bracelet'){
+                if($group->getAttributeGroupName() == 'Bracelet Information'){ // set name
+                    $groupName          = $group->getAttributeGroupName();
+                    $groupId            = $group->getAttributeGroupId();
+                    ?>
+                    <?php
+                    $html = "";
+                    ?>
+                    <?php
+                    $attributes = Mage::getResourceModel('catalog/product_attribute_collection')
+                        ->setAttributeGroupFilter($group->getId())
+                        ->addVisibleFilter()
+                        ->checkConfigurableProducts()
+                        ->load();
+                    //echo"<pre>";	print_r($attributes->getData());
+                    if ($attributes->getSize() > 0) {
+                        $i = 0;
+
+                        foreach ($attributes->getItems() as $attribute) {
+
+                            /* @var $child Mage_Eav_Model_Entity_Attribute */
+                            $attributeCodes[] = $attribute->getAttributeCode();
+                            $attributeCodes1[] = $attribute->getIsVisibleOnFront();
+                            $attrfrontname[] = $attribute->getFrontendLabel();
+                            //echo $attribute->getFrontendInput();
+
+
+                            ?>
+                            <?php //$attributesetting = $_helper->productAttribute($_product, $_product->$attributeCodes[$i], $attributeCodes[$i]);
+                            if($attribute->getFrontendInput() == 'text'){
+                                $attributesetting = $_helper->productAttribute($_product, $_product->$attributeCodes[$i], $attributeCodes[$i]);
+
+                            } else if($attribute->getFrontendInput() == 'multiselect'){
+
+                                $attributesetting = $_product->getAttributeText($attributeCodes[$i]);
+                                if(is_array($attributesetting)) {
+                                    $attributesetting = implode(',',$attributesetting);
+                                    $attributesetting = str_replace('Most Popular','',$attributesetting);
+                                    $attributesetting = rtrim($attributesetting,',');
+
+                                }
+                            }else{
+                                $attributesetting = $_product->getAttributeText($attributeCodes[$i]);
+                                //echo"<pre>";	print_r($attributesetting);
+                            }
+                            ?>
+
+                            <?php
+
+                            if($attributeCodes1[$i] == 1){ ?>
+                                <?php
+                                //	echo"<pre>";	print_r($attributesetting);
+                                $html .= '<div class="prod-attrib"><span class="prod-attrib-name">'.$attrfrontname[$i].'</span>';
+                                if($attributesetting != ""){
+                                    $html .= '<span class="prod-attrib-value">'.$attributesetting.'</span></div>';
+                                }
+                                else{
+                                    $html .= '<span class="prod-attrib-value">N/A</span></div>';
+                                }
+                                ?>
+                            <?php } ?>
+                            <?php $i++;  }
+                    }
+                }
+            }
+
+        } ?>
+
+        <?php
+        foreach ($groups as $group) {
+
+            $productType = $_product->getResource()->getAttribute('product_type')->getFrontend()->getValue($_product);
+
+            if($productType == 'Earring'){
+                if($group->getAttributeGroupName() == 'Earring Information'){ // set name
+                    $groupName          = $group->getAttributeGroupName();
+                    $groupId            = $group->getAttributeGroupId();
+                    ?>
+                    <?php
+                    $html = "";
+                    ?>
+                    <?php
+                    $attributes = Mage::getResourceModel('catalog/product_attribute_collection')
+                        ->setAttributeGroupFilter($group->getId())
+                        ->addVisibleFilter()
+                        ->checkConfigurableProducts()
+                        ->load();
+                    //echo"<pre>";	print_r($attributes->getData());
+                    if ($attributes->getSize() > 0) {
+                        $i = 0;
+
+                        foreach ($attributes->getItems() as $attribute) {
+
+                            /* @var $child Mage_Eav_Model_Entity_Attribute */
+                            $attributeCodes[] = $attribute->getAttributeCode();
+                            $attributeCodes1[] = $attribute->getIsVisibleOnFront();
+                            $attrfrontname[] = $attribute->getFrontendLabel();
+                            //echo $attribute->getFrontendInput();
+
+
+                            ?>
+                            <?php //$attributesetting = $_helper->productAttribute($_product, $_product->$attributeCodes[$i], $attributeCodes[$i]);
+                            if($attribute->getFrontendInput() == 'text'){
+                                $attributesetting = $_helper->productAttribute($_product, $_product->$attributeCodes[$i], $attributeCodes[$i]);
+
+                            } else if($attribute->getFrontendInput() == 'multiselect'){
+
+                                $attributesetting = $_product->getAttributeText($attributeCodes[$i]);
+                                if(is_array($attributesetting)) {
+                                    $attributesetting = implode(',',$attributesetting);
+                                    $attributesetting = str_replace('Most Popular','',$attributesetting);
+                                    $attributesetting = rtrim($attributesetting,',');
+
+                                }
+                            }else{
+                                $attributesetting = $_product->getAttributeText($attributeCodes[$i]);
+                                //echo"<pre>";	print_r($attributesetting);
+                            }
+                            ?>
+
+                            <?php
+
+                            if($attributeCodes1[$i] == 1){ ?>
+                                <?php
+                                //	echo"<pre>";	print_r($attributesetting);
+                                $html .= '<div class="prod-attrib"><span class="prod-attrib-name">'.$attrfrontname[$i].'</span>';
+                                if($attributesetting != ""){
+                                    $html .= '<span class="prod-attrib-value">'.$attributesetting.'</span></div>';
+                                }
+                                else{
+                                    $html .= '<span class="prod-attrib-value">N/A</span></div>';
+                                }
+                                ?>
+                            <?php } ?>
+                            <?php $i++;  }
+                    }
+                }
+            }
+
+        } ?>
+
+
+        <?php
+        foreach ($groups as $group) {
+
+            $productType = $_product->getResource()->getAttribute('product_type')->getFrontend()->getValue($_product);
+
+            if($productType == 'Necklace'){
+                if($group->getAttributeGroupName() == 'Necklace Information'){ // set name
+                    $groupName          = $group->getAttributeGroupName();
+                    $groupId            = $group->getAttributeGroupId();
+                    ?>
+                    <?php
+                    $html = "";
+                    ?>
+                    <?php
+                    $attributes = Mage::getResourceModel('catalog/product_attribute_collection')
+                        ->setAttributeGroupFilter($group->getId())
+                        ->addVisibleFilter()
+                        ->checkConfigurableProducts()
+                        ->load();
+                    //echo"<pre>";	print_r($attributes->getData());
+                    if ($attributes->getSize() > 0) {
+                        $i = 0;
+
+                        foreach ($attributes->getItems() as $attribute) {
+
+                            /* @var $child Mage_Eav_Model_Entity_Attribute */
+                            $attributeCodes[] = $attribute->getAttributeCode();
+                            $attributeCodes1[] = $attribute->getIsVisibleOnFront();
+                            $attrfrontname[] = $attribute->getFrontendLabel();
+                            //echo $attribute->getFrontendInput();
+
+
+                            ?>
+                            <?php //$attributesetting = $_helper->productAttribute($_product, $_product->$attributeCodes[$i], $attributeCodes[$i]);
+                            if($attribute->getFrontendInput() == 'text'){
+                                $attributesetting = $_helper->productAttribute($_product, $_product->$attributeCodes[$i], $attributeCodes[$i]);
+
+                            } else if($attribute->getFrontendInput() == 'multiselect'){
+
+                                $attributesetting = $_product->getAttributeText($attributeCodes[$i]);
+                                if(is_array($attributesetting)) {
+                                    $attributesetting = implode(',',$attributesetting);
+                                    $attributesetting = str_replace('Most Popular','',$attributesetting);
+                                    $attributesetting = rtrim($attributesetting,',');
+
+                                }
+                            }else{
+                                $attributesetting = $_product->getAttributeText($attributeCodes[$i]);
+                                //echo"<pre>";	print_r($attributesetting);
+                            }
+                            ?>
+
+                            <?php
+
+                            if($attributeCodes1[$i] == 1){ ?>
+                                <?php
+                                //	echo"<pre>";	print_r($attributesetting);
+                                $html .= '<div class="prod-attrib"><span class="prod-attrib-name">'.$attrfrontname[$i].'</span>';
+                                if($attributesetting != ""){
+                                    $html .= '<span class="prod-attrib-value">'.$attributesetting.'</span></div>';
+                                }
+                                else{
+                                    $html .= '<span class="prod-attrib-value">N/A</span></div>';
+                                }
+                                ?>
+                            <?php } ?>
+                            <?php $i++;  }
+                    }
+                }
+            }
+
+        } ?>
+
+        <!-- Added by CStar -->
+        <?php
+        foreach ($groups as $group) {
+
+            $productType = $_product->getResource()->getAttribute('product_type')->getFrontend()->getValue($_product);
+
+            if($productType == 'Engagement Ring'){
+                if($group->getAttributeGroupName() == 'Ring Information'){ // set name
+                    $groupName          = $group->getAttributeGroupName();
+                    $groupId            = $group->getAttributeGroupId();
+                    ?>
+                    <?php
+                    $html = "";
+                    ?>
+                    <?php
+                    $attributes = Mage::getResourceModel('catalog/product_attribute_collection')
+                        ->setAttributeGroupFilter($group->getId())
+                        ->addVisibleFilter()
+                        ->checkConfigurableProducts()
+                        ->load();
+                    //echo"<pre>";	print_r($attributes->getData());
+                    if ($attributes->getSize() > 0) {
+                        $i = 0;
+
+                        foreach ($attributes->getItems() as $attribute) {
+
+                            /* @var $child Mage_Eav_Model_Entity_Attribute */
+                            $attributeCodes[] = $attribute->getAttributeCode();
+                            $attributeCodes1[] = $attribute->getIsVisibleOnFront();
+                            $attrfrontname[] = $attribute->getFrontendLabel();
+                            //echo $attribute->getFrontendInput();
+
+
+                            ?>
+                            <?php //$attributesetting = $_helper->productAttribute($_product, $_product->$attributeCodes[$i], $attributeCodes[$i]);
+                            if($attribute->getFrontendInput() == 'text'){
+                                $attributesetting = $_helper->productAttribute($_product, $_product->$attributeCodes[$i], $attributeCodes[$i]);
+
+                            } else if($attribute->getFrontendInput() == 'multiselect'){
+
+                                $attributesetting = $_product->getAttributeText($attributeCodes[$i]);
+                                if(is_array($attributesetting)) {
+                                    $attributesetting = implode(',',$attributesetting);
+                                    $attributesetting = str_replace('Most Popular','',$attributesetting);
+                                    $attributesetting = rtrim($attributesetting,',');
+
+                                }
+                            }else{
+                                $attributesetting = $_product->getAttributeText($attributeCodes[$i]);
+                                //echo"<pre>";	print_r($attributesetting);
+                            }
+                            ?>
+
+                            <?php
+
+                            if($attributeCodes1[$i] == 1){ ?>
+                                <?php
+                                //	echo"<pre>";	print_r($attributesetting);
+                                $html .= '<div class="prod-attrib"><span class="prod-attrib-name">'.$attrfrontname[$i].'</span>';
+                                if($attributesetting != ""){
+                                    $html .= '<span class="prod-attrib-value">'.$attributesetting.'</span></div>';
+                                }
+                                else{
+                                    $html .= '<span class="prod-attrib-value">N/A</span></div>';
+                                }
+                                ?>
+                            <?php } ?>
+                            <?php $i++;  }
+                    }
+                }
+            }
+
+        } ?>
+
+        <!-- End by CStar -->
+        <?php
+        $productType = $_product->getResource()->getAttribute('product_type')->getFrontend()->getValue($_product);
+        if($productType == 'Fashion Ring' || $productType == 'Engagement Ring'){
+            if($html != "") {?>
+                <div class="prod-attrib-column">
+                <h2 class="All-title" id="<?php echo $productType;?>">Ring Information</h2>
+                    <div class="prod-attrib">
+                        <span class="prod-attrib-name"><?php echo $_product->getResource()->getAttribute('sku')->getFrontendLabel()?></span><span class="prod-attrib-value"><?php
+                            if($_product->getResource()->getAttribute('sku')->getFrontend()->getValue($_product) != ''){
+                                echo $_product->getResource()->getAttribute('sku')->getFrontend()->getValue($_product);
+                            }
+                            else {		echo "N/A";	}?>
+                        </span>
+                    </div>
+                    <?php /*
+                    <div class="prod-attrib">
+                        <span class="prod-attrib-name"><?php echo $_product->getResource()->getAttribute('metal_type')->getFrontendLabel()?></span><span class="prod-attrib-value"><?php
+                            if($_product->getResource()->getAttribute('metal_type')->getFrontend()->getValue($_product) != ''){
+                                echo $_product->getResource()->getAttribute('metal_type')->getFrontend()->getValue($_product);
+                             }
+                            else {		echo "N/A";	}?>
+                        </span>
+                    </div>
+                    <div class="prod-attrib">
+                        <span class="prod-attrib-name"><?php echo $_product->getResource()->getAttribute('metal_weight')->getFrontendLabel()?></span><span class="prod-attrib-value"><?php
+                            if($_product->getResource()->getAttribute('metal_weight')->getFrontend()->getValue($_product) != ''){
+                                echo $_product->getResource()->getAttribute('metal_weight')->getFrontend()->getValue($_product);
+                             }
+                            else {		echo "N/A";	}?>
+                        </span>
+                    </div>
+                    <div class="prod-attrib">
+                        <span class="prod-attrib-name"><?php echo $_product->getResource()->getAttribute('finish')->getFrontendLabel()?></span><span class="prod-attrib-value"><?php
+                            if($_product->getResource()->getAttribute('finish')->getFrontend()->getValue($_product) != ''){
+                                echo $_product->getResource()->getAttribute('finish')->getFrontend()->getValue($_product);
+                             }
+                            else {		echo "N/A";	}?>
+                        </span>
+                    </div>
+                    */?>
+                    <?php echo $html; ?>
+                </div>
+            <?php } ?>
+        <?php }
+        else{
+            if($html != "") {?>
+                <div class="prod-attrib-column">
+                    <h2 class="All-title" id="<?php echo $productType;?>">
+                        <?php echo $_product->getResource()->getAttribute('product_type')->getFrontend()->getValue($_product);?>&nbsp;Information
+                    </h2>
+                    <?php
+
+                    if($productType == 'Bracelet'){ ?>
+                        <div class="prod-attrib">
+                            <span class="prod-attrib-name"><?php echo $_product->getResource()->getAttribute('sku')->getFrontendLabel()?></span><span class="prod-attrib-value"><?php
+                                if($_product->getResource()->getAttribute('sku')->getFrontend()->getValue($_product) != ''){
+                                    echo $_product->getResource()->getAttribute('sku')->getFrontend()->getValue($_product);
+                                }
+                                else {		echo "N/A";	}?>
+                        </span>
+                        </div>
+                        <div class="prod-attrib">
+                            <span class="prod-attrib-name"><?php echo $_product->getResource()->getAttribute('metal_type')->getFrontendLabel()?></span><span class="prod-attrib-value"><?php
+                                if($_product->getResource()->getAttribute('metal_type')->getFrontend()->getValue($_product) != ''){
+                                    echo $_product->getResource()->getAttribute('metal_type')->getFrontend()->getValue($_product);
+                                }
+                                else {		echo "N/A";	}?>
+                        </span>
+                        </div>
+                        <div class="prod-attrib">
+                            <span class="prod-attrib-name"><?php echo $_product->getResource()->getAttribute('metal_weight')->getFrontendLabel()?></span><span class="prod-attrib-value"><?php
+                                if($_product->getResource()->getAttribute('metal_weight')->getFrontend()->getValue($_product) != ''){
+                                    echo $_product->getResource()->getAttribute('metal_weight')->getFrontend()->getValue($_product);
+                                }
+                                else {		echo "N/A";	}?>
+                        </span>
+                        </div>
+                        <div class="prod-attrib">
+                            <span class="prod-attrib-name"><?php echo $_product->getResource()->getAttribute('finish')->getFrontendLabel()?></span><span class="prod-attrib-value"><?php
+                                if($_product->getResource()->getAttribute('finish')->getFrontend()->getValue($_product) != ''){
+                                    echo $_product->getResource()->getAttribute('finish')->getFrontend()->getValue($_product);
+                                }
+                                else {		echo "N/A";	}?>
+                        </span>
+                        </div>
+                        <?php /*
+                    <div class="prod-attrib">
+                        <span class="prod-attrib-name"><?php echo $_product->getResource()->getAttribute('dimension')->getFrontendLabel()?></span><span class="prod-attrib-value"><?php
+                    if($_product->getResource()->getAttribute('dimension')->getFrontend()->getValue($_product) != ''){
+                        echo $_product->getResource()->getAttribute('dimension')->getFrontend()->getValue($_product);
+                     }
+                    else {		echo "N/A";	}?>
+                        </span>
+                    </div>
+                    */?>
+                    <?php }
+                    else if($productType == 'Necklace'){ ?>
+                        <div class="prod-attrib">
+                            <span class="prod-attrib-name"><?php echo $_product->getResource()->getAttribute('sku')->getFrontendLabel()?></span><span class="prod-attrib-value"><?php
+                                if($_product->getResource()->getAttribute('sku')->getFrontend()->getValue($_product) != ''){
+                                    echo $_product->getResource()->getAttribute('sku')->getFrontend()->getValue($_product);
+                                }
+                                else {		echo "N/A";	}?>
+                        </span>
+                        </div>
+                        <div class="prod-attrib">
+                            <span class="prod-attrib-name"><?php echo $_product->getResource()->getAttribute('metal_type')->getFrontendLabel()?></span><span class="prod-attrib-value"><?php
+                                if($_product->getResource()->getAttribute('metal_type')->getFrontend()->getValue($_product) != ''){
+                                    echo $_product->getResource()->getAttribute('metal_type')->getFrontend()->getValue($_product);
+                                }
+                                else {		echo "N/A";	}?>
+                        </span>
+                        </div>
+                        <div class="prod-attrib">
+                            <span class="prod-attrib-name"><?php echo $_product->getResource()->getAttribute('metal_weight')->getFrontendLabel()?></span><span class="prod-attrib-value"><?php
+                                if($_product->getResource()->getAttribute('metal_weight')->getFrontend()->getValue($_product) != ''){
+                                    echo $_product->getResource()->getAttribute('metal_weight')->getFrontend()->getValue($_product);
+                                }
+                                else {		echo "N/A";	}?>
+                        </span>
+                        </div>
+                        <div class="prod-attrib">
+                            <span class="prod-attrib-name"><?php echo $_product->getResource()->getAttribute('finish')->getFrontendLabel()?></span><span class="prod-attrib-value"><?php
+                                if($_product->getResource()->getAttribute('finish')->getFrontend()->getValue($_product) != ''){
+                                    echo $_product->getResource()->getAttribute('finish')->getFrontend()->getValue($_product);
+                                }
+                                else {		echo "N/A";	}?>
+                        </span>
+                        </div>
+                        <div class="prod-attrib">
+                            <span class="prod-attrib-name"><?php echo $_product->getResource()->getAttribute('dimension')->getFrontendLabel()?></span><span class="prod-attrib-value"><?php
+                                if($_product->getResource()->getAttribute('dimension')->getFrontend()->getValue($_product) != ''){
+                                    echo $_product->getResource()->getAttribute('dimension')->getFrontend()->getValue($_product);
+                                }
+                                else {		echo "N/A";	}?>
+                        </span>
+                        </div>
+                    <?php }
+                    else if($productType == 'Earring'){ ?>
+                        <div class="prod-attrib">
+                            <span class="prod-attrib-name"><?php echo $_product->getResource()->getAttribute('sku')->getFrontendLabel()?></span><span class="prod-attrib-value"><?php
+                                if($_product->getResource()->getAttribute('sku')->getFrontend()->getValue($_product) != ''){
+                                    echo $_product->getResource()->getAttribute('sku')->getFrontend()->getValue($_product);
+                                }
+                                else {		echo "N/A";	}?>
+                        </span>
+                        </div>
+                        <div class="prod-attrib">
+                            <span class="prod-attrib-name"><?php echo $_product->getResource()->getAttribute('metal_type')->getFrontendLabel()?></span><span class="prod-attrib-value"><?php
+                                if($_product->getResource()->getAttribute('metal_type')->getFrontend()->getValue($_product) != ''){
+                                    echo $_product->getResource()->getAttribute('metal_type')->getFrontend()->getValue($_product);
+                                }
+                                else {		echo "N/A";	}?>
+                        </span>
+                        </div>
+                        <div class="prod-attrib">
+                            <span class="prod-attrib-name"><?php echo $_product->getResource()->getAttribute('metal_weight')->getFrontendLabel()?></span><span class="prod-attrib-value"><?php
+                                if($_product->getResource()->getAttribute('metal_weight')->getFrontend()->getValue($_product) != ''){
+                                    echo $_product->getResource()->getAttribute('metal_weight')->getFrontend()->getValue($_product);
+                                }
+                                else {		echo "N/A";	}?>
+                        </span>
+                        </div>
+                        <div class="prod-attrib">
+                            <span class="prod-attrib-name"><?php echo $_product->getResource()->getAttribute('finish')->getFrontendLabel()?></span><span class="prod-attrib-value"><?php
+                                if($_product->getResource()->getAttribute('finish')->getFrontend()->getValue($_product) != ''){
+                                    echo $_product->getResource()->getAttribute('finish')->getFrontend()->getValue($_product);
+                                }
+                                else {		echo "N/A";	}?>
+                        </span>
+                        </div>
+                        <div class="prod-attrib">
+                            <span class="prod-attrib-name"><?php echo $_product->getResource()->getAttribute('dimension')->getFrontendLabel()?></span><span class="prod-attrib-value"><?php
+                                if($_product->getResource()->getAttribute('dimension')->getFrontend()->getValue($_product) != ''){
+                                    echo $_product->getResource()->getAttribute('dimension')->getFrontend()->getValue($_product);
+                                }
+                                else {		echo "N/A";	}?>
+                        </span>
+                        </div>
+                    <?php }
+                    else if($productType == 'Fashion Ring'){ ?>
+                        <div class="prod-attrib">
+                            <span class="prod-attrib-name"><?php echo $_product->getResource()->getAttribute('sku')->getFrontendLabel()?></span><span class="prod-attrib-value"><?php
+                                if($_product->getResource()->getAttribute('sku')->getFrontend()->getValue($_product) != ''){
+                                    echo $_product->getResource()->getAttribute('sku')->getFrontend()->getValue($_product);
+                                }
+                                else {		echo "N/A";	}?>
+                        </span>
+                        </div>
+
+                    <?php }
+                    /*
+                     * Added by CStar
+                     * */
+                    else if($productType == 'Engagement Ring'){ ?>
+                        <div class="prod-attrib">
+                            <span class="prod-attrib-name"><?php echo $_product->getResource()->getAttribute('sku')->getFrontendLabel()?></span><span class="prod-attrib-value"><?php
+                                if($_product->getResource()->getAttribute('sku')->getFrontend()->getValue($_product) != ''){
+                                    echo $_product->getResource()->getAttribute('sku')->getFrontend()->getValue($_product);
+                                }
+                                else {		echo "N/A";	}?>
+                        </span>
+                        </div>
+
+                    <?php }
+                    /*
+                     * End by CStar
+                     * */
+                    ?>
+                    <?php echo $html; ?>
+                </div>
+            <?php } ?>
+        <?php } ?>
+
+        <?php
+        foreach ($groups as $group) {
+            if($group->getAttributeGroupName() == 'Gemstone Information'){ // set name
+                $groupName          = $group->getAttributeGroupName();
+                $groupId            = $group->getAttributeGroupId();
+                ?>
+                <?php $html = "" ;?>
+                <?php
+                $attributes = Mage::getResourceModel('catalog/product_attribute_collection')
+                    ->setAttributeGroupFilter($group->getId())
+                    ->addVisibleFilter()
+                    ->checkConfigurableProducts()
+                    ->load();
+
+                if ($attributes->getSize() > 0) {
+                    $i = 0;
+
+                    foreach ($attributes->getItems() as $attribute) {
+                        /* @var $child Mage_Eav_Model_Entity_Attribute */
+                        $attributeCodesSide[] = $attribute->getAttributeCode();
+                        $attributeCodesSide1[] = $attribute->getIsVisibleOnFront();
+                        $attrfrontnameside[] = $attribute->getFrontendLabel();
+                        ?>
+                        <?php //$attributesetting = $_helper->productAttribute($_product, $_product->$attributeCodes[$i], $attributeCodes[$i]);
+                        if($attribute->getFrontendInput() == 'text'){
+                            $attributesettingside = $_helper->productAttribute($_product, $_product->$attributeCodesSide[$i], $attributeCodesSide[$i]);
+                        }else{
+                            $attributesettingside = $_product->getAttributeText($attributeCodesSide[$i]);
+                        }
+                        ?>
+
+
+
+                        <?php if($attributeCodesSide1[$i] == 1){ ?>
+                            <?php
+                            $html .= '<div class="prod-attrib"><span class="prod-attrib-name">'.$attrfrontnameside[$i].'</span>';
+                            if($attributesettingside != ""){
+                                $html.= '<span class="prod-attrib-value">'.$attributesettingside.'</span></div>';
+                            }else{
+                                $html.= '<span class="prod-attrib-value">N/A</span></div>';
+                            }
+                            ?>
+
+                        <?php } ?>
+                        <?php $i++; }
+                }
+            }
+        }
+
+        if($html != "") { ?>
+            <div class="prod-attrib-column"><h2>Gemstone Information</h2><?php echo $html;?></div>
+        <?php } ?>
+
+        <?php
+        foreach ($groups as $group) {
+            if($group->getAttributeGroupName() == 'Center Stone Information'){ // set name
+                $groupName          = $group->getAttributeGroupName();
+                $groupId            = $group->getAttributeGroupId();
+                ?>
+                <?php $html = "";  ?>
+                <?php
+                $attributes1 = Mage::getResourceModel('catalog/product_attribute_collection')
+                    ->setAttributeGroupFilter($group->getId())
+                    ->addVisibleFilter()
+                    ->checkConfigurableProducts()
+                    ->load();
+                if ($attributes1->getSize() > 0) { ?>
+
+                    <?php
+                    $i = 0;
+                    foreach ($attributes1->getItems() as $attribute) {
+                        /* @var $child Mage_Eav_Model_Entity_Attribute */
+                        $attributeCodesGemstone[] = $attribute->getAttributeCode();
+                        $attributeCodesGemstone1[] = $attribute->getIsVisibleOnFront();
+                        $attrfrontnameGemstone[] = $attribute->getFrontendLabel();
+                        ?>
+                        <?php //$attributesetting = $_helper->productAttribute($_product, $_product->$attributeCodes[$i], $attributeCodes[$i]);
+                        if($attribute->getFrontendInput() == 'text'){
+                            $attributesettinggemstone = $_helper->productAttribute($_product, $_product->$attributeCodesGemstone[$i], $attributeCodesGemstone[$i]);
+                        }else{
+                            $attributesettinggemstone = $_product->getAttributeText($attributeCodesGemstone[$i]);
+                        }
+                        ?>
+
+                        <?php if($attributeCodesGemstone1[$i] == 1){ ?>
+                            <?php
+
+                            $html .= '<div class="prod-attrib"><span class="prod-attrib-name">'.$attrfrontnameGemstone[$i].'</span>';
+                            if($attributesettinggemstone != ""){
+                                $html .= '<span class="prod-attrib-value">'.$attributesettinggemstone.'</span></div>';
+                            }else{
+                                $html .= '<span class="prod-attrib-value">N/A</span></div>';
+                            }
+                            ?>
+                        <?php } ?>
+                        <?php $i++; }
+                }
+            }
+        }
+        if($html != "") { ?><div class="prod-attrib-column"><h2>Center Stone Information</h2><?php echo $html;?></div><?php } ?>
+
+        <?php
+        /*$setId = $_product->getAttributeSetId(); // Attribute set Id
+        $groups = Mage::getModel('eav/entity_attribute_group')
+            ->getResourceCollection()
+            ->setAttributeSetFilter($setId)
+            ->setSortOrder()
+            ->load();*/
+        ?>
+        <?php /*	foreach ($groups as $group) {
+            //if(($group->getAttributeGroupName() == 'Ring Information') || ($group->getAttributeGroupName() == 'Gemstone Information') || ($group->getAttributeGroupName() == 'Center Stone Information')){
+            if($group->getAttributeGroupName() == 'Ring Information'){
+			echo '<div class="prod-attrib-column"><h2>' . $group->getAttributeGroupName() . '</h2>';
+            $attributes = Mage::getResourceModel('catalog/product_attribute_collection')
+                ->setAttributeGroupFilter($group->getId())
+                ->addVisibleFilter()
+                ->checkConfigurableProducts()
+                ->load();
+               //echo "<pre>";print_r($attributes->getSize());echo "</pre>";
+                if ($attributes->getSize() > 0) {
+					$i = 0;
+                    foreach ($attributes->getItems() as $attribute) {
+
+                        $attributeCodesStud[] = $attribute->getAttributeCode();
+                        $attributeCodesStud1[] = $attribute->getIsVisibleOnFront();
+                        $attrfrontnameStud[] = $attribute->getFrontendLabel();
+							if($attribute->getFrontendInput() == 'text'){
+								$attributesettingStud = $_helper->productAttribute($_product, $_product->$attributeCodesStud[$i], $attributeCodesStud[$i]);
+							}else{
+								$attributesettingStud = $_product->getAttributeText($attributeCodesStud[$i]);
+							}
+							if($attributeCodesStud1[$i] == 1 && $attributesettingStud != ""){ ?>
+								<div class="prod-attrib">
+									<span class="prod-attrib-name"><?php echo $attrfrontnameStud[$i]; ?></span>
+									<span class="prod-attrib-value"><?php echo $attributesettingStud; ?></span>
+								</div>
+							<?php }
+						$i++;
+                    }
+                }
+			echo '</div>';
+			}
+
+			unset($attributeCodesStud);
+			unset($attributeCodesStud1);
+			unset($attrfrontnameStud);
+			unset($attributesettingStud);
+			unset($attributeCodesStud);
+
+			if($group->getAttributeGroupName() == 'Gemstone Information'){
+			echo '<div class="prod-attrib-column"><h2>' . $group->getAttributeGroupName() . '</h2>';
+            $attributes = Mage::getResourceModel('catalog/product_attribute_collection')
+                ->setAttributeGroupFilter($group->getId())
+                ->addVisibleFilter()
+                ->checkConfigurableProducts()
+                ->load();
+               //echo "<pre>";print_r($attributes->getSize());echo "</pre>";
+                if ($attributes->getSize() > 0) {
+					$i = 0;
+                    foreach ($attributes->getItems() as $attribute) {
+
+                        $attributeCodesStud[] = $attribute->getAttributeCode();
+                        $attributeCodesStud2[] = $attribute->getIsVisibleOnFront();
+                        $attrfrontnameStud[] = $attribute->getFrontendLabel();
+							if($attribute->getFrontendInput() == 'text'){
+								$attributesettingStud = $_helper->productAttribute($_product, $_product->$attributeCodesStud[$i], $attributeCodesStud[$i]);
+							}else{
+								$attributesettingStud = $_product->getAttributeText($attributeCodesStud[$i]);
+							}
+							if($attributeCodesStud2[$i] == 1 && $attributesettingStud != ""){ ?>
+								<div class="prod-attrib">
+									<span class="prod-attrib-name"><?php echo $attrfrontnameStud[$i]; ?></span>
+									<span class="prod-attrib-value"><?php echo $attributesettingStud; ?></span>
+								</div>
+							<?php }
+						$i++;
+                    }
+                }
+                echo '</div>';
+			}
+
+			unset($attributeCodesStud);
+			unset($attributeCodesStud1);
+			unset($attrfrontnameStud);
+			unset($attributesettingStud);
+			unset($attributeCodesStud);
+
+			if($group->getAttributeGroupName() == 'Center Stone Information'){
+			echo '<div class="prod-attrib-column"><h2>' . $group->getAttributeGroupName() . '</h2>';
+            $attributes = Mage::getResourceModel('catalog/product_attribute_collection')
+                ->setAttributeGroupFilter($group->getId())
+                ->addVisibleFilter()
+                ->checkConfigurableProducts()
+                ->load();
+               //echo "<pre>";print_r($attributes->getSize());echo "</pre>";
+                if ($attributes->getSize() > 0) {
+					$i = 0;
+                    foreach ($attributes->getItems() as $attribute) {
+
+                        $attributeCodesStud[] = $attribute->getAttributeCode();
+                        $attributeCodesStud3[] = $attribute->getIsVisibleOnFront();
+                        $attrfrontnameStud[] = $attribute->getFrontendLabel();
+							if($attribute->getFrontendInput() == 'text'){
+								$attributesettingStud = $_helper->productAttribute($_product, $_product->$attributeCodesStud[$i], $attributeCodesStud[$i]);
+							}else{
+								$attributesettingStud = $_product->getAttributeText($attributeCodesStud[$i]);
+							}
+							if($attributeCodesStud3[$i] == 1 && $attributesettingStud != ""){ ?>
+								<div class="prod-attrib">
+									<span class="prod-attrib-name"><?php echo $attrfrontnameStud[$i]; ?></span>
+									<span class="prod-attrib-value"><?php echo $attributesettingStud; ?></span>
+								</div>
+							<?php }
+						$i++;
+                    }
+                }
+                echo '</div>';
+			}
+		} */?>
+
+    </div>
+    <!---------------------------------------------------- Desktop tab End ---------------------------------------------------------->
+
+    <!---------------------------------------------------- Mobile tab start ---------------------------------------------------------->
+
+    <div class="mobilespe">
+        <section class="data-table" id="demo" data-accordion-group>
+
+            <?php
+
+            $setId = $_product->getAttributeSetId(); // Attribute set Id
+            $groups = Mage::getModel('eav/entity_attribute_group')
+                ->getResourceCollection()
+                ->setAttributeSetFilter($setId)
+                ->setSortOrder()
+                ->load();
+
+            $attributeCodes = array();
+            ?>
+
+            <?php
+            foreach ($groups as $group) {
+                if($productType == 'Fashion Ring'){
+                    if($group->getAttributeGroupName() == 'Ring Information'){ // set name
+                        $groupName          = $group->getAttributeGroupName();
+                        $groupId            = $group->getAttributeGroupId();
+                        ?>
+                        <?php
+                        $html = "";
+                        ?>
+                        <?php
+                        $attributes = Mage::getResourceModel('catalog/product_attribute_collection')
+                            ->setAttributeGroupFilter($group->getId())
+                            ->addVisibleFilter()
+                            ->checkConfigurableProducts()
+                            ->load();
+
+                        if ($attributes->getSize() > 0) {
+                            $i = 0;
+
+                            foreach ($attributes->getItems() as $attribute) {
+                                /* @var $child Mage_Eav_Model_Entity_Attribute */
+                                $attributeCodes[] = $attribute->getAttributeCode();
+                                $attributeCodes1[] = $attribute->getIsVisibleOnFront();
+                                $attrfrontname[] = $attribute->getFrontendLabel();
+                                //echo $attribute->getFrontendInput();
+                                ?>
+                                <?php //$attributesetting = $_helper->productAttribute($_product, $_product->$attributeCodes[$i], $attributeCodes[$i]);
+                                if($attribute->getFrontendInput() == 'text'){
+                                    $attributesetting = $_helper->productAttribute($_product, $_product->$attributeCodes[$i], $attributeCodes[$i]);
+                                } else if($attribute->getFrontendInput() == 'multiselect'){
+                                    $attributesetting = $_product->getAttributeText($attributeCodes[$i]);
+                                    if(is_array($attributesetting)) {
+                                        $attributesetting = implode(',',$attributesetting);
+                                        $attributesetting = str_replace('Most Popular','',$attributesetting);
+                                        $attributesetting = rtrim($attributesetting,',');
+                                    }
+                                }else{
+                                    $attributesetting = $_product->getAttributeText($attributeCodes[$i]);
+                                }
+                                ?>
+
+                                <?php
+
+                                if($attributeCodes1[$i] == 1){ ?>
+                                    <?php
+                                    $html .= '<div class="prod-attrib"><span class="prod-attrib-name">'.$attrfrontname[$i].'</span>';
+                                    if($attributesetting != ""){
+                                        $html .= '<span class="prod-attrib-value">'.$attributesetting.'</span></div>';
+                                    }
+                                    else{
+                                        $html .= '<span class="prod-attrib-value">N/A</span></div>';
+                                    }
+                                    ?>
+                                <?php } ?>
+                                <?php $i++;  }
+                        }
+                    }
+                }
+            } ?>
+            <?php
+            foreach ($groups as $group) {
+                if($productType == 'Bracelet'){
+                    if($group->getAttributeGroupName() == 'Bracelet Information'){ // set name
+                        $groupName          = $group->getAttributeGroupName();
+                        $groupId            = $group->getAttributeGroupId();
+                        ?>
+                        <?php
+                        $html = "";
+                        ?>
+                        <?php
+                        $attributes = Mage::getResourceModel('catalog/product_attribute_collection')
+                            ->setAttributeGroupFilter($group->getId())
+                            ->addVisibleFilter()
+                            ->checkConfigurableProducts()
+                            ->load();
+
+                        if ($attributes->getSize() > 0) {
+                            $i = 0;
+
+                            foreach ($attributes->getItems() as $attribute) {
+                                /* @var $child Mage_Eav_Model_Entity_Attribute */
+                                $attributeCodes[] = $attribute->getAttributeCode();
+                                $attributeCodes1[] = $attribute->getIsVisibleOnFront();
+                                $attrfrontname[] = $attribute->getFrontendLabel();
+                                //echo $attribute->getFrontendInput();
+                                ?>
+                                <?php //$attributesetting = $_helper->productAttribute($_product, $_product->$attributeCodes[$i], $attributeCodes[$i]);
+                                if($attribute->getFrontendInput() == 'text'){
+                                    $attributesetting = $_helper->productAttribute($_product, $_product->$attributeCodes[$i], $attributeCodes[$i]);
+                                } else if($attribute->getFrontendInput() == 'multiselect'){
+                                    $attributesetting = $_product->getAttributeText($attributeCodes[$i]);
+                                    if(is_array($attributesetting)) {
+                                        $attributesetting = implode(',',$attributesetting);
+                                        $attributesetting = str_replace('Most Popular','',$attributesetting);
+                                        $attributesetting = rtrim($attributesetting,',');
+                                    }
+                                }else{
+                                    $attributesetting = $_product->getAttributeText($attributeCodes[$i]);
+                                }
+                                ?>
+
+                                <?php
+
+                                if($attributeCodes1[$i] == 1){ ?>
+                                    <?php
+                                    $html .= '<div class="prod-attrib"><span class="prod-attrib-name">'.$attrfrontname[$i].'</span>';
+                                    if($attributesetting != ""){
+                                        $html .= '<span class="prod-attrib-value">'.$attributesetting.'</span></div>';
+                                    }
+                                    else{
+                                        $html .= '<span class="prod-attrib-value">N/A</span></div>';
+                                    }
+                                    ?>
+                                <?php } ?>
+                                <?php $i++;  }
+                        }
+                    }
+                }
+            } ?>
+            <?php
+            foreach ($groups as $group) {
+                if($productType == 'Earring'){
+                    if($group->getAttributeGroupName() == 'Earring Information'){ // set name
+                        $groupName          = $group->getAttributeGroupName();
+                        $groupId            = $group->getAttributeGroupId();
+                        ?>
+                        <?php
+                        $html = "";
+                        ?>
+                        <?php
+                        $attributes = Mage::getResourceModel('catalog/product_attribute_collection')
+                            ->setAttributeGroupFilter($group->getId())
+                            ->addVisibleFilter()
+                            ->checkConfigurableProducts()
+                            ->load();
+
+                        if ($attributes->getSize() > 0) {
+                            $i = 0;
+
+                            foreach ($attributes->getItems() as $attribute) {
+                                /* @var $child Mage_Eav_Model_Entity_Attribute */
+                                $attributeCodes[] = $attribute->getAttributeCode();
+                                $attributeCodes1[] = $attribute->getIsVisibleOnFront();
+                                $attrfrontname[] = $attribute->getFrontendLabel();
+                                //echo $attribute->getFrontendInput();
+                                ?>
+                                <?php //$attributesetting = $_helper->productAttribute($_product, $_product->$attributeCodes[$i], $attributeCodes[$i]);
+                                if($attribute->getFrontendInput() == 'text'){
+                                    $attributesetting = $_helper->productAttribute($_product, $_product->$attributeCodes[$i], $attributeCodes[$i]);
+                                } else if($attribute->getFrontendInput() == 'multiselect'){
+                                    $attributesetting = $_product->getAttributeText($attributeCodes[$i]);
+                                    if(is_array($attributesetting)) {
+                                        $attributesetting = implode(',',$attributesetting);
+                                        $attributesetting = str_replace('Most Popular','',$attributesetting);
+                                        $attributesetting = rtrim($attributesetting,',');
+                                    }
+                                }else{
+                                    $attributesetting = $_product->getAttributeText($attributeCodes[$i]);
+                                }
+                                ?>
+
+                                <?php
+
+                                if($attributeCodes1[$i] == 1){ ?>
+                                    <?php
+                                    $html .= '<div class="prod-attrib"><span class="prod-attrib-name">'.$attrfrontname[$i].'</span>';
+                                    if($attributesetting != ""){
+                                        $html .= '<span class="prod-attrib-value">'.$attributesetting.'</span></div>';
+                                    }
+                                    else{
+                                        $html .= '<span class="prod-attrib-value">N/A</span></div>';
+                                    }
+                                    ?>
+                                <?php } ?>
+                                <?php $i++;  }
+                        }
+                    }
+                }
+            } ?>
+            <?php
+            foreach ($groups as $group) {
+                if($productType == 'Necklace'){
+                    if($group->getAttributeGroupName() == 'Necklace Information'){ // set name
+                        $groupName          = $group->getAttributeGroupName();
+                        $groupId            = $group->getAttributeGroupId();
+                        ?>
+                        <?php
+                        $html = "";
+                        ?>
+                        <?php
+                        $attributes = Mage::getResourceModel('catalog/product_attribute_collection')
+                            ->setAttributeGroupFilter($group->getId())
+                            ->addVisibleFilter()
+                            ->checkConfigurableProducts()
+                            ->load();
+
+                        if ($attributes->getSize() > 0) {
+                            $i = 0;
+
+                            foreach ($attributes->getItems() as $attribute) {
+                                /* @var $child Mage_Eav_Model_Entity_Attribute */
+                                $attributeCodes[] = $attribute->getAttributeCode();
+                                $attributeCodes1[] = $attribute->getIsVisibleOnFront();
+                                $attrfrontname[] = $attribute->getFrontendLabel();
+                                //echo $attribute->getFrontendInput();
+                                ?>
+                                <?php //$attributesetting = $_helper->productAttribute($_product, $_product->$attributeCodes[$i], $attributeCodes[$i]);
+                                if($attribute->getFrontendInput() == 'text'){
+                                    $attributesetting = $_helper->productAttribute($_product, $_product->$attributeCodes[$i], $attributeCodes[$i]);
+                                } else if($attribute->getFrontendInput() == 'multiselect'){
+                                    $attributesetting = $_product->getAttributeText($attributeCodes[$i]);
+                                    if(is_array($attributesetting)) {
+                                        $attributesetting = implode(',',$attributesetting);
+                                        $attributesetting = str_replace('Most Popular','',$attributesetting);
+                                        $attributesetting = rtrim($attributesetting,',');
+                                    }
+                                }else{
+                                    $attributesetting = $_product->getAttributeText($attributeCodes[$i]);
+                                }
+                                ?>
+
+                                <?php
+
+                                if($attributeCodes1[$i] == 1){ ?>
+                                    <?php
+                                    $html .= '<div class="prod-attrib"><span class="prod-attrib-name">'.$attrfrontname[$i].'</span>';
+                                    if($attributesetting != ""){
+                                        $html .= '<span class="prod-attrib-value">'.$attributesetting.'</span></div>';
+                                    }
+                                    else{
+                                        $html .= '<span class="prod-attrib-value">N/A</span></div>';
+                                    }
+                                    ?>
+                                <?php } ?>
+                                <?php $i++;  }
+                        }
+                    }
+                }
+            } ?>
+
+            <?php
+            $productType = $_product->getResource()->getAttribute('product_type')->getFrontend()->getValue($_product);
+            if($productType == 'Fashion Ring'){
+                if($html != "") {?>
+                    <section class="prod-attrib-column" data-accordion><h2 data-control>Ring Information</h2><div data-content></h2>
+                <?php } ?>
+                <div class="prod-attrib">
+                    <span class="prod-attrib-name"><?php echo $_product->getResource()->getAttribute('sku')->getFrontendLabel()?></span><span class="prod-attrib-value"><?php
+                        if($_product->getResource()->getAttribute('sku')->getFrontend()->getValue($_product) != ''){
+                            echo $_product->getResource()->getAttribute('sku')->getFrontend()->getValue($_product);
+                        }
+                        else {		echo "N/A";	}?>
+				</span>
+                </div>
+                <div class="prod-attrib">
+                    <span class="prod-attrib-name"><?php echo $_product->getResource()->getAttribute('metal_type')->getFrontendLabel()?></span><span class="prod-attrib-value"><?php
+                        if($_product->getResource()->getAttribute('metal_type')->getFrontend()->getValue($_product) != ''){
+                            echo $_product->getResource()->getAttribute('metal_type')->getFrontend()->getValue($_product);
+                        }
+                        else {		echo "N/A";	}?>
+			</span>
+                </div>
+                <div class="prod-attrib">
+                    <span class="prod-attrib-name"><?php echo $_product->getResource()->getAttribute('metal_weight')->getFrontendLabel()?></span><span class="prod-attrib-value"><?php
+                        if($_product->getResource()->getAttribute('metal_weight')->getFrontend()->getValue($_product) != ''){
+                            echo $_product->getResource()->getAttribute('metal_weight')->getFrontend()->getValue($_product);
+                        }
+                        else {		echo "N/A";	}?>
+			</span>
+                </div>
+                <div class="prod-attrib">
+                    <span class="prod-attrib-name"><?php echo $_product->getResource()->getAttribute('finish')->getFrontendLabel()?></span><span class="prod-attrib-value"><?php
+                        if($_product->getResource()->getAttribute('finish')->getFrontend()->getValue($_product) != ''){
+                            echo $_product->getResource()->getAttribute('finish')->getFrontend()->getValue($_product);
+                        }
+                        else {		echo "N/A";	}?>
+			</span>
+                </div>
+                <?php /*<div class="prod-attrib">
+			<span class="prod-attrib-name"><?php echo $_product->getResource()->getAttribute('dimension')->getFrontendLabel()?></span><span class="prod-attrib-value"><?php
+				if($_product->getResource()->getAttribute('dimension')->getFrontend()->getValue($_product) != ''){
+					echo $_product->getResource()->getAttribute('dimension')->getFrontend()->getValue($_product);
+				 }
+				else {		echo "N/A";	}?>
+			</span>
+		</div>*/?>
+                <?php echo $html; ?></div></section><?php } else{
+
+                if($html != "") { ?> <section class="prod-attrib-column" data-accordion><h2 data-control><?php echo $_product->getResource()->getAttribute('product_type')->getFrontend()->getValue($_product);?>&nbsp;Information</h2><div data-content>
+                        <?php
+                        $productType = $_product->getResource()->getAttribute('product_type')->getFrontend()->getValue($_product);
+
+                        if($productType == 'Bracelet'){ ?>
+                            <div class="prod-attrib">
+                                <span class="prod-attrib-name"><?php echo $_product->getResource()->getAttribute('sku')->getFrontendLabel()?></span><span class="prod-attrib-value"><?php
+                                    if($_product->getResource()->getAttribute('sku')->getFrontend()->getValue($_product) != ''){
+                                        echo $_product->getResource()->getAttribute('sku')->getFrontend()->getValue($_product);
+                                    }
+                                    else {		echo "N/A";	}?>
+				</span>
+                            </div>
+                            <div class="prod-attrib">
+                                <span class="prod-attrib-name"><?php echo $_product->getResource()->getAttribute('metal_type')->getFrontendLabel()?></span><span class="prod-attrib-value"><?php
+                                    if($_product->getResource()->getAttribute('metal_type')->getFrontend()->getValue($_product) != ''){
+                                        echo $_product->getResource()->getAttribute('metal_type')->getFrontend()->getValue($_product);
+                                    }
+                                    else {		echo "N/A";	}?>
+			</span>
+                            </div>
+                            <div class="prod-attrib">
+                                <span class="prod-attrib-name"><?php echo $_product->getResource()->getAttribute('metal_weight')->getFrontendLabel()?></span><span class="prod-attrib-value"><?php
+                                    if($_product->getResource()->getAttribute('metal_weight')->getFrontend()->getValue($_product) != ''){
+                                        echo $_product->getResource()->getAttribute('metal_weight')->getFrontend()->getValue($_product);
+                                    }
+                                    else {		echo "N/A";	}?>
+			</span>
+                            </div>
+                            <div class="prod-attrib">
+                                <span class="prod-attrib-name"><?php echo $_product->getResource()->getAttribute('finish')->getFrontendLabel()?></span><span class="prod-attrib-value"><?php
+                                    if($_product->getResource()->getAttribute('finish')->getFrontend()->getValue($_product) != ''){
+                                        echo $_product->getResource()->getAttribute('finish')->getFrontend()->getValue($_product);
+                                    }
+                                    else {		echo "N/A";	}?>
+			</span>
+                            </div>
+                            <?php /*<div class="prod-attrib">
+			<span class="prod-attrib-name"><?php echo $_product->getResource()->getAttribute('dimension')->getFrontendLabel()?></span><span class="prod-attrib-value"><?php
+				if($_product->getResource()->getAttribute('dimension')->getFrontend()->getValue($_product) != ''){
+					echo $_product->getResource()->getAttribute('dimension')->getFrontend()->getValue($_product);
+				 }
+				else {		echo "N/A";	}?>
+			</span>
+		</div>*/?>
+                        <?php }
+                        else if($productType == 'Necklace'){ ?>
+                            <div class="prod-attrib">
+                                <span class="prod-attrib-name"><?php echo $_product->getResource()->getAttribute('sku')->getFrontendLabel()?></span><span class="prod-attrib-value"><?php
+                                    if($_product->getResource()->getAttribute('sku')->getFrontend()->getValue($_product) != ''){
+                                        echo $_product->getResource()->getAttribute('sku')->getFrontend()->getValue($_product);
+                                    }
+                                    else {		echo "N/A";	}?>
+				</span>
+                            </div>
+                            <div class="prod-attrib">
+                                <span class="prod-attrib-name"><?php echo $_product->getResource()->getAttribute('metal_type')->getFrontendLabel()?></span><span class="prod-attrib-value"><?php
+                                    if($_product->getResource()->getAttribute('metal_type')->getFrontend()->getValue($_product) != ''){
+                                        echo $_product->getResource()->getAttribute('metal_type')->getFrontend()->getValue($_product);
+                                    }
+                                    else {		echo "N/A";	}?>
+			</span>
+                            </div>
+                            <div class="prod-attrib">
+                                <span class="prod-attrib-name"><?php echo $_product->getResource()->getAttribute('metal_weight')->getFrontendLabel()?></span><span class="prod-attrib-value"><?php
+                                    if($_product->getResource()->getAttribute('metal_weight')->getFrontend()->getValue($_product) != ''){
+                                        echo $_product->getResource()->getAttribute('metal_weight')->getFrontend()->getValue($_product);
+                                    }
+                                    else {		echo "N/A";	}?>
+			</span>
+                            </div>
+                            <div class="prod-attrib">
+                                <span class="prod-attrib-name"><?php echo $_product->getResource()->getAttribute('finish')->getFrontendLabel()?></span><span class="prod-attrib-value"><?php
+                                    if($_product->getResource()->getAttribute('finish')->getFrontend()->getValue($_product) != ''){
+                                        echo $_product->getResource()->getAttribute('finish')->getFrontend()->getValue($_product);
+                                    }
+                                    else {		echo "N/A";	}?>
+			</span>
+                            </div>
+                            <div class="prod-attrib">
+                                <span class="prod-attrib-name"><?php echo $_product->getResource()->getAttribute('dimension')->getFrontendLabel()?></span><span class="prod-attrib-value"><?php
+                                    if($_product->getResource()->getAttribute('dimension')->getFrontend()->getValue($_product) != ''){
+                                        echo $_product->getResource()->getAttribute('dimension')->getFrontend()->getValue($_product);
+                                    }
+                                    else {		echo "N/A";	}?>
+			</span>
+                            </div>
+                        <?php }
+                        else if($productType == 'Earring'){ ?>
+                            <div class="prod-attrib">
+                                <span class="prod-attrib-name"><?php echo $_product->getResource()->getAttribute('sku')->getFrontendLabel()?></span><span class="prod-attrib-value"><?php
+                                    if($_product->getResource()->getAttribute('sku')->getFrontend()->getValue($_product) != ''){
+                                        echo $_product->getResource()->getAttribute('sku')->getFrontend()->getValue($_product);
+                                    }
+                                    else {		echo "N/A";	}?>
+				</span>
+                            </div>
+                            <div class="prod-attrib">
+                                <span class="prod-attrib-name"><?php echo $_product->getResource()->getAttribute('metal_type')->getFrontendLabel()?></span><span class="prod-attrib-value"><?php
+                                    if($_product->getResource()->getAttribute('metal_type')->getFrontend()->getValue($_product) != ''){
+                                        echo $_product->getResource()->getAttribute('metal_type')->getFrontend()->getValue($_product);
+                                    }
+                                    else {		echo "N/A";	}?>
+			</span>
+                            </div>
+                            <div class="prod-attrib">
+                                <span class="prod-attrib-name"><?php echo $_product->getResource()->getAttribute('metal_weight')->getFrontendLabel()?></span><span class="prod-attrib-value"><?php
+                                    if($_product->getResource()->getAttribute('metal_weight')->getFrontend()->getValue($_product) != ''){
+                                        echo $_product->getResource()->getAttribute('metal_weight')->getFrontend()->getValue($_product);
+                                    }
+                                    else {		echo "N/A";	}?>
+			</span>
+                            </div>
+                            <div class="prod-attrib">
+                                <span class="prod-attrib-name"><?php echo $_product->getResource()->getAttribute('finish')->getFrontendLabel()?></span><span class="prod-attrib-value"><?php
+                                    if($_product->getResource()->getAttribute('finish')->getFrontend()->getValue($_product) != ''){
+                                        echo $_product->getResource()->getAttribute('finish')->getFrontend()->getValue($_product);
+                                    }
+                                    else {		echo "N/A";	}?>
+			</span>
+                            </div>
+                            <div class="prod-attrib">
+                                <span class="prod-attrib-name"><?php echo $_product->getResource()->getAttribute('dimension')->getFrontendLabel()?></span><span class="prod-attrib-value"><?php
+                                    if($_product->getResource()->getAttribute('dimension')->getFrontend()->getValue($_product) != ''){
+                                        echo $_product->getResource()->getAttribute('dimension')->getFrontend()->getValue($_product);
+                                    }
+                                    else {		echo "N/A";	}?>
+			</span>
+                            </div>
+                        <?php }
+                        else if($productType == 'Fashion Ring'){ ?>
+                            <div class="prod-attrib">
+                                <span class="prod-attrib-name"><?php echo $_product->getResource()->getAttribute('sku')->getFrontendLabel()?></span><span class="prod-attrib-value"><?php
+                                    if($_product->getResource()->getAttribute('sku')->getFrontend()->getValue($_product) != ''){
+                                        echo $_product->getResource()->getAttribute('sku')->getFrontend()->getValue($_product);
+                                    }
+                                    else {		echo "N/A";	}?>
+				</span>
+                            </div>
+                        <?php }?>
+                        <?php echo $html; ?>
+                    </div>
+                    </section>
+                <?php } ?>
+
+            <?php } ?>
+
+
+            <?php
+            foreach ($groups as $group) {
+                if($group->getAttributeGroupName() == 'Gemstone Information'){ // set name
+                    $groupName          = $group->getAttributeGroupName();
+                    $groupId            = $group->getAttributeGroupId();
+                    ?>
+                    <?php $html = "" ;?>
+                    <?php
+                    $attributes = Mage::getResourceModel('catalog/product_attribute_collection')
+                        ->setAttributeGroupFilter($group->getId())
+                        ->addVisibleFilter()
+                        ->checkConfigurableProducts()
+                        ->load();
+
+                    if ($attributes->getSize() > 0) {
+                        $i = 0;
+
+                        foreach ($attributes->getItems() as $attribute) {
+                            /* @var $child Mage_Eav_Model_Entity_Attribute */
+                            $attributeCodesSide[] = $attribute->getAttributeCode();
+                            $attributeCodesSide1[] = $attribute->getIsVisibleOnFront();
+                            $attrfrontnameside[] = $attribute->getFrontendLabel();
+                            ?>
+                            <?php //$attributesetting = $_helper->productAttribute($_product, $_product->$attributeCodes[$i], $attributeCodes[$i]);
+                            if($attribute->getFrontendInput() == 'text'){
+                                $attributesettingside = $_helper->productAttribute($_product, $_product->$attributeCodesSide[$i], $attributeCodesSide[$i]);
+                            }else{
+                                $attributesettingside = $_product->getAttributeText($attributeCodesSide[$i]);
+                            }
+                            ?>
+
+
+
+                            <?php if($attributeCodesSide1[$i] == 1){ ?>
+                                <?php
+                                $html .= '<div class="prod-attrib"><span class="prod-attrib-name">'.$attrfrontnameside[$i].'</span>';
+                                if($attributesettingside != ""){
+                                    $html.= '<span class="prod-attrib-value">'.$attributesettingside.'</span></div>';
+                                }else{
+                                    $html.= '<span class="prod-attrib-value">N/A</span></div>';
+                                }
+                                ?>
+
+                            <?php } ?>
+                            <?php $i++; }
+                    }
+                }
+            } if($html != "") { ?>
+                <section class="prod-attrib-column" data-accordion>
+                <h2 data-control>Gemstone Information</h2>
+                <div data-content><?php echo $html;?></div>
+                </section><?php } ?>
+
+
+            <?php
+            foreach ($groups as $group) {
+                if($group->getAttributeGroupName() == 'Center Stone Information'){ // set name
+                    $groupName          = $group->getAttributeGroupName();
+                    $groupId            = $group->getAttributeGroupId();
+                    ?>
+                    <?php $html = "";  ?>
+                    <?php
+                    $attributes1 = Mage::getResourceModel('catalog/product_attribute_collection')
+                        ->setAttributeGroupFilter($group->getId())
+                        ->addVisibleFilter()
+                        ->checkConfigurableProducts()
+                        ->load();
+                    if ($attributes1->getSize() > 0) { ?>
+
+                        <?php
+                        $i = 0;
+                        foreach ($attributes1->getItems() as $attribute) {
+                            /* @var $child Mage_Eav_Model_Entity_Attribute */
+                            $attributeCodesGemstone[] = $attribute->getAttributeCode();
+                            $attributeCodesGemstone1[] = $attribute->getIsVisibleOnFront();
+                            $attrfrontnameGemstone[] = $attribute->getFrontendLabel();
+                            ?>
+                            <?php //$attributesetting = $_helper->productAttribute($_product, $_product->$attributeCodes[$i], $attributeCodes[$i]);
+                            if($attribute->getFrontendInput() == 'text'){
+                                $attributesettinggemstone = $_helper->productAttribute($_product, $_product->$attributeCodesGemstone[$i], $attributeCodesGemstone[$i]);
+                            }else{
+                                $attributesettinggemstone = $_product->getAttributeText($attributeCodesGemstone[$i]);
+                            }
+                            ?>
+
+                            <?php if($attributeCodesGemstone1[$i] == 1){ ?>
+                                <?php
+
+                                $html .= '<div class="prod-attrib"><span class="prod-attrib-name">'.$attrfrontnameGemstone[$i].'</span>';
+                                if($attributesettinggemstone != ""){
+                                    $html .= '<span class="prod-attrib-value">'.$attributesettinggemstone.'</span></div>';
+                                }else{
+                                    $html .= '<span class="prod-attrib-value">N/A</span></div>';
+                                }
+                                ?>
+                            <?php } ?>
+                            <?php $i++; }
+                    }
+                }
+            }
+            if($html != "") { ?>
+                <section class="prod-attrib-column" data-accordion>
+                <h2 data-control>Center Stone Information</h2>
+                <div data-content><?php echo $html;?></div>
+                </section>
+            <?php } ?>
+
+
+        </section>
+    </div>
+    <!---------------------------------------------------- Mobile tab End ---------------------------------------------------------->
+
+    <script>
+        jQuery(document).ready(function() {
+            jQuery('#demo [data-accordion]').accordion();
+        });
+
+        jQuery(document).ready(function() {
+            jQuery('#demo [data-accordion]').accordion({
+// Transition speed on miliseconds.
+                transitionSpeed: 300,
+
+// CSS value for easing
+                transitionEasing: 'ease',
+
+// CSS selector for the element acting as a button inside accordions.
+                controlElement: '[data-control]',
+
+// CSS selector for the element containing hide/show content.
+                contentElement: '[data-content]',
+
+// CSS selector for a parent element containing a group of accordions.
+                groupElement: '[data-accordion-group]',
+
+// Opens a single accordion a time.
+// If false, multiple accordions can be open a time.
+                singleOpen: true
+            });
+        });
+
+
+    </script>
+
+
+
+    </div>
+    <script type="text/javascript">decorateTable('product-attribute-specs-table')</script>
+<?php endif;?>
+
+<?php /*
+    <h2><?php echo $this->__('Specifications') ?></h2>
+    <table class="data-table" id="product-attribute-specs-table">
+        <col width="25%" />
+        <col />
+        <tbody>
+        <?php foreach ($_additional as $_data): ?>
+            <tr>
+                <th class="label"><?php echo $this->escapeHtml($this->__($_data['label'])) ?></th>
+                <td class="data"><?php echo $_helper->productAttribute($_product, $_data['value'], $_data['code']) ?></td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+    <script type="text/javascript">decorateTable('product-attribute-specs-table')</script>
+<?php endif; */ ?>

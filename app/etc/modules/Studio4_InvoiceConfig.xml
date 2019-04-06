@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Studio4_InvoiceConfig>
+            <active>true</active>
+            <codePool>community</codePool>
+        </Studio4_InvoiceConfig>
+    </modules>
+</config>

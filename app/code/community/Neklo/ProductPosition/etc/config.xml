@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<!--
+NOTICE OF LICENSE
+
+This source file is subject to the NekloEULA that is bundled with this package in the file ICENSE.txt.
+
+It is also available through the world-wide-web at this URL: http://store.neklo.com/LICENSE.txt
+
+Copyright (c)  Neklo (http://store.neklo.com/)
+-->
+<config>
+    <modules>
+        <Neklo_ProductPosition>
+            <version>1.0.2</version>
+        </Neklo_ProductPosition>
+    </modules>
+    <global>
+        <blocks>
+            <neklo_productposition>
+                <class>Neklo_ProductPosition_Block</class>
+            </neklo_productposition>
+            <neklo_productposition_adminhtml>
+                <class>Neklo_ProductPosition_Block_Adminhtml</class>
+            </neklo_productposition_adminhtml>
+        </blocks>
+        <helpers>
+            <neklo_productposition>
+                <class>Neklo_ProductPosition_Helper</class>
+            </neklo_productposition>
+        </helpers>
+        <models>
+            <neklo_productposition>
+                <class>Neklo_ProductPosition_Model</class>
+                <resourceModel>neklo_productposition_resource</resourceModel>
+            </neklo_productposition>
+            <neklo_productposition_resource>
+                <class>Neklo_ProductPosition_Model_Resource</class>
+                <entities>
+                    <product_status>
+                        <table>neklo_productposition_product_status</table>
+                    </product_status>
+                </entities>
+            </neklo_productposition_resource>
+            <neklo_productposition_source>
+                <class>Neklo_ProductPosition_Model_source</class>
+            </neklo_productposition_source>
+        </models>
+        <resources>
+            <neklo_productposition_setup>
+                <setup>
+                    <module>Neklo_ProductPosition</module>
+                </setup>
+            </neklo_productposition_setup>
+        </resources>
+    </global>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Neklo_ProductPosition before="Mage_Adminhtml">Neklo_ProductPosition_Adminhtml</Neklo_ProductPosition>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <adminhtml>
+        <events>
+            <adminhtml_catalog_category_tabs>
+                <observers>
+                    <neklo_productposition_adminhtml_catalog_category_tabs>
+                        <class>neklo_productposition/observer</class>
+                        <method>addTab</method>
+                    </neklo_productposition_adminhtml_catalog_category_tabs>
+                </observers>
+            </adminhtml_catalog_category_tabs>
+            <catalog_category_prepare_save>
+                <observers>
+                    <neklo_productposition_catalog_category_prepare_save>
+                        <class>neklo_productposition/observer</class>
+                        <method>categoryPrepareSave</method>
+                    </neklo_productposition_catalog_category_prepare_save>
+                </observers>
+            </catalog_category_prepare_save>
+        </events>
+        <layout>
+            <updates>
+                <neklo_productposition>
+                    <file>neklo/productposition.xml</file>
+                </neklo_productposition>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Neklo_ProductPosition>
+                    <files>
+                        <default>Neklo_ProductPosition.csv</default>
+                    </files>
+                </Neklo_ProductPosition>
+            </modules>
+        </translate>
+    </adminhtml>
+    <default>
+        <neklo_productposition>
+            <general>
+                <is_enabled>1</is_enabled>
+            </general>
+            <grid>
+                <column_count>4</column_count>
+            </grid>
+        </neklo_productposition>
+    </default>
+</config>

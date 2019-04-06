@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<TF_Autocomplete>
+			<active>false</active>
+			<codePool>community</codePool>
+		</TF_Autocomplete>
+	</modules>
+</config>

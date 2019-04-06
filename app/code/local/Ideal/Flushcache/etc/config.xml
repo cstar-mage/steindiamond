@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Ideal_Flushcache>
+            <version>0.1.4</version>
+        </Ideal_Flushcache>
+    </modules>
+    <admin>
+	    <routers>
+	        <adminhtml>
+	            <args>
+	                <modules>
+	                    <flushcache after="Mage_Adminhtml">Ideal_Flushcache_Adminhtml</flushcache>
+	                </modules>
+	            </args>
+	        </adminhtml>
+	    </routers>
+	</admin>
+	
+    <adminhtml>
+    	<layout>
+            <updates>
+                <flushcache>
+                    <file>flushcache.xml</file>
+                </flushcache>
+            </updates>
+        </layout>
+        
+        <events>
+            <cms_page_save_after>
+                <observers>
+                    <ideal_cms_page_flushcache>
+                        <type>model</type>
+                        <class>flushcache/observer</class>
+                        <method>cmsPageSaveAfter</method>
+                    </ideal_cms_page_flushcache>
+                </observers>
+            </cms_page_save_after>
+            <cms_block_save_after>
+                <observers>
+                    <ideal_cms_block_flushcache>
+                        <type>model</type>
+                        <class>flushcache/observer</class>
+                        <method>cmsBlockSaveAfter</method>
+                    </ideal_cms_block_flushcache>
+                </observers>
+            </cms_block_save_after>
+            <catalog_product_save_before>
+                <observers>
+                    <ideal_redundant_gallery>
+                        <type>model</type>
+                        <class>flushcache/observer</class>
+                        <method>removeBadGallery</method>
+                    </ideal_redundant_gallery>
+                </observers>
+            </catalog_product_save_before>
+            
+            <catalog_product_save_after>
+                <observers>
+                    <ideal_catalog_product_save_after>
+                        <type>model</type>
+                        <class>flushcache/observer</class>
+                        <method>flushAllCache</method>
+                    </ideal_catalog_product_save_after>
+                </observers>
+            </catalog_product_save_after>
+            
+            <catalog_category_save_after>
+                <observers>
+                    <ideal_catalog_category_save_after>
+                        <type>model</type>
+                        <class>flushcache/observer</class>
+                        <method>flushAllCache</method>
+                    </ideal_catalog_category_save_after>
+                </observers>
+            </catalog_category_save_after>
+            
+        </events>
+    </adminhtml>
+    <global>
+    	<events>
+			<!-- this event is redundant now, menu issue has been fixed in stain -->
+    		<!-- litemage menu fix use only when custom dropdown menu used -->
+			<!--<controller_action_layout_load_before>
+			  <observers>
+			    <litemage_esi>
+			      <class>flushcache/observer</class>
+			      <method>purgeLitemageCache</method>
+			    </litemage_esi>
+			  </observers>
+			</controller_action_layout_load_before>-->
+		</events>
+    	<blocks>
+            <flushcache>
+                <class>Ideal_Flushcache_Block</class>
+            </flushcache>
+        </blocks>
+        <models>
+            <flushcache>
+                <class>Ideal_Flushcache_Model</class>
+            </flushcache>
+        </models>
+        
+        <helpers>
+            <flushcache>
+                <class>Ideal_Flushcache_Helper</class>
+            </flushcache>
+        </helpers>
+    </global>
+</config>

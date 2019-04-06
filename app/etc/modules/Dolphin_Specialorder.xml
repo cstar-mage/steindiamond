@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Dolphin_Specialorder>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Dolphin_Specialorder>
+    </modules>
+</config> 

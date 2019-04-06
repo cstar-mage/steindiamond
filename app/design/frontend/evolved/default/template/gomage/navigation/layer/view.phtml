@@ -1,0 +1,329 @@
+<?php
+ /**
+ * GoMage Advanced Navigation Extension
+ *
+ * @category     Extension
+ * @copyright    Copyright (c) 2010-2011 GoMage (http://www.gomage.com)
+ * @author       GoMage
+ * @license      http://www.gomage.com/license-agreement/  Single domain license
+ * @terms of use http://www.gomage.com/terms-of-use
+ * @version      Release: 2.1
+ * @since        Class available since Release 1.0
+ */
+?>
+
+<?php 
+if (Mage::registry('current_category'))
+{
+	$category_id = Mage::registry('current_category')->getId();
+	$category_name = Mage::registry('current_category')->getName();
+}
+?>
+<?php if($this->canShowBlock()): ?>
+<div class="block block-layered-nav gomage-navigation-slider-type-<?php echo $this->getSliderType();?> gomage-navigation-icons-<?php echo $this->getIconStyle();?> category-<?php echo $category_id; ?> category-<?php echo $category_name; ?>">
+    <?php  ?>
+    <div class="block-title">
+        <strong><span><?php echo $this->__('Shop By') ?></span></strong>
+    </div>
+	<div class="searchfilter">
+		<h3 class="heading">Filter</h3>
+	</div>
+    <?php  ?>
+    
+    
+    <div class="block-content">
+        <?php echo $this->getStateHtml() ?>
+        <?php if($this->canShowOptions()): ?>
+            <p class="block-subtitle">
+    			<?php /* ?>
+	    			<span><?php echo $this->__('Shopping Options') ?></span>
+    			<?php */ ?>
+    			<?php if(count($_filters = $this->getActiveFilters()) > 0):?>
+    			
+				<div class="filter-name-attribute">
+					<?php 
+    			$_activeFilters[] = array();
+				foreach ($_filters as $_filter):?>
+				   <div class="filter-value-name">
+					<span class="close"><a href="<?php  echo $_filter->getRemoveUrl() ?>" title="<?php echo $this->__('Remove Item') ?>"><img src="<?php echo $this->getSkinUrl('images/close.png') ?>" alt=""/></a></span>
+					<span class="att-name"><?php echo $this->stripTags($_filter->getLabel()) ?> </span>
+				   </div>	
+					<?php  endforeach; ?>
+				</div>
+				
+    		
+    			<?php /* <button class="button" onclick="setNavigationUrl('<?php echo urlencode($this->getClearUrl(true));?>'); return false;"><span><span><?php echo $this->__('Clear All') ?></span></span></button> */ ?>
+    			<button class="button" onclick="window.location.href='<?php echo $this->getClearUrl();?>'"><span><span><?php echo $this->__('Clear All') ?></span></span></button>
+    			
+    			<?php endif;?>
+    		</p>
+            <dl id="narrow-by-list">
+                <?php $_filters = $this->getFilters() ?>
+                
+                 
+                <?php foreach ($_filters as $_filter): 
+                	
+                	
+                	$filter_id = 'advancednavigation-filter-content-'.$_filter->_filter->getRequestVar();
+                	
+                ?>
+                <?php //echo $_filter->_filter->getRequestVar();?>
+                
+                <?php if($_filter->getItemsCount() && $_filter->getItemsCount() > 1): ?>
+                
+                    <?php if($_filter->canShowPopup()):?>
+                    
+                        <?php $note_content = trim($_filter->getPopupText())?>
+                        
+    					<?php if(strlen($note_content)):?>
+    						<?php
+    	                    		
+    	                    		$styles = '';
+    	                    		
+    	                    		if($content_width = $_filter->getPopupWidth()){
+    	                    			
+    	                    			$styles .= "width:{$content_width}px;";
+    	                    			
+    	                    		}
+    	                    		if($content_height = $_filter->getPopupHeight()){
+    	                    			
+    	                    			$styles .= "height:{$content_height}px;";
+    	                    			
+    	                    		}
+    	                    		
+    	                    	?>    	                    	
+    	                    	<dd id="filter-<?php echo $_filter->getPopupId();?>-note-content" class="filter-note-content" <?php if($styles):?> style="<?php echo $styles;?>" <?php endif;?>>
+    								<?php echo nl2br($note_content);?> 
+    	                    	</dd>
+    					<?php endif;?>
+					<?php endif;?>
+                	  
+                	 <?php if($category_id == "29" && $_filter->_filter->getRequestVar()=="series"): ?>                	                	                	
+                	 <?php else: ?>
+								<dt id="<?php echo $_filter->_filter->getRequestVar();?>" data-attname="<?php echo $_filter->_filter->getRequestVar();?>" onclick="navigationOpenFilter('<?php echo $_filter->_filter->getRequestVar();?>');">
+									<span class="filter-name"><?php echo $this->__($_filter->getName()) ?></span>
+									<p class="clearallsub <?php echo $_filter->_filter->getRequestVar(); ?>">Clear</p>
+																
+									<?php if($_filter->canShowPopup()):?>
+																							
+										<?php if(strlen($note_content)):?>
+										
+										<span class="filter-note-handle" onmouseout="hideNavigationNote();" onmouseover="showNavigationNote('filter-<?php echo $_filter->getPopupId();?>-note-content', this)">?</span>
+																	
+										<?php endif;?>
+									
+									<?php endif;?>
+								</dt>
+						   <!--     <div class="clearallsubdiv">
+									
+						 		</div> -->
+								<dd id="<?php echo $filter_id;?>" <?php if($_filter->canShowMinimized()){?> style="display:none;" <?php } ?> >
+								
+								<?php if ($_filter->canShowResetFirler()): ?>
+									<?php $_filter_reset =  $this->getResetFirlerUrl($_filter, $_filter->ajaxEnabled()); ?>
+									<?php if ($_filter_reset): ?>
+										 <a href="<?php echo $_filter_reset; ?>" <?php if ($_filter->ajaxEnabled()): ?>onclick="setNavigationUrl('<?php echo urlencode($_filter_reset); ?>'); return false;"<?php endif; ?> >Reset</a>
+									<?php endif; ?>
+								<?php endif; ?>
+								
+								
+								<?php echo $_filter->getHtml() ?>		
+											
+								</dd>
+					<?php endif; ?>
+					
+					
+                <?php endif; ?>
+                <?php endforeach; ?>
+            </dl>
+            <script type="text/javascript">
+            	// <![CDATA[
+            	decorateDataList('narrow-by-list');
+            	// ]]>
+            </script>
+        <?php endif; ?>
+    </div>
+</div>
+<?php endif; ?>
+<?php 
+
+$evolvedmethod = new Ideal_Evolved_Block_Evolved();
+if(method_exists($evolvedmethod, 'getBlockConfig'))
+{
+	if($evolvedmethod->getBlockConfig('evolved_form_productlist_sidebar')['productlist_sidebar_left_editor_block'])
+	{
+		$list_left_block = $evolvedmethod->getBlockConfig('evolved_form_productlist_sidebar')['productlist_sidebar_left_editor_block'];	
+	}
+	else 
+	{
+		$theme = Mage::helper('evolved')->getThemeConfig();
+		$list_left_block = $theme['productlist_sidebar_left_editor_block'];
+	}
+}
+else 
+{
+	$theme = Mage::helper('evolved')->getThemeConfig();
+	$list_left_block = $theme['productlist_sidebar_left_editor_block'];
+}
+$helper = Mage::helper('cms');
+$processor = $helper->getPageTemplateProcessor();
+if(nl2br($processor->filter($list_left_block))): ?>
+<div class="category-left-block">
+<?php 
+//$theme = Ideal_Evolved_Block_Evolved::getConfig(); 
+echo nl2br($processor->filter($list_left_block));	
+?>
+</div>
+<?php endif; ?>
+
+
+<script>
+
+
+		  
+		  
+		var pageWidth = jQuery(window).width();
+		if (pageWidth < 770) {
+			
+	jQuery(".searchfilter").click(function(){
+		jQuery(".block-layered-nav .block-content").slideToggle();
+	});
+	
+	
+	  
+		  jQuery( document ).ready(function() {
+		jQuery(".filter-name").addClass("closed");
+		jQuery('.block-layered-nav .block-content > dl > dd').css("display","none");
+    jQuery('.block-layered-nav .block-content > dl > dt').on('click', function(){
+		if(jQuery( this).next().css('display') == 'block')
+		{
+			
+			jQuery('#narrow-by-list dd').css("display","none");
+			jQuery(this).next().css("display","block");
+			jQuery('#narrow-by-list dt').removeClass( "opened" );
+			jQuery( this).removeClass( "closed" );
+			jQuery( this).addClass( "opened" );	
+			//jQuery(this).css("display","block");
+			
+		}
+		else
+		{
+			jQuery( this).addClass( "closed" );
+			jQuery( this).removeClass( "opened" );	
+				
+		}	
+		 
+    });
+		  	
+});
+		}
+	
+</script>
+
+
+<script type="text/javascript">
+jQuery(document).ready(function(){
+	
+	jQuery(".clearallsub").hide();
+	var url = jQuery(location).attr("href");
+	var urlparts= url.split('?');   
+	
+	
+	if (urlparts.length >= 2) {
+			
+					
+				var pars= urlparts[1].split(/[&;]/g);
+					for(l=0;l<pars.length;l++){
+						
+						var aa = pars[l].split("=");
+						var attriname = aa[0];
+						
+						if(attriname == 'price_from'){
+							attriname = 'price';
+						}					    
+						jQuery(".clearallsub."+attriname).show();
+					}	
+
+	}
+	 
+	
+	
+	jQuery(".clearallsub").click(function() {
+
+	  var parameter = jQuery(this).parent().attr('data-attname');
+	  
+	  if(parameter == "price"){
+		  
+		  parameter1 = "price_from";
+		  parameter2 = "price_to";
+		  parameter3 = "t";
+		 
+			
+				var urlparts= url.split('?');  
+				
+		 		var prefix1= encodeURIComponent(parameter1)+'=';
+				var pars1= urlparts[1].split(/[&;]/g);
+
+				for (var i= pars1.length; i-- > 0;) {    
+					  if (pars1[i].lastIndexOf(prefix1, 0) !== -1) {  
+						pars1.splice(i, 1);
+					}
+				}
+
+				urlsecond = urlparts[0]+'?'+pars1.join('&');
+				var urlparts1= urlsecond.split('?'); 
+			
+				var prefix= encodeURIComponent(parameter2)+'=';
+				var pars= urlparts1[1].split(/[&;]/g);
+
+				for (var j= pars.length; j-- > 0;) {    
+					  if (pars[j].lastIndexOf(prefix, 0) !== -1) {  
+						pars.splice(j, 1);
+					}
+				}
+				urlsecond = urlparts[0]+'?'+pars.join('&');
+							
+			//	var urlsecond = urlsecond.replace('?', '');
+				
+				window.location.replace(urlsecond);
+		
+	  }
+	  else{  
+		  
+			var urlparts= url.split('?');   
+			if (urlparts.length>=2) {
+
+				var prefix= encodeURIComponent(parameter)+'=';
+				
+				var pars= urlparts[1].split(/[&;]/g);
+				
+				for (var i= pars.length; i-- > 0;) {    
+					  if (pars[i].lastIndexOf(prefix, 0) !== -1) {  
+						pars.splice(i, 1);
+					}
+				}
+
+				url = urlparts[0]+'?'+pars.join('&');
+				
+				var urlparts1= url.split('?'); 
+				 				
+				
+				//	url = url.replace('?', '');
+				
+								
+			   window.location.replace(url);
+			   
+			} else {
+			
+			   window.location.replace(url);
+			   
+			}
+		
+		}
+	 
+	});
+	
+});		
+</script>
+
+

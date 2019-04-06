@@ -1,0 +1,123 @@
+<?php 
+	
+
+
+	$_product = Mage::registry('current_product');
+
+	$holiday_dates = Mage::getStoreConfig('excludeholiday/holiday/dates');
+	$inc_saturday = Mage::getStoreConfig('excludeholiday/holiday/saturday');
+	$inc_sunday = Mage::getStoreConfig('excludeholiday/holiday/sunday');
+
+	
+	
+	$current_date = Mage::getModel('core/date')->timestamp(time()); 
+	
+	$total_shipping_day = $_product->total_shipping_days;
+	if($total_shipping_day == ""){
+		$total_shipping_day = 3;		
+	}
+	
+	$shipping_day = time() + ($total_shipping_day * 24 * 60 * 60);
+	
+	$holidays = explode(",",$holiday_dates);
+
+	$start_date = date('Y-m-d',$current_date);
+	$end_date = date('Y-m-d',$shipping_day);
+	
+	
+	function GetDays($sStartDate, $sEndDate){
+		  $sStartDate = gmdate("Y-m-d", strtotime($sStartDate));
+		  $sEndDate = gmdate("Y-m-d", strtotime($sEndDate));
+		  $aDays[] = $sStartDate;
+		  $sCurrentDate = $sStartDate;
+		  while($sCurrentDate < $sEndDate){
+			$sCurrentDate = gmdate("Y-m-d", strtotime("+1 day", strtotime($sCurrentDate)));
+			$aDays[] = $sCurrentDate;
+		  }
+		  return $aDays;
+	}
+
+	
+	$days = GetDays($start_date,$end_date);  
+	//print_r($aDays);
+	
+	$saturday_count = 0;
+	$sunday_count = 0;
+	
+	foreach($days as $key => $day){
+		$day = strtotime($day);	
+		$day = date("l",$day);
+
+		if(($day == "Saturday") && ($inc_saturday == "1")){
+			$saturday_count++;
+			}
+		if(($day == "Sunday") && ($inc_sunday == "1")){
+			$sunday_count++;
+			}
+		
+	}
+	$total_saturday = $saturday_count;
+	$total_sunday = $sunday_count;
+					
+	$holiday_count=0;
+	
+	foreach($holidays as $key => $holiday){
+		$date = strtotime($holiday);
+		
+		if(($date>$current_date) && ($date < $shipping_day)){
+			//echo date("l, F j",$date)."<br/>";
+			$holiday_count++;
+			}
+		} 
+
+	$total_holiday = $holiday_count;
+
+
+	
+	$totalshipdays = $total_shipping_day + $total_saturday + $total_sunday + $total_holiday;
+	
+	$shippingdate = mktime(0, 0, 0, date("m"), date("d")+$totalshipdays, date("y"));
+	//$shippingdate = date("l, F j",$shippingdate);
+	//$caldate = mktime(0, 0, 0, date("m"), date("d")+$totalshipdays, date("y"));
+	$caldate = date("l, F j",$shippingdate);
+	$shippingday = date("l",$shippingdate);
+	
+	if(($shippingday == "Saturday") && ($inc_saturday == "1") && ($inc_sunday == "1")){
+			$shippingdate = date('F j', strtotime('+2 day',$shippingdate));
+		}
+	else if(($shippingday == "Saturday") && ($inc_saturday == "1") && ($inc_sunday == "0")){
+			$shippingdate = date('F j', strtotime('+1 day',$shippingdate));
+		}
+	else if(($shippingday == "Sunday") && ($inc_sunday == "1")){
+			$shippingdate = date('F j', strtotime('+1 day',$shippingdate));
+		}
+	else {
+			$shippingdate = date("F j",$shippingdate);			
+	}
+?>
+ 
+<div class="">
+	<!--<h3>Shipping Information</h3>-->		
+	<div class="">	
+		<!--<strong>Order By :&nbsp;</strong><span>6PM PST Tomorrow</span> <br/>-->	
+		<?php //$caldate = date("j",$shippingdate) ?>			
+
+		<div class="data_del"><?php echo $caldate = date('j',strtotime($shippingdate)); ?></div><div class="data_del_main">DELIVERED BY : &nbsp;<span class="data_del_seleted"><?php echo $shippingdate; ?></span> <br> <span class="data_delbottom">FREE SHIPPNG, FREE RETURNS</span> </div>	
+
+	</div>
+</div>
+
+ 
+<?php /*?><div class="shipping-info">
+	<h3>Shipping Information</h3>		
+	<div class="middle">
+			<?php 
+				$currentdate = date("m/d/Y H:i:s A", Mage::getModel('core/date')->timestamp(time()));
+				$totalshipdays = $this->htmlEscape($_product->total_shipping_days);
+				$shippingdate = mktime(0, 0, 0, date("m"), date("d")+$totalshipdays, date("y"));
+				$shippingdate = date("l, F j",$shippingdate)
+			?>
+		<strong>Order By :&nbsp;</strong><span>6PM PST Tomorrow</span> <br/>						
+		<strong>Ship On :&nbsp;</strong><span>&nbsp;<?php echo $shippingdate; ?></span> <br/>
+	</div>
+</div><?php */?>

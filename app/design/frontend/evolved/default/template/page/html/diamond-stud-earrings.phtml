@@ -1,0 +1,143 @@
+<div class="stud_earring_main">
+
+    <div class="stud_earring_sub">
+
+        <div class="searing_title">
+
+            <img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'wysiwyg/diamondearing.jpg' ?>" />
+            <!--
+                        <h1>Diamond Stud Earrings</h1>
+                        <p>Our diamond studs are the perfect gift for any occasion. Browse our wide selection below for a variety of sizes and metals.</p>
+            -->
+        </div>
+
+        <?php
+        $category = Mage::getModel('catalog/category')->load(73);
+
+        $productCollection = Mage::getResourceModel('catalog/product_collection')
+            ->addCategoryFilter($category);
+
+        foreach($productCollection as $productCollections){
+            $confproid = $productCollections->getEntityId();
+
+            $_product1 = Mage::getModel('catalog/product')->load($confproid);
+            $childProducts = Mage::getModel('catalog/product_type_configurable')
+                ->getUsedProductCollection($_product1)
+                ->addAttributeToSelect('*');
+            //->addAttributeToFilter('gemstones', $gemid);
+
+            $proname = $_product1->getName();
+            $averagecolor = $_product1->getAverageColor();
+            $averageclarity = $_product1->getAverageClarity();
+            $proimg = Mage::helper('catalog/image')->init($_product1, 'thumbnail')->resize(400);
+
+            $gallery = $_product1->getMediaGalleryImages('images');
+
+            $prourl = $_product1->getProductUrl();
+
+            ?>
+
+            <div class="main-product">
+
+                <h2><?php echo $proname; ?></h2>
+                <?php if($averagecolor == ""){ 				$averagecolor = "NULL";				}		?>
+                <?php if($averageclarity == ""){ 			$averageclarity = "NULL";			}		?>
+                <p><span class="avgcolor">Average color: <?php echo $averagecolor; ?></span> <span class="avgclarity">Average Clarity: <?php echo $averageclarity; ?></span></p>
+                <p class="metaltypechange"><span>METAL: </span><a class="white" href="javascript:;">18K WHITE</a> | <a class="yellow" href="javascript:;">18K YELLOW</a> | <a class="rose" href="javascript:;">14K ROSE</a></p>
+
+                <div class="sub-product">
+
+                    <div class="main-pro-img">
+                        <img src="<?php echo $proimg; ?>">
+                        <?php foreach($gallery as $gallerys){ ?>
+                            <img class="<?php echo $gallerys['label']; ?>" src="<?php echo $gallerys['url']; ?>" style="display:none;">
+                        <?php } ?>
+                    </div>
+
+
+                    <div class="all-simple-pro">
+                        <ul>
+                            <?php $html = array(); ?>
+                            <?php
+                            foreach($childProducts as $associatedProduct)
+                            {
+
+
+                                $finalprice = $associatedProduct->getData('price');
+                                $ctwsimplename = $associatedProduct->getAttributeText('ctw');
+                                $ctwsimpleid = $associatedProduct->getCtw();
+                                $childurl = $associatedProduct->getProductUrl();
+
+                                ob_start();
+                                ?>
+
+                                <li>
+
+                                    <?php if($ctwsimplename == "0.50 ct.tw."){ ?>
+                                        <img class="simple-img"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/1-2-carat-round.png'; ?>" />
+                                        <span class="simple-ctw"><?php echo "1/2 CT.TW" ?></span>
+                                    <?php }else if($ctwsimplename == "0.75 ct.tw."){ ?>
+                                        <img class="simple-img"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/3-4-carat-round.png'; ?>" />
+                                        <span class="simple-ctw"><?php echo "3/4 CT.TW" ?></span>
+                                    <?php }else if($ctwsimplename == "1.00 ct.tw."){ ?>
+                                        <img class="simple-img"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/1-carat-round.png'; ?>" />
+                                        <span class="simple-ctw"><?php echo "1 CT.TW" ?></span>
+                                    <?php }else if($ctwsimplename == "1.50 ct.tw."){ ?>
+                                        <img class="simple-img"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/1-1-2-carat-round.png'; ?>" />
+                                        <span class="simple-ctw"><?php echo "1 1/2 CT.TW" ?></span>
+                                    <?php }else if($ctwsimplename == "2.00 ct.tw."){ ?>
+                                        <img class="simple-img"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/2-carat-round.png'; ?>" />
+                                        <span class="simple-ctw"><?php echo "2 CT.TW" ?></span>
+                                    <?php }else if($ctwsimplename == "3.00 ct.tw."){ ?>
+                                        <img class="simple-img"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/3-carat-round.png'; ?>" />
+                                        <span class="simple-ctw"><?php echo "3 CT.TW" ?></span>
+                                    <?php }else{ ?>
+                                        <img class="simple-img"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'studearrings/4-carat-round.png'; ?>" />
+                                        <span class="simple-ctw"><?php echo "4 CT.TW" ?></span>
+                                    <?php } ?>
+
+                                    <span class="simple-pro-price"><a href="<?php echo $prourl."?ctw=".$ctwsimpleid; ?>"><?php echo Mage::helper('core')->currency($finalprice, true, false); ?></a></span>
+
+                                </li>
+
+                                <?php
+                                $item = ob_get_contents();
+                                ob_end_clean();
+
+                                $ctwVal = explode(' ', $ctwsimplename);
+
+                                $html[$ctwVal[0]] = $item;
+                                ?>
+
+                            <?php } ?>
+
+                            <?php ksort($html) ?>
+                            <?php echo(implode('', $html)) ?>
+                        </ul>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        <?php	} 	?>
+
+    </div>
+
+</div>
+
+<script type="text/javascript">
+
+    jQuery(document).ready(function(){
+
+        jQuery(".metaltypechange a").click(function(){
+
+            jQuery(this).parents().parents().children(".sub-product").children(".main-pro-img").children().hide();
+            jQuery(this).parents().parents().children(".sub-product").children(".main-pro-img").find("."+jQuery(this).attr('class')).show();
+
+        });
+
+    });
+
+</script>

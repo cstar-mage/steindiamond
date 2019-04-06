@@ -1,0 +1,357 @@
+.ringbuilder.slide_show.desktop-cat-list {
+    background: #ededed;
+    border-top: 1px solid #cccccc;
+    border-bottom: 1px solid #cccccc;
+}
+.ringbuilder .shadowsteps {
+    max-width: 1230px;
+    margin: 0 auto;
+    width: 100%;
+    display: block;
+}
+.liststep li {
+    display: inline-block;    
+    padding-right: 10px;
+    padding-left: 10px;    
+    position: relative;
+}
+.liststep li.createring{
+	padding-left: 0px;
+	float: left;
+}
+.createring h2 {
+    font-size: 17px;
+    float: left;
+    margin: 0; 
+    letter-spacing: 1px;
+    font-weight: bold;
+    margin-top: 23px;
+    color: #000000; 
+}
+.stepborder_main span {
+    font-size: 79px;
+    line-height: 37px;
+    color: #dbdbdb;
+    font-weight: bold;
+	font-family:lato;
+}
+.liststep li.re-ring {
+	background-image: url(../images/build_diamondring1.png);
+	background-repeat: no-repeat;
+	background-position: 30px 10px;
+    width: 28.20%;
+    padding-left: 7%;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    min-height: 57px;
+    
+}
+.liststep li.checkout {
+    width: 27.20%;
+    padding-left: 7%;
+    padding-top: 8px;    
+    padding-bottom: 8px;
+    background-image: url(../images/build_diamondring.png);
+	background-repeat: no-repeat;
+	background-position: 30px 10px;
+    min-height: 57px;
+}
+.liststep li.se-diamond {
+	width: 27.20%;
+    padding-left: 7%;
+    padding-top: 8px;
+    padding-bottom: 8px;    
+    background-image: url(../images/build_diamond1.png);
+	background-repeat: no-repeat;
+	background-position: 30px 10px;
+    min-height: 57px;
+}
+.liststep .selected {
+    background-color: #ffffff;
+}
+span.stepborder_main {
+    position: absolute;
+    right: 15px;    
+}
+.liststep ol {
+    display: block;
+    width: 100%;
+}
+.liststep li:after {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 30px;
+    height: 57px;
+    top: 0px;
+    right: -20px;
+    z-index: 1;
+    background-image: url(../images/arrowstep.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.liststep li.selected:after {
+    background-image: url(../images/arrowstep1.png);
+} 
+.liststep li.selected {
+    background-color: #fff;
+}
+.liststep li.createring{
+	padding-left: 0px;
+    float: left; 
+    z-index: 99;
+    min-height: 57px;
+}
+span.stepborder_main {
+    position: absolute;
+    right: 15px;
+    z-index: 9;
+}
+.liststep li.checkout:after{
+	background-image:none;
+}
+.liststep li.checkout.selected:after {
+    background-image: url(../images/arrowstep1.png);
+} 
+.liststep .price-select {
+    float: left;
+    font-size: 12px;
+    color: #727272 !important;
+    clear: both;
+}
+.liststep li a {
+   font-size: 15px;
+    color: #000000;
+   display: block;
+}
+.liststep li a.stepeditlink {
+    font-size: 13px;
+    position: absolute;
+    color: #727272;
+    bottom: 10px;
+    right: 26px;
+    z-index: 9;
+}
+.stepmob {
+    display: none;
+}
+.top-container {
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+}
+
+.liststep .hhh {
+    float: left;
+    width: auto;
+}
+
+.liststep li a {
+    float: left;
+    height: 40px;
+    line-height: 3;
+}
+.liststep li{ 
+   float: left !important;
+}
+.liststep li .stepdesk {
+    float: left;
+    width: 200px;
+}
+
+.ringbuilder.slide_show.desktop-cat-list {
+    float: left;
+    width: 100%;
+}
+.main-container{
+    float: left !important;
+    width: 100% !important;
+    max-width: 100% !important;
+}
+.main-container .main {
+    max-width: 1250px !important;
+    padding: 25px 10px !important;
+    min-height: 590px !important;
+    margin: 0 auto !important;
+}
+.liststep li.available a{
+    height: 20px;
+    line-height: 1.5;
+}
+
+@media only screen and (max-width:1175px) {
+.liststep li.createring {
+    display: none;
+}
+.liststep li.checkout.selected:after {
+    background-image: none;
+}
+.liststep li.re-ring{width: 33%;}
+.liststep li.se-diamond{width: 33%;}
+.liststep li.checkout{width: 33%;}
+
+}
+@media only screen and (max-width:768px) {
+.liststep li.selected:after {
+    background-image: url(../images/arrowstep1mob.png);
+}
+.liststep li:after {
+    content: '';
+    position: absolute;
+    display: block;
+       width: 48px;
+    height: 92px;
+    top: 0px;
+    right: -20px;
+    z-index: 1;
+    background-image: url(../images/arrowstepmob.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.liststep li.re-ring{ min-height: 92px;padding: 0;    background-image: none;}
+.liststep li.se-diamond{ min-height: 92px;padding: 0;    background-image: none;}
+.liststep li.checkout{ min-height: 92px;padding: 0;    background-image: none;}
+span.stepborder_main {
+    position: absolute;
+    right: 35%;
+    z-index: 9;
+    top: 8px;
+}
+.liststep li a.stepeditlink {
+    font-size: 13px;
+    position: absolute;
+    color: #727272;
+    bottom: 5px;
+    z-index: 999;
+    right: 0;
+    display: block;
+    text-align: center;
+}
+.stepborder_main span {
+    font-size: 122.73px;
+    line-height: 69px;
+    color: #dbdbdb;
+    font-weight: bold;
+}
+.available .stepborder_main span {
+    line-height: 69px;
+}
+.liststep li .stepdesk {
+    float: left;
+    width: 100%;
+}
+.liststep li a {
+        float: left;
+    height: 30px;
+    font-size: 16px;
+    line-height: 2;
+    width: 100%;
+}
+.liststep .hhh {
+	float: left;
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+    z-index: 9999;
+    position: absolute;
+}
+.liststep .price-select {
+    float: left;
+    font-size: 12px;
+    color: #727272 !important;
+    clear: both;
+    width: 100%;
+    text-align: center;
+        position: absolute;
+    z-index: 99999;
+    margin-top: 47px;
+}
+.liststep li.checkout:after {
+    background-image: none;
+    width: 0;
+    height: 0;
+}
+/*
+.liststep .price-select { 
+    width: 100%;
+    text-align: center;
+}
+.liststep li.re-ring {
+    width: 100%;
+    border-bottom: 1px solid #cccccc;
+}
+.liststep li.se-diamond{
+   width: 100%;
+   border-bottom: 1px solid #cccccc; 
+}
+.liststep li.checkout{
+width: 100%;
+  }
+.liststep li:after{
+background:none;
+    width: 0;
+    height: 0;
+}
+.liststep li a {
+    text-align: center;
+}
+*/
+}
+@media only screen and (max-width:580px) {
+
+	.liststep li.checkout .hhh a {
+		max-width: 127px;
+		margin: 0 auto;
+		display: block;
+		float: none;
+		line-height: 1;
+	}
+	.liststep li.checkout .hhh {
+		margin-top: 25px;
+	}
+	.liststep li.checkout.available .hhh {
+		margin-top: 13px;
+	}
+	.liststep li.checkout.available .hhh a {
+		line-height: 1;
+	}
+
+}
+@media only screen and (max-width:480px) {
+	.liststep li.re-ring{padding-left: 15px;}
+	span.stepborder_main {
+		position: absolute;
+		right: 24%;
+		z-index: 9;
+		top: 8px;
+	}
+	.liststep li a {
+        font-size: 14px;
+    }
+    .liststep li.checkout .hhh a {
+		max-width: 110px;
+    }
+    .liststep li.checkout.available .hhh {
+		margin-top: 19px;
+	}
+	.liststep li.checkout .hhh a {
+        line-height: 1.5;
+	}
+	
+}
+@media only screen and (max-width:360px) {
+	.liststep li a {
+		font-size: 11px;
+	}
+	.liststep .price-select {
+		font-size: 10px;
+	}
+	.liststep li.checkout .hhh a {
+		max-width: 90px;
+	}
+	.liststep .hhh {
+		margin-top: 30px;
+	}
+	
+}

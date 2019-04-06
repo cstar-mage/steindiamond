@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Ideal_Sendfriend>
+            <version>0.0.1</version>
+        </Ideal_Sendfriend>
+    </modules>
+    <frontend>
+        <routers>
+            <sendfriend>
+                <args>
+                    <modules>
+                        <Ideal_Sendfriend before="Mage_Sendfriend">Ideal_Sendfriend</Ideal_Sendfriend>
+                    </modules>
+                </args>
+            </sendfriend>
+        </routers>
+    </frontend>
+</config>

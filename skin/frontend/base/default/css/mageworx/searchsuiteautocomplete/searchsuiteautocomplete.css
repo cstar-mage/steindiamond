@@ -1,0 +1,134 @@
+/**
+ * MageWorx
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the MageWorx EULA that is bundled with
+ * this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.mageworx.com/LICENSE-1.0.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade the extension
+ * to newer versions in the future. If you wish to customize the extension
+ * for your needs please refer to http://www.mageworx.com/ for more information
+ *
+ * @category   MageWorx
+ * @package    MageWorx_SearchSuite
+ * @copyright  Copyright (c) 2014 MageWorx (http://www.mageworx.com/)
+ * @license    http://www.mageworx.com/LICENSE-1.0.html
+ */
+
+/**
+ * Search Suite extension
+ *
+ * @category   MageWorx
+ * @package    MageWorx_SearchSuiteAutocomplete
+ * @author     MageWorx Dev Team
+ */
+a:focus { outline: none; }
+.highlight {
+    color: #FF2F00 !important;
+    font-weight: bold;
+}
+.reset-button{
+    position: absolute;
+    border: 0px;
+    width: 16px;
+    background-color: transparent;
+    padding: 0px 6px 6px 2px;
+    z-index: 100;
+    color: #DE5400;
+    font-size: 10pt;
+    cursor: pointer;
+    left: 0;
+    vertical-align: middle;
+}
+@-moz-document url-prefix() 
+{
+    .reset-button{margin-top: 0px;}
+}
+input.spinner, input.spinner:focus {
+    background-repeat: no-repeat !important;
+    background-position: right center;
+    background-image: url(../../../images/mageworx/searchsuiteautocomplete/spinner.gif) !important;
+}
+#search_autocomplete{
+    top: 32px !important;
+    z-index: 999;
+    position: absolute;
+}
+.search-autocomplete:before {
+    content: none !important;
+}
+.autocomplete {position: absolute; top: 100%; width: 540px; background: #ffffff; border: 2px solid #d1d1d1; z-index: 9999999999;
+    color: #000 !important;
+    font-family: 'Lato', sans-serif !important;
+    font-weight: 300 !important;
+    font-size: 16px !important;
+}
+/* to determine what alignment autocomplete popup should have - left or right*/
+/* class 'aligned-right' or 'aligned-left' should be added to the main container, div with class 'autocomplete' */
+.autocomplete.aligned-right {right: 0;}
+.autocomplete.aligned-left {left: 0;}
+
+.autocomplete-container {padding: 30px 30px 0 30px;}
+
+.autocomplete-blk {border-bottom: 1px solid #d1d1d1; padding-bottom: 15px; margin-bottom: 25px;}
+.autocomplete-blk:last-child {border: 0; padding-bottom: 0;}
+.autocomplete-title {font-size: 20px; line-height: 24px; text-transform: uppercase; color: #ea7a00; text-align: left;}
+.autocomplete-title h4 {font-size: 24px; line-height: 26px; font-weight: 300; text-transform: uppercase; color: #ea7a00;}
+
+.autocomplete-item {position: relative; padding-top: 5px; margin: 0;}
+.item-img {float: left; margin-right: 15px; padding: 4px;}
+.item-img img {width: 98px; height: 98px; }
+.item-info {overflow: hidden; text-align: left;}
+.item-info-line {padding-bottom: 5px;}
+.item-info-line a {color: #000;}
+.item-info-line a:hover {color: #ea7a00; text-decoration: none;}
+.item-info-line>div {display: inline-block;}
+.product-title {font-size: 20px; line-height: 22px; color: #000000; font-weight: 300; text-decoration: none; }
+.product-title:hover {color: #ea7a00; cursor: pointer;}
+.reviews {font-size: 16px;}
+.review-count {font-weight: 400; font-size: 17px;}
+.product-sku,
+.product-desc {font-size: 12px; line-height: 16px; padding: 0; margin: 0;}
+.product-price .price-box .price {font-weight: 400; font-size: 20px; line-height: 20px; color: #000000;}
+.product-buy-btn {float: right; height: 20px; background-color: #ea7a00; padding: 0 10px; text-transform: uppercase; text-align: center; text-decoration: none; cursor: pointer;
+    -webkit-border-radius: 9px;
+    -moz-border-radius: 9px;
+    border-radius: 9px;
+}
+.product-buy-btn span {font-size: 16px; line-height: 20px; font-weight: 400; color: #ffffff; }
+.product-buy-btn:hover {color: #ffffff;}
+
+.rating-box.small {width: 65px; height: 12px; background:url(../../../images/mageworx/searchsuiteautocomplete/bkg_rating_small.png) 0 -1px repeat-x;}
+.rating-box.small .rating {height: 12px; background:url(../../../images/mageworx/searchsuiteautocomplete/bkg_rating_small.png) 0 100% repeat-x;}
+
+.more-results-container {text-align: right;}
+.more-results-link {font-size: 16px; line-height: 18px; font-weight: 300; color: #000000; text-decoration: none;}
+.more-results-link:hover {color: #ea7a00; cursor: pointer;}
+
+
+@media screen and (max-width: 767px) {
+    .autocomplete {width: 100%;}
+    .autocomplete-item {margin-left: 0;}
+    .autocomplete-container {padding: 30px;}
+}
+@media screen and (max-width: 480px) {
+    .autocomplete {width: 100%;}
+    .autocomplete-container {padding: 20px;}
+    .item-img img {width: 68px; height: 68px;}
+}
+@media screen and (max-width: 320px) {
+    .autocomplete {width: 100%;}
+    .autocomplete-blk {margin-bottom: 15px; padding-bottom: 10px;}
+    .autocomplete-item {margin-bottom: 5px;}
+    .autocomplete-title span {display: none;}
+    .item-img {display: none;}
+    .autocomplete-title h4 {font-size: 20px; line-height: 22px;}
+    .product-title {font-size: 18px; line-height: 20px;}
+    .reviews {font-size: 15px;}
+    .more-results-link {font-size: 14px; line-height: 16px;}
+}

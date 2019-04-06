@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <Ideal_Ringbuilder>
+            <version>1.0.2</version>
+        </Ideal_Ringbuilder>
+    </modules>
+    <admin>
+	    <routers>
+	        <adminhtml>
+	            <args>
+	                <modules>
+	                    <diamondvendors after="Mage_Adminhtml">Ideal_Ringbuilder_Adminhtml</diamondvendors>
+	                </modules>
+	            </args>
+	        </adminhtml>
+	    </routers>
+	</admin>
+
+	<adminhtml>
+		<menu>
+			<sales module="ringbuilder">
+				<children>
+					<diamondvendors module="ringbuilder">
+						<title>Diamond Vendors</title>
+						<sort_order>0</sort_order>
+						<action>adminhtml/diamondvendors</action>
+					</diamondvendors>
+					<diamondorders module="ringbuilder">
+						<title>Diamond Orders</title>
+						<sort_order>0</sort_order>
+						<action>adminhtml/diamondorders</action>
+					</diamondorders>
+				</children>
+			</sales>
+		</menu>
+		<acl>
+			<resources>
+				<all>
+					<title>Allow Everything</title>
+				</all>
+				<admin>
+					<children>
+						<sales>
+							<children>
+								<diamondvendors module="ringbuilder">
+									<title>Diamond Vendors</title>
+								</diamondvendors>
+							</children>
+						</sales>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+		<layout>
+			<updates>
+				<ringbuilder>
+					<file>ringbuilder.xml</file>
+				</ringbuilder>
+			</updates>
+		</layout>
+    </adminhtml>
+    
+    <frontend>
+        <routers>
+            <ringbuilder>
+                <use>standard</use>
+                <args>
+                    <module>Ideal_Ringbuilder</module>
+                    <frontName>ringbuilder</frontName>
+                </args>
+            </ringbuilder>
+        </routers>
+        <layout>
+            <updates>
+                <ringbuilder>
+                    <file>ringbuilder.xml</file>
+                </ringbuilder>
+            </updates>
+        </layout>
+        <events>
+        
+        	<sales_convert_quote_item_to_order_item>
+			    <observers>
+			        <additional_options>
+			            <type>model</type>
+			            <class>ringbuilder/observer</class>
+			            <method>salesConvertQuoteItemToOrderItem</method>
+			        </additional_options>
+			    </observers>
+			</sales_convert_quote_item_to_order_item>
+
+			<!-- For ReOrder  -->
+			<checkout_cart_product_add_after>
+			    <observers>
+			        <ringbuilder_reorder_extra_options>
+			            <type>singleton</type>
+			            <class>ringbuilder/observer</class>
+			            <method>checkoutCartProductAddAfter</method>
+			        </ringbuilder_reorder_extra_options>
+			    </observers>
+			</checkout_cart_product_add_after>
+
+			<!-- For Default  -->
+           <checkout_cart_product_add_after>
+           		<observers>
+                    <ringbuilder_action>
+                        <class>ringbuilder/observer</class>
+                        <method>addDiamondToCartEvent</method>
+                    </ringbuilder_action>
+                </observers>
+           </checkout_cart_product_add_after>
+           
+           <checkout_cart_save_after>
+           		<observers>
+                    <ringbuilder_update_name>
+                        <class>ringbuilder/observer</class>
+                        <method>updateRingbuilderProductName</method>
+                    </ringbuilder_update_name>
+                </observers>
+           </checkout_cart_save_after>
+        </events>
+    </frontend>
+    <global>
+        <models>
+            <ringbuilder>
+                <class>Ideal_Ringbuilder_Model</class>
+                <resourceModel>ringbuilder_mysql4</resourceModel>
+            </ringbuilder>
+            <ringbuilder_mysql4>
+                <class>Ideal_Ringbuilder_Model_Mysql4</class>
+                <entities>
+                    <diamondorders>
+                        <table>ringbuilder_diamondorders</table>
+                    </diamondorders>
+                    <diamondvendors>
+                        <table>ringbuilder_diamondvendors</table>
+                    </diamondvendors>
+                </entities>
+            </ringbuilder_mysql4>
+        </models>
+        <resources>
+            <ringbuilder_setup>
+                <setup>
+                    <module>Ideal_Ringbuilder</module>
+                    <class>Mage_Eav_Model_Entity_Setup</class>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </ringbuilder_setup>
+            <ringbuilder_write>
+              <connection>
+                <use>core_write</use>
+              </connection>
+            </ringbuilder_write>
+            <ringbuilder_read>
+              <connection>
+                <use>core_read</use>
+              </connection>
+            </ringbuilder_read>
+        </resources>
+        <blocks>
+            <ringbuilder>
+                <class>Ideal_Ringbuilder_Block</class>
+            </ringbuilder>
+        </blocks>
+        <helpers>
+            <ringbuilder><class>Ideal_Ringbuilder_Helper</class></ringbuilder>
+        </helpers>
+        
+        <template>
+            <email>
+                <sales_email_diamondnotification_email_template translate="label" module="ringbuilder">
+                    <label>Diamond Order Notification Email Template</label>
+                    <file>diamond_order_notification.html</file>
+                    <type>html</type>
+                </sales_email_diamondnotification_email_template>
+            </email>
+        </template>
+        
+        <events>
+            <sales_order_place_after>
+                <observers>
+                    <diamondnotification_email_observer>
+                        <type>singleton</type>
+                        <class>ringbuilder/observer</class>
+                        <method>diamondNotificationEmail</method>
+                    </diamondnotification_email_observer>
+                </observers>
+            </sales_order_place_after>
+        </events>
+    </global>
+    
+    <default>
+        <sales_email>
+            <diamondnotification>
+            	<enabled>1</enabled>
+                <recipient_email><![CDATA[hello@example.com]]></recipient_email>
+                <sender_email_identity>sales</sender_email_identity>
+                <email_template>sales_email_diamondnotification_email_template</email_template>
+            </diamondnotification>
+        </sales_email>
+    </default>
+</config>

@@ -1,0 +1,280 @@
+<?xml version="1.0"?>
+<config>
+	<sections>
+		<invoiceconfig translate="label">
+			<class>separator-top</class>
+			<label>S4 Invoice Settings</label>
+			<tab>sales</tab>
+			<frontend_type>text</frontend_type>
+			<sort_order>300</sort_order>
+			<show_in_default>1</show_in_default>
+			<show_in_website>1</show_in_website>
+			<show_in_store>1</show_in_store>
+			<groups>
+				<s4about>
+					<frontend_model>studio4_invoiceconfig/adminhtml_system_config_fieldset_about</frontend_model>
+					<sort_order>0</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+                </s4about>
+				<s4general translate="label">
+					<label>General</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>10</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<expanded>expanded</expanded>
+					<fields>
+						<s4_company_name translate="label">
+							<label>Organization</label>
+							<sort_order>10</sort_order>
+							<frontend_type>text</frontend_type>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</s4_company_name>
+						<s4_company_address>
+							<label>Address</label>
+							<frontend_type>textarea</frontend_type>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</s4_company_address>
+						<s4_company_phone translate="label">
+							<label>Phone</label>
+							<sort_order>30</sort_order>
+							<frontend_type>text</frontend_type>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</s4_company_phone>
+						<s4_company_email translate="label">
+							<label>Email</label>
+							<validate>validate-email</validate>
+							<sort_order>40</sort_order>
+							<frontend_type>text</frontend_type>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</s4_company_email>
+						<s4_company_additionalinfo>
+							<label>Additional info</label>
+							<frontend_type>textarea</frontend_type>
+							<sort_order>50</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>&lt;i&gt; e.g. VAT number, Company code etc.&lt;/i&gt;</comment>
+						</s4_company_additionalinfo>
+						<s4_show_comments>
+							<label>Show invoice comments</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>60</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>Comments can be added to apear under Invoice lines.&lt;br/&gt;NOTE: Only comments marked as "Visible on front end" will be displayed</comment>
+						</s4_show_comments>
+						<s4_text_suffix>
+							<label>Custom text</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>70</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>Any text you wish to appear on the bottom of the invoice. &lt;i&gt; e.g. Thank you for choosing us!&lt;/i&gt;</comment>
+						</s4_text_suffix>
+						<s4_text_signature>
+							<label>Issued by</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>80</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>Name, which will appear on the bottom of the invoice next to the signature (if used)</comment>
+						</s4_text_signature>
+						 <s4_swap_blocks>
+						 	<label>Swap Seller/Buyer blocks</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>90</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Select Yes if you want Seller information to appear on the right</comment>
+						</s4_swap_blocks>
+						<s4_show_customer_shipping_address>
+						 	<label>Show customer shipping address</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>95</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>NOTE: shipping address is only displayed if shipping and billing addresses are different</comment>
+						</s4_show_customer_shipping_address>
+						<s4_custom_prefix>
+						 	<label>Custom Invoice Number Prefix</label>
+                            <frontend_type>text</frontend_type>
+                            <validate>validate-length maximum-length-15</validate>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>The first 3 invoice number characters will be replaced with this prefix (e.g. 100000009 -> SHP000009). &lt;br/&gt;NOTE: Leave blank for no changes&lt;br/&gt;NOTE: max 15 characters</comment>
+						</s4_custom_prefix>
+						<s4_invoice_date>
+							<label>Show document issue date</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>110</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>By default, Magento shows Order date on the document. You can select document issue date instead.</comment>
+						</s4_invoice_date>
+					</fields>
+				</s4general>
+				<s4colors translate="label">
+					<label>Colors</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>20</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<expanded>expanded</expanded>
+					<fields>
+						<s4_main_color>
+							<label>Main Invoice Color</label>
+							<frontend_type>text</frontend_type>
+							<validate>color</validate>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</s4_main_color>
+						<s4_text_color>
+							<label>Text Color</label>
+							<frontend_type>text</frontend_type>
+							<validate>color</validate>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</s4_text_color>
+						<s4_lighttext_color>
+							<label>Lighter Text Color</label>
+							<frontend_type>text</frontend_type>
+							<validate>color</validate>
+							<sort_order>30</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>Choose color used for shipping and payment method information</comment>
+						</s4_lighttext_color>
+						<s4_inverted_color>
+							<label>Inverted Text Color</label>
+							<frontend_type>text</frontend_type>
+							<validate>color</validate>
+							<sort_order>40</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>Choose color for text, which appears in main color elements (&lt;i&gt;e.g. table heading&lt;/i&gt;)</comment>
+						</s4_inverted_color>
+						<s4_lightbg_color>
+							<label>Light background color</label>
+							<frontend_type>text</frontend_type>
+							<validate>color</validate>
+							<sort_order>50</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>Used for "Subtotal", "Discount", "Shipping and Handling" etc. background</comment>
+						</s4_lightbg_color>
+					</fields>
+				</s4colors>
+				<s4images translate="label">
+					<label>Images</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>30</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<expanded>expanded</expanded>
+					<fields>
+						<s4_pdf_logo translate="label comment">
+							<label>Logo</label>
+							<frontend_type>image</frontend_type>
+							<backend_model>adminhtml/system_config_backend_image_pdf</backend_model>
+							<upload_dir config="system/filesystem/media" scope_info="1">s4-invoice</upload_dir>
+							<base_url type="media" scope_info="1">s4-invoice</base_url>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>Recomended height: 180px. Width: up to 1200px. &lt;br /&gt;Important! PNG support requires ZLIB extension to be configured to work with Alpha channel images.</comment>
+						</s4_pdf_logo>
+						<s4_pdf_bg translate="label comment">
+							<label>Background PDF Invoice</label>
+							<frontend_type>image</frontend_type>
+							<backend_model>adminhtml/system_config_backend_image_pdf</backend_model>
+							<upload_dir config="system/filesystem/media" scope_info="1">s4-invoice</upload_dir>
+							<base_url type="media" scope_info="1">s4-invoice</base_url>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>Full page background width/height ratio should be 0.7, at least 793px wide. Higher resolution images will look better when printed. Any smaller image will be centered on the page.&lt;br /&gt;Note: Opacity of the image is not changed, image is placed on the PDF "as is".</comment>
+						</s4_pdf_bg>
+						<s4_pdf_signature translate="label comment">
+							<label>Signature</label>
+							<frontend_type>image</frontend_type>
+							<backend_model>adminhtml/system_config_backend_image_pdf</backend_model>
+							<upload_dir config="system/filesystem/media" scope_info="1">s4-invoice</upload_dir>
+							<base_url type="media" scope_info="1">s4-invoice</base_url>
+							<sort_order>30</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>Recomended height: 160px. Width: up to 1600px.</comment>
+						</s4_pdf_signature>
+					</fields>
+				</s4images>
+				<s4payment translate="label">
+					<label>Payment info</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>40</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<expanded>expanded</expanded>
+					<fields>
+						<s4_due_date_shift>
+							<label>Due date after</label>
+							<frontend_type>text</frontend_type>
+							<validate>validate-number</validate>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>Value in days (e.g. enter 10 for due date 10 days after invoice date )&lt;br/&gt;NOTE: Leave blank if due date should not be displayed on the invoice</comment>
+						</s4_due_date_shift>
+						<s4_payment_information>
+							<label>Payment information</label>
+							<frontend_type>textarea</frontend_type>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</s4_payment_information>
+					</fields>
+				</s4payment>
+			</groups>
+		</invoiceconfig>
+	</sections>
+</config>

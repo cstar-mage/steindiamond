@@ -1,0 +1,27 @@
+@media (min-width: 1200px) {
+  .container {
+    max-width:1000px;
+  }
+}
+@media (min-width: 768px){
+ .global-navgation{ display:table;}
+ .global-navgation > li{  width:auto !important;}
+ .global-navgation > li.nav-engagement-ring{ width:16% !important;}
+ .global-navgation > li.nav-wedding-rings{ width:13% !important;}
+ .global-navgation > li.nav-diamonds{ width:10% !important;}
+ .global-navgation > li.nav-sapphire{ width:9% !important;}
+ .global-navgation > li.nav-fine-jewel{ width:9% !important;}
+ .global-navgation > li.nav-vintage{width:9% !important;}
+ .global-navgation > li.nav-our-movement{ width:12% !important;}
+ .global-navgation > li.wish-list{width:12% !important; }
+ .global-navgation > li.my-bag{width:10% !important;}
+ .livelihoods-block .content{ min-height: inherit; height:510px;}
+ .livelihoods-block-sm .content{min-height: inherit; height:350px;}
+ .jewelry-education-block .content{height:auto;min-height: 299px;}
+ .wedding-rings-block .content { min-height: inherit; height:652px;}
+}
+.join-movement,.more-issues{min-height:287px;}
+.grid .share{ display:none;}
+.grid:hover .share{display:block;}
+.culture-and-us .fore1 .imitate-table .animation p{ display:none;}
+.culture-and-us .fore1 .imitate-table:hover .animation p{ display:block;}

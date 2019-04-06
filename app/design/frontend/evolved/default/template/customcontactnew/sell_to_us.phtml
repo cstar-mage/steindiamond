@@ -1,0 +1,605 @@
+<script type="text/javascript" src="<?php// echo $this->getBaseUrl().'js/captch/jquery.plugin.js'; ?>"></script>
+<script type="text/javascript" src="<?php// echo $this->getBaseUrl().'js/captch/jquery.realperson.js'; ?>"></script>
+<link type="text/css" href="<?php// echo $this->getBaseUrl().'js/captch/jquery.realperson.css'; ?>" rel="stylesheet" ></link>
+<script>
+jQuery(function() {
+ jQuery('#defaultReal10').realperson();
+});
+
+</script>
+<script type="text/javascript">
+document.getElementById("uploadBtn1").onchange = function () {
+    document.getElementById("image1").value = this.value;
+};
+
+document.getElementById("uploadBtn2").onchange = function () {
+    document.getElementById("image2").value = this.value;
+};
+ 
+</script>
+<script> 
+jQuery(document).ready(function() {
+   jQuery('#month').blur(validateMaxLength);
+
+function validateMaxLength()
+{
+        var text = jQuery(this).val();
+		//alert(text);
+        if((text > 0) && (text < 13)){
+			jQuery('.dob-year').next('.validation-advice').empty().css("display","none");
+			return true;
+		}
+		else{
+			jQuery('.dob-year').next('.validation-advice').empty().css("display","none");
+			jQuery('.dob-year').next('.validation-advice').append('Kindly Add Month Beetween 1 to 12').css("display","block");
+			jQuery(this).focus();
+			return false;
+		}
+		
+       /* if(maxlength > 0)  
+        {
+                $(this).val(text.substr(0, maxlength)); 
+        }*/
+}
+jQuery('#day').blur(validateMaxdayLength);
+
+function validateMaxdayLength()
+{
+        var text = jQuery(this).val();
+		jQuery('.dob-year').next('.validation-advice').empty().css("display","none");
+		//alert(text);
+        if((text > 0) && (text < 32)){
+			jQuery('.dob-year').next('.validation-advice').empty().css("display","none");
+			return true;
+		}
+		else{
+			jQuery('.dob-year').next('.validation-advice').empty().css("display","none");
+			jQuery('.dob-year').next('.validation-advice').append('Kindly Add Date Beetween 1 to 31').css("display","block");
+			jQuery(this).focus();
+			return false;
+		}
+
+       /* if(maxlength > 0)  
+        {
+                $(this).val(text.substr(0, maxlength)); 
+        }*/
+}
+jQuery('#year').blur(validateMaxyearLength);
+
+function validateMaxyearLength()
+{
+        var text = jQuery(this).val();
+		var len = text.length;
+		var currentTime = new Date();
+		var years = currentTime.getFullYear();
+		jQuery('.dob-year').next('.validation-advice').empty().css("display","none");
+		//alert(years);
+		//alert(len);
+		if(text == '') 
+		{
+			//alert("kindly add year");
+			jQuery('.dob-year').next('.validation-advice').append('Kindly add year').css("display","block");
+			jQuery(this).focus();
+			return false;
+			
+		}
+		else {
+			
+			if(!isNaN(text))
+			{
+				jQuery('.dob-year').next('.validation-advice').empty().css("display","none");
+				if((len == '4'))
+				{
+				jQuery('.dob-year').next('.validation-advice').empty().css("display","none");
+					if(text < years)
+					{
+				   jQuery('.dob-year').next('.validation-advice').empty().css("display","none");
+					jQuery('.dob-year').next('.validation-advice').append('Kindly Add year proper format like current year or greater').css("display","block");
+					jQuery(this).focus();
+					
+					return false;
+					}
+					else
+					{
+					jQuery('.dob-year').next('.validation-advice').empty().css("display","none");
+					return true;
+					}
+					
+				}
+				else{
+					jQuery('.dob-year').next('.validation-advice').empty().css("display","none");
+					jQuery('.dob-year').next('.validation-advice').append('Kindly Add year in proper format, four digits only').css("display","block");
+					jQuery(this).focus();
+					return false;
+				}
+			}
+			else
+			{
+			jQuery('.dob-year').next('.validation-advice').empty().css("display","none");
+			jQuery('.dob-year').next('.validation-advice').append('Kindly Add year properly in digits format').css("display","block");
+			jQuery(this).focus();
+			return false;
+			}
+		}
+		
+	
+        /*else if((text > 0) && (text < 32)){
+			return true;
+		}
+		else{
+			alert("kindly Add year properly from current year");
+			jQuery(this).focus();
+			return false;
+		}*/
+
+       /* if(maxlength > 0)  
+        {
+                $(this).val(text.substr(0, maxlength)); 
+        }*/
+}
+});
+
+</script>
+<?php
+$postData = Mage::app()->getRequest()->getPost(); 
+$prodname = $postData['prodname'];
+
+$prodsku = $postData['prodsku'];
+
+$producturl = $postData['producturl']; 
+ 
+?>
+
+
+
+<?php /*?><div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div><?php */?>
+
+<div class="custmain">
+
+
+
+<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('custom-req')->toHtml(); ?>
+
+
+
+<div class="cutitle"> 
+
+Sell To Us Here<span class="itl">Fill Out The Form Below</span> 
+
+</div>
+
+<div class="line"><img src="<?php echo $this->getSkinUrl(); ?>images/border.png"/></div>
+
+<div class="customfrm cms-custom-design">
+
+<div class="fieldset">
+
+	<?php /*?><h2 class="legend">Personal Information</h2><?php */?>
+
+	<form id="contactForm" method="post" action="<?php echo Mage::getBaseUrl();?>specialorder/index/postspecialorder/" enctype="multipart/form-data">
+
+		<input type="hidden" name="productname" id="productname" value="<?php echo $prodname ?>" />
+
+        <input type="hidden" name="productsku" id="productsku" value="<?php echo $prodsku ?>" />
+        
+        <input type="hidden" name="producturl" id="producturl" value="<?php echo $producturl ?>" />
+        <input type="hidden" name="curl" id="curl" value="<?php echo $this->helper('core/url')->getCurrentUrl();?>" />
+
+		<ul class="form-list">
+
+			<li class="fields">
+
+				<div>
+
+				    <div class="field">
+
+				        <!--<label class="required" for="name"><em>*</em>Name</label>-->
+
+				        <div class="input-box">
+
+				            <input type="text" class="input-text required-entry" title="Name" value="" name="name" id="name" placeholder="NAME*">
+
+				        </div>
+
+				    </div>
+
+				    <div class="field"> 
+
+				        <!--<label class="required" for="email"><em>*</em>Email</label>-->
+
+				        <div class="input-box">
+
+				            <input type="text" class="input-text validate-email required-entry" title="Email" value="" name="email" id="email" placeholder="EMAIL*">
+
+				        </div>
+
+				    </div>
+
+				</div>
+
+			</li>
+
+			<li> 
+
+				<div>
+
+				    <div class="field">
+
+				        <?php /*?><label class="required" for="phone"><!--<em>*</em>-->Phone</label><?php */?>
+
+				        <div class="input-box">
+
+				            <input type="text" class="input-text validate-number required-entry" title="Phone" value="" name="phone" id="phone" placeholder="PHONE*">
+
+				        </div>
+
+				    </div>
+
+				    <div class="field product_type">
+
+				        <!--<label for="email">What are you looking to purchase?</label>-->
+ 
+				        <div class="input-box">
+
+				            <select name="producttype" id="producttype" class="validation-passed">
+
+				            	<option>&nbsp;&nbsp;PRODUCT TYPE*</option>
+
+				            	<option value="TIMEPIECES">TIMEPIECES</option>
+
+				            	<option value="FASHION RINGS">FASHION RINGS</option>
+
+				            	<option value="EARRINGS">EARRINGS</option>
+
+				            	<option value="BRACELETS">BRACELETS</option>
+                                                
+                                                <option value="NECKLACES">NECKLACES & PENDANTS</option>
+
+								<option value="LOOSE STONE">LOOSE STONE</option>
+
+				            </select>
+
+				        </div>
+
+				    </div>
+                    <div class="field lilsmall price_range">
+
+				       <?php /*?> <label for="pricerange">Do you have price range?</label><?php */?>
+
+				        <div class="input-box">
+
+				            <!--<input type="text" class="input-text lilsmall" title="Do you have price range?" value="" name="pricerange" id="pricerange">-->
+
+							<select name="pricerange" id="pricerange" class="lilsmallselect" title="Do you have price range?">
+
+				            	<option value="">&nbsp;&nbsp;REQUESTED AMOUNT*</option>
+				            	
+				            	
+
+				            	<!--<option value="Below $500">Below $500</option>-->
+
+				            	<option value="$500">&nbsp;&nbsp;$500</option>
+
+				            	<option value="$500 - $1000">&nbsp;&nbsp;$500 - $1000</option>
+
+				            	<option value="$1000 - $5000">&nbsp;&nbsp;$1000 - $5000</option>
+
+								<option value="$5000 - $10,000">&nbsp;&nbsp;$5000 - $10,000</option>
+
+								<option value="$10,000 - $25,000">&nbsp;&nbsp;$10,000 - $25,000</option>
+
+								<option value="$25,000 - $50,000">&nbsp;&nbsp;$25,000 - $50,000</option>
+
+								<option value="$50,000 - $75,000">&nbsp;&nbsp;$50,000 - $75,000</option>
+
+								<option value="$75,000 - $100,000">&nbsp;&nbsp;$75,000 - $100,000</option>
+
+				            </select>
+
+
+
+				        </div>
+
+				    </div>
+				    <div class="input-box1"><div class="input-box1_1">
+
+				            <input type="text" class="input-text required-entry" title="Address" value="" name="address" id="address" placeholder="ADDRESS*">
+
+				        </div>
+				        </div>
+				        <div class="input-box2"><div class="input-box2_2">
+
+				            <input type="text" class="input-text required-entry" title="City" value="" name="city" id="city" placeholder="CITY*">
+
+				        </div>
+				        </div>
+
+				</div>
+
+			</li>
+			<li> 
+				<div class="field three_fields">
+					<div class="input-box">
+						<input type="text" class="input-text required-entry" title="Zip" value="" name="zipcode" id="zipcode" placeholder="Zip*">
+					</div>
+					<div class="input-box">
+						<input type="text" class="input-text required-entry" title="State" value="" name="state" id="state" placeholder="State*">
+					</div>
+					<div class="input-box">
+						<input type="text" class="input-text required-entry" title="Country" value="" name="country" id="country" placeholder="Country*">
+					</div>
+				</div>
+			</li>
+
+			<div class="another">
+			<li>
+				<div class="important_container">
+					<div class="field lilbig"> <!-- big-->
+				       <!-- <label for="moreimportant">What is more important?</label>
+				        <div class="input-box radioprop">
+				            <input type="radio" class="radio radiobuton" title="What is more important?" value="Size" name="moreimportant" id="moreimportant"><span>Size</span>
+							<input type="radio" class="radio radiobuton" title="What is more important?" value="Quality" name="moreimportant" id="moreimportant"><span>Quality</span>
+				        </div>-->
+				    </div>
+					<?php /*?><div class="field lilsmall">
+				        <label for="pricerange">Do you have price range?</label>
+				        <div class="input-box">
+
+				            <!--<input type="text" class="input-text lilsmall" title="Do you have price range?" value="" name="pricerange" id="pricerange">-->
+
+							<select name="pricerange" id="pricerange" class="lilsmallselect" title="Do you have price range?">
+
+				            	<option value="">Select Price Range...</option>
+
+				            	<!--<option value="Below $500">Below $500</option>-->
+
+				            	<option value="$500">$500</option>
+
+				            	<option value="$500 - $1000">$500 - $1000</option>
+
+				            	<option value="$1000 - $5000">$1000 - $5000</option>
+
+								<option value="$5000 - $10,000">$5000 - $10,000</option>
+
+								<option value="$10,000 - $25,000">$10,000 - $25,000</option>
+
+								<option value="$25,000 - $50,000">$25,000 - $50,000</option>
+
+								<option value="$50,000 - $75,000">$50,000 - $75,000</option>
+
+								<option value="$75,000 - $100,000">$75,000 - $100,000</option>
+
+				            </select>
+				        </div>
+				    </div><?php */?>
+			    </div>
+			</li>
+			</div>
+            <li class="cudate finish_date">
+				<div class="input-box customer-dob" id="">
+					<!--<label>What’s your deadline?</label>
+			    	 <div class="dob-month">
+					 <?php /*?><label for="month">MM</label><?php */?>
+			             <input type="text" class="input-text small validate-number validate-digit-range" title="Month" value="" name="month" id="month" placeholder="MM" maxlength="2">
+			         </div>
+			         <div class="dob-day">
+					 <?php /*?><label for="day">DD</label><?php */?>
+			             <input type="text" class="input-text small validate-number validate-digit-range" title="Day" value="" name="day" id="day" placeholder="DD" maxlength="2">
+			         </div>
+			         <div class="dob-year">
+					  <?php /*?><label for="year">YYYY</label><?php */?>
+			             <input type="text" class="input-text small validate-number" title="Year" value="" name="year" id="year" placeholder="YYYY" maxlength="4">
+			         </div>
+				    <div style="display:none;" class="validation-advice"></div>
+				</div>
+			</li>-->
+		<div class="line"><img src="<?php echo $this->getSkinUrl(); ?>images/border.png"/></div>
+			<li class="splline">
+				<label>Upload Images below to help guide your Inquiry (Please Only GIF, JPG or PNG files).</label>
+
+				<div class="clearer" style="float:left;">
+				    <div class="field imgsel">
+				        <div class="input-box image_upload1">
+				            <?php /*?><input type="file" name="image_1" id="image1" class="spc" /><?php */?>                            
+                            <input id="image1" placeholder="&nbsp;&nbsp;image one..." name="image_1" value="" disabled="disabled"/>
+                                <div class="fileUpload btn btn-primary">
+                                    <span id="btn_img_name">BROWSE</span>
+                                    <input id="imageupload1" name="imageupload1" type="file" class="upload" />
+                                </div>
+                                </div>
+<div class="input-box image_upload2">
+				            <?php /*?><input type="file" name="image_2" id="image2" class="spc" /><?php */?>
+                            
+                            <input id="image2" placeholder="&nbsp;&nbsp;image two..." name="image_2" value="" disabled="disabled"/>
+							<div class="fileUpload btn btn-primary">
+    								<span id="btn_img_name">BROWSE</span>
+    								<input id="imageupload2" type="file" class="upload" name="imageupload2"/>
+								</div>
+				            <?php /*?><input type="file" name="image_3" id="image3" class="spc"/> <?php */?>
+				        </div>
+						    
+						     
+					<!--	<div class="input-box image_upload3">
+				            <?php /*?><input type="file" name="image_2" id="image2" class="spc" /><?php */?>
+                            
+                            <input id="image3" placeholder="" name="image_3" value="" disabled="disabled"/>
+							<div class="fileUpload btn btn-primary">
+    								<span id="btn_img_name">BROWSE</span>
+    								<input id="imageupload3" type="file" class="upload" name="imageupload3"/>
+								</div>
+				            <?php /*?><input type="file" name="image_3" id="image3" class="spc"/> <?php */?>
+				        </div>
+				        -->
+						
+				    </div>
+                    <script type="text/javascript">
+                    jQuery(document).ready(function(e) {
+						jQuery("#imageupload1").change(function(e) {
+                            var file1 = jQuery("#imageupload1").val();
+                            console.log(res);
+							var res = file1.replace("C", "");
+							var res = res.replace("fakepath", "");
+							var res = res.replace(":\\", "");
+							
+							jQuery("#image1").val(res);						
+                        });
+						
+						jQuery("#imageupload2").change(function(e) {
+                            var file2 = jQuery("#imageupload2").val();
+							var res2 = file2.replace("C", "");
+							var res2 = res2.replace("fakepath", "");
+							var res2 = res2.replace(":\\", "");
+							
+							jQuery("#image2").val(res2);
+						
+                        });            
+						jQuery("#imageupload3").change(function(e) {
+                            var file3 = jQuery("#imageupload3").val();
+							var res3 = file3.replace("C", "");
+							var res3 = res3.replace("fakepath", "");
+							var res3 = res3.replace(":\\", "");
+							
+							jQuery("#image3").val(res3);
+						
+                        });         						
+                    });
+                    </script>
+				    <?php /*?><div class="field imgsel1">
+				        <div class="input-box">
+				            <input type="file" name="image_4" id="image4" class="spc"/>
+				            <input type="file" name="image_5" id="image5" class="spc"/>
+							<input type="file" name="image_6" id="image6" class="spc"/>
+				        </div>
+				    </div><?php */?>
+				</div>
+			</li>
+            <li class="cudate extra">
+            	<?php /*?><label for="month">Comment</label><?php */?>
+				<textarea rows="5" cols="10" name="comments" id="comment" placeholder="special instructions or questions?"></textarea>
+            </li>
+             <li class="sendspecial_offer">
+            	<input id="is_subscribed" class="checkbox newslater" type="checkbox"  value="1" title="Sign Up for Newsletter" name="is_subscribed">
+				<label class="customnews_subscribe" for="is_subscribed">
+				Send me updates and offers
+				</label>      
+            </li>      
+		</ul> 
+		<div class="buttons-set">
+
+           <?php /*?> <p class="required">* Required Fields</p><?php */?>
+
+ <div class="input-box">
+						<input type="text" class="required-entry" id="defaultReal10" name="defaultReal10">
+				   </div> 
+            <button class="custsub" title="Submit" type="submit"><span><span>Submit</span></span></button>
+
+        </div>
+        
+     <div class="line"><img src="<?php echo $this->getSkinUrl(); ?>images/border.png"/></div>
+     
+        <div class="make-apptmt"><p><a href="/contacts">contact us</a></p></div>
+	</form>  
+ 
+</div>
+
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+//<![CDATA[
+
+    var contactForm = new VarienForm('contactForm', true);
+
+//]]>
+
+</script>
+
+<?php /*?><script type="text/javascript">
+
+function checkform(frm) 
+
+{ 
+
+  sname = frm.name; 
+
+  semail = frm.email; 
+
+  phone = frm.phone; 
+
+
+
+  if (sname.value == "" || !removeSpaces(sname.value)) 
+
+  { 
+
+   	return false;  
+
+  } 
+
+  else if (semail.value == "" || !validate_email(semail.value)) 
+
+  { 
+
+    return false;  
+
+  }
+
+  else if (phone.value == "" || !removeSpaces(phone.value)) 
+
+  { 
+
+     return false; 
+
+  }
+
+ 
+
+} 
+
+ 
+
+function validate_email(e) 
+
+{ 
+
+var str=e; 
+
+var filter=/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i; 
+
+ 
+
+if (!filter.test(str)) 
+
+  return false; 
+
+else 
+
+  return true; 
+
+} 
+
+
+
+function removeSpaces(string) { 
+
+var tstring = ""; 
+
+string = '' + string; 
+
+splitstring = string.split(" "); 
+
+for(i = 0; i < splitstring.length; i++) 
+
+tstring += splitstring[i]; 
+
+return tstring; 
+
+}
+
+</script>
+
+
+
+<?php */?>

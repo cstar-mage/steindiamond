@@ -1,0 +1,163 @@
+<?xml version="1.0"?>
+    <config>
+     <modules>
+        <Ideal_Bankwirediscount>
+            <version>0.1.1</version>
+        </Ideal_Bankwirediscount>
+    </modules>
+    <frontend>
+        <routers>
+            <bankwirediscount>
+                <use>standard</use>
+                <args>
+                    <module>Ideal_Bankwirediscount</module>
+                    <frontName>bankwirediscount</frontName>
+                </args>
+            </bankwirediscount>
+        </routers>
+        <layout>
+            <updates>
+                <bankwirediscount>
+                    <file>bankwirediscount.xml</file>
+                </bankwirediscount>
+            </updates>
+        </layout>
+    </frontend>
+
+	<admin>
+        <!-- <routers>
+        	<adminhtml>
+	            <args>
+	                <modules>
+	                    <bankwirediscount after="Mage_Adminhtml">Ideal_Bankwirediscount_Adminhtml</bankwirediscount>
+	                </modules>
+	            </args>
+	        </adminhtml>
+        </routers> -->
+    </admin>
+    
+    <adminhtml>
+		<layout>
+			<updates>
+				<bankwirediscount>
+					<file>bankwirediscount.xml</file>
+				</bankwirediscount>
+			</updates>
+		</layout>
+		
+		<acl>
+	        <resources>
+	        	<all>
+					<title>Allow Everything</title>
+				</all>
+	            
+	        </resources>
+	    </acl>
+    </adminhtml>  
+    
+      <global>
+        <sales>
+            <quote>
+                <totals>
+                    <bankwirediscount>
+                        <class>Ideal_Bankwirediscount_Model_Sales_Quote_Address_Total_Bankwirediscount</class>
+                        <before>tax</before>
+                    	<after>discount</after>
+                    </bankwirediscount>
+                </totals>
+            </quote>
+            
+             <order_invoice> 
+                <totals>
+                    <bankwirediscount>
+                        <class>bankwirediscount/sales_order_total_invoice_bankwirediscount</class>    
+                          <before>tax</before>
+                    	<after>discount</after>           
+                    </bankwirediscount>
+                </totals>
+            </order_invoice>
+            
+            <order_creditmemo>
+                <totals>
+                    <bankwirediscount>
+                        <class>bankwirediscount/sales_order_total_creditmemo_bankwirediscount</class>
+                    </bankwirediscount>
+                </totals>
+            </order_creditmemo>
+       </sales>
+	     <fieldsets>
+	           <sales_convert_quote_address>
+	                <bankwirediscount><to_order>*</to_order></bankwirediscount>
+	                <base_bankwirediscount_amount><to_order>*</to_order></base_bankwirediscount_amount>
+	            </sales_convert_quote_address>
+	      </fieldsets>
+	      <pdf>
+	            <totals>
+	                <bankwirediscount translate="title">
+	                    <title>Bankwire Discount</title>
+	                    <source_field>bankwirediscount</source_field>
+	                    <font_size>7</font_size>
+	                    <display_zero>0</display_zero>
+	                    <!-- <sort_order>650</sort_order> -->
+	                    <amount_prefix>-</amount_prefix>
+	                </bankwirediscount>
+	            </totals>
+	        </pdf>
+	        
+	        <blocks>
+	            <bankwirediscount>
+	                <class>Ideal_Bankwirediscount_Block</class>
+	            </bankwirediscount>
+	        </blocks>
+	        
+	        <models>
+	            <bankwirediscount>
+	                <class>Ideal_Bankwirediscount_Model</class>
+	                <resourceModel>bankwirediscount_mysql4</resourceModel>
+	            </bankwirediscount>
+	            <bankwirediscount_mysql4>
+	                <class>Ideal_Bankwirediscount_Model_Mysql4</class>
+	                <entities>
+	                    <bankwirediscount>
+	                        <table>bankwirediscount</table>
+	                    </bankwirediscount>
+	                </entities>
+	            </bankwirediscount_mysql4>
+	        </models>
+	        
+        <resources>
+            <bankwirediscount_setup>
+                <setup>
+                    <module>Ideal_Bankwirediscount</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </bankwirediscount_setup>
+            <bankwirediscount_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </bankwirediscount_write>
+            <bankwirediscount_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </bankwirediscount_read>
+        </resources> 
+        
+        <events>
+        	<!-- <sales_quote_payment_import_data_after>
+	            <observers>
+	                <bankwirediscount_update_totals_flag>
+	                    <type>singleton</type>
+	                    <class>Ideal_Bankwirediscount_Model_Price_Observer</class>
+	                    <method>collectTotalsBankwirediscount</method>
+	                </bankwirediscount_update_totals_flag>
+	            </observers>
+	        </sales_quote_payment_import_data_after> -->
+        </events>
+        
+      </global>
+    
+    </config>

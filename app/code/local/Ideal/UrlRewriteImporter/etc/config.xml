@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Ideal_UrlRewriteImporter>
+            <version>1.0.2.1</version>
+        </Ideal_UrlRewriteImporter>
+    </modules>
+    <global>
+        <models>
+            <ideal_urlrewriteimporter>
+                <class>Ideal_UrlRewriteImporter_Model</class>
+            </ideal_urlrewriteimporter>
+        </models>
+        <blocks>
+            <ideal_urlrewriteimporter>
+                <class>Ideal_UrlRewriteImporter_Block</class>
+            </ideal_urlrewriteimporter>
+        </blocks>
+		<helpers>
+            <ideal_urlrewriteimporter>
+                <class>Ideal_UrlRewriteImporter_Helper</class>
+            </ideal_urlrewriteimporter>
+        </helpers>        
+    </global>
+    <adminhtml>
+        <events>
+            <adminhtml_widget_container_html_before>
+                <observers>
+                    <ideal_urlrewriteimporter_injectImportUrlRewritesButton>
+                        <class>ideal_urlrewriteimporter/observer</class>
+                        <method>injectImportUrlRewritesButton</method>
+                    </ideal_urlrewriteimporter_injectImportUrlRewritesButton>
+                </observers>
+            </adminhtml_widget_container_html_before>
+        </events>
+    </adminhtml>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Ideal_UrlRewriteImporter after="Mage_Adminhtml">Ideal_UrlRewriteImporter_Adminhtml</Ideal_UrlRewriteImporter>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers> 
+    </admin>
+
+	<crontab>
+        <jobs>
+            <check_repair_product_rewrites>
+            	<schedule>
+                    <config_path>cronjobs/check_repair_product_rewrites/cron_expr</config_path>
+                </schedule>
+                <run>
+                    <model>ideal_urlrewriteimporter/observer::checkRepairProductRewrites</model>
+                </run>
+            </check_repair_product_rewrites>
+        </jobs>
+    </crontab>
+    
+    <default>
+		
+        <cronjobs>
+           	<check_repair_product_rewrites>
+            	<enabled>1</enabled>
+            	<cron_expr>15 5 * * *</cron_expr>
+            </check_repair_product_rewrites>
+        </cronjobs>
+    </default>  
+</config>

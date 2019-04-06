@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Ideal_Customer>
+            <version>0.0.1</version>
+        </Ideal_Customer>
+    </modules>
+    <frontend>
+        <routers>
+            <customer>
+                <args>
+                    <modules>
+                        <Ideal_Customer before="Mage_Customer">Ideal_Customer</Ideal_Customer>
+                    </modules>
+                </args>
+            </customer>
+        </routers>
+    </frontend>
+</config>

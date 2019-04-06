@@ -1,0 +1,131 @@
+<!--@subject Diamond Order Notification #{{htmlescape var=$order.increment_id}} @-->
+<!--@vars
+{"store url=\"\"":"Store Url",
+"var logo_url":"Email Logo Image Url",
+"var logo_alt":"Email Logo Image Alt",
+"htmlescape var=$diamond.name":"Customer Name"}
+@-->
+<!--@styles
+body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+@-->
+
+<body style="background:#F6F6F6; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; margin:0; padding:0;">
+<div style="background:#F6F6F6; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; margin:0; padding:0;">
+<table cellspacing="0" cellpadding="0" border="0" height="100%" width="100%">
+    <tr>
+        <td align="center" valign="top" style="padding:20px 0 20px 0">
+            <!-- [ header starts here] -->
+            <table bgcolor="#f4f3f8" cellspacing="0" cellpadding="10" border="0" width="650" style="border:1px solid #f4f3f8;">
+                
+                <tr>
+                    <td valign="top" style="text-align: center;">
+                        <a href="{{store url=""}}" style="color:#1E7EC8;"><img src="{{var logo_url}}" alt="{{var logo_alt}}" border="0"/></a>
+                    </td>
+                </tr>
+                
+                <!-- [ middle starts here] -->
+                <tr>
+                    <td valign="top">
+                        <h1 style="font-size:22px; font-weight:normal; line-height:22px; margin:0 0 11px 0;"">Hello {{htmlescape var=$vendor_name}},</h1>
+                        <p style="border:1px solid #E0E0E0; font-size:12px; line-height:16px; margin:0; padding:13px 18px; background:#F9F9F9;">
+                        	 We got new diamond order with following information reference by order #{{htmlescape var=$order.increment_id}} <br>Placed on {{var order.getCreatedAtFormated('long')}}
+                        <p>
+                        <p>Please immediately ship the stone to Carl K. Gumpert, Inc, ATTN: Diamond Procurement Dept 606 South Olive Street, Suite 2400, Los Angeles CA 90014 for verification</p>
+                    </td>
+                </tr>
+                
+                <tr>
+                	<td>
+                		<table width="100%">
+                			<thead>
+                				<tr>
+						        	<th colspan="16" align="left" bgcolor="#413760" style="color:#ffffff;font-size:16px;line-height:1em;padding:10px;text-transform:uppercase;">Diamond Information:</th>
+						      	</tr>
+						    </thead>
+						    <tbody>
+						    	<tr>
+	                				<td style="padding: 3px;"><label><strong>RockHer ID#: </strong></label></td>
+	                				<td style="padding: 3px;">{{htmlescape var=$diamond.id}}</td>
+	                				<td style="padding: 3px;">&nbsp;</td>
+	                				<td style="padding: 3px;"><label><strong>Polish: </strong></label></td>
+	                				<td style="padding: 3px;">{{htmlescape var=$diamond.polish}}</td>
+	                				<td style="padding: 3px;">&nbsp;</td>
+	                				<td style="padding: 3px;"><label><strong>Culet: </strong></label></td>
+	                				<td style="padding: 3px;">{{htmlescape var=$diamond.culet}}</td>
+	                			</tr>
+	                			
+	                			<tr>
+	                				<td style="padding: 3px;"><label><strong>Vendor Lot#: </strong></label></td>
+	                				<td style="padding: 3px;">{{htmlescape var=$diamond.lotno}}</td>
+	                				<td style="padding: 3px;">&nbsp;</td>
+	                				<td style="padding: 3px;"><label><strong>Symmetry: </strong></label></td>
+	                				<td style="padding: 3px;">{{htmlescape var=$diamond.symmetry}}</td>
+	                				<td style="padding: 3px;">&nbsp;</td>
+	                				<td style="padding: 3px;"><label><strong>Dimensions: </strong></label></td>
+	                				<td style="padding: 3px;">{{htmlescape var=$diamond.dimensions}}</td>
+	                			</tr>
+	                			
+	                			<tr>
+	                				<td style="padding: 3px;"><label><strong>Shape: </strong></label></td>
+	                				<td style="padding: 3px;">{{htmlescape var=$diamond.shape}}</td>
+	                				<td style="padding: 3px;">&nbsp;</td>
+	                				<td style="padding: 3px;"><label><strong>Fluorescence: </strong></label></td>
+	                				<td style="padding: 3px;">{{htmlescape var=$diamond.fluorescence}}</td>
+	                				<td style="padding: 3px;">&nbsp;</td>
+	                				<td style="padding: 3px;"><label><strong>Table: </strong></label></td>
+	                				<td style="padding: 3px;">{{htmlescape var=$diamond.tabl}}</td>
+	                			</tr>
+	                			
+	                			<tr>
+	                				<td style="padding: 3px;"><label><strong>Carat: </strong></label></td>
+	                				<td style="padding: 3px;">{{htmlescape var=$diamond.carat}}</td>
+	                				<td style="padding: 3px;">&nbsp;</td>
+	                				<td style="padding: 3px;"><label><strong>Lab: </strong></label></td>
+	                				<td style="padding: 3px;">{{htmlescape var=$diamond.certificate}}</td>
+	                				<td style="padding: 3px;">&nbsp;</td>
+	                				<td style="padding: 3px;"><label><strong>Crown: </strong></label></td>
+	                				<td style="padding: 3px;">{{htmlescape var=$diamond.crown}}</td>
+	                			</tr>
+	                			
+	                			<tr>
+	                				<td style="padding: 3px;"><label><strong>Color: </strong></label></td>
+	                				<td style="padding: 3px;">{{htmlescape var=$diamond.color}} {{htmlescape var=$diamond.fancycolor}}</td>
+	                				<td style="padding: 3px;">&nbsp;</td>
+	                				<td style="padding: 3px;"><label><strong>Cert#: </strong></label></td>
+	                				<td style="padding: 3px;">{{htmlescape var=$diamond.cert_number}}</td>
+	                				<td style="padding: 3px;">&nbsp;</td>
+	                				<td style="padding: 3px;"><label><strong>Depth: </strong></label></td>
+	                				<td style="padding: 3px;">{{htmlescape var=$diamond.depth}}</td>
+	                			</tr>
+	                			
+	                			<tr>
+	                				<td style="padding: 3px;"><label><strong>Clarity: </strong></label></td>
+	                				<td style="padding: 3px;">{{htmlescape var=$diamond.clarity}}</td>
+	                				<td style="padding: 3px;">&nbsp;</td>
+	                				<td style="padding: 3px;"><label><strong>Total Price: </strong></label></td>
+	                				<td style="padding: 3px;">{{htmlescape var=$diamond.cost}}</td>
+	                				<td style="padding: 3px;">&nbsp;</td>
+	                				<td style="padding: 3px;"><label><strong>Pavilion: </strong></label></td>
+	                				<td style="padding: 3px;">{{htmlescape var=$diamond.pavilion}}</td>
+	                			</tr>
+	
+	                			<tr>
+	                				<td style="padding: 3px;"><label><strong>Cut: </strong></label></td>
+	                				<td style="padding: 3px;">{{htmlescape var=$diamond.cut}}</td>
+	                				<td style="padding: 3px;">&nbsp;</td>
+	                				{{depend $diamond.fancy_intensity}} 
+	                				<td style="padding: 3px;"><label><strong>Fancy Intensity: </strong></label></td>
+	                				<td style="padding: 3px;">{{htmlescape var=$diamond.fancy_intensity}}</td>
+	                				{{/depend}}
+	                			</tr>
+	                		</tbody>
+                		</table>
+                	</td>
+                </tr>
+                
+            <tr>
+                <td bgcolor="#EAEAEA" align="center" style="background:#EAEAEA; text-align:center;"><center><p style="font-size:12px; margin:0;">Thank you, <strong>{{var store.getFrontendName()}}</strong></p></center></td>
+            </tr>
+		</table>
+	</div>
+</body>

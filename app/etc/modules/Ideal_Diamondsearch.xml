@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Ideal_Diamondsearch>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Ideal_Diamondsearch>
+    </modules>
+</config> 

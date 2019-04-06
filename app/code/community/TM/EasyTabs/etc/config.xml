@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <TM_EasyTabs>
+            <version>3.1.6</version>
+        </TM_EasyTabs>
+    </modules>
+
+    <global>
+        <helpers>
+            <easytabs>
+                <class>TM_EasyTabs_Helper</class>
+            </easytabs>
+        </helpers>
+        <blocks>
+            <easytabs>
+                <class>TM_EasyTabs_Block</class>
+            </easytabs>
+        </blocks>
+
+        <resources>
+            <easytabs_setup>
+                <setup>
+                    <module>TM_EasyTabs</module>
+                </setup>
+            </easytabs_setup>
+        </resources>
+        <models>
+            <easytabs>
+                <class>TM_EasyTabs_Model</class>
+                <resourceModel>easytabs_resource</resourceModel>
+            </easytabs>
+            <easytabs_resource>
+                <class>TM_EasyTabs_Model_Resource</class>
+                <entities>
+                    <tab>
+                        <table>tm_easytab</table>
+                    </tab>
+                    <store>
+                        <table>tm_easytab_store</table>
+                    </store>
+                </entities>
+            </easytabs_resource>
+        </models>
+    </global>
+
+    <frontend>
+        <layout>
+            <updates>
+                <easytabs>
+                    <file>tm/easytabs.xml</file>
+                </easytabs>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <TM_EasyTabs>
+                    <files>
+                        <default>TM_EasyTabs.csv</default>
+                    </files>
+                </TM_EasyTabs>
+            </modules>
+        </translate>
+    </frontend>
+
+    <default>
+        <subscriptionchecker>
+            <ignored_sections>
+                <tm_easytabs/>
+            </ignored_sections>
+        </subscriptionchecker>
+        <tm_easytabs>
+            <general>
+                <enabled>0</enabled>
+                <update_url_hash>1</update_url_hash>
+                <show_anchor>0</show_anchor>
+            </general>
+        </tm_easytabs>
+    </default>
+
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <easytabs before="Mage_Adminhtml">TM_EasyTabs_Adminhtml</easytabs>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+
+    <adminhtml>
+        <layout>
+            <updates>
+                <easytabs>
+                    <file>tm/easytabs.xml</file>
+                </easytabs>
+            </updates>
+        </layout>
+
+        <translate>
+            <modules>
+                <TM_EasyTabs>
+                    <files>
+                        <default>TM_EasyTabs.csv</default>
+                    </files>
+                </TM_EasyTabs>
+            </modules>
+        </translate>
+    </adminhtml>
+</config>

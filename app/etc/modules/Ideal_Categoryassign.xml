@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Ideal_Categoryassign>
+            <active>false</active>
+            <codePool>local</codePool>
+        </Ideal_Categoryassign>
+    </modules>
+</config>

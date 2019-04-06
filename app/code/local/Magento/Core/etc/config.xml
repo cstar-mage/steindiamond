@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Magento_Core>
+            <version>1.9.3.7</version>
+        </Magento_Core>
+    </modules>
+</config>

@@ -1,0 +1,1604 @@
+<?php 
+	$ctw = $_GET['ctw']; 
+?>
+<input type="hidden" value="<?php echo $ctw; ?>" name="ctw" id="ctw">
+<script>
+jQuery(document).ready(function(){ 
+
+var ctw = jQuery("#ctw").val();
+
+
+
+ setTimeout(function() {
+   
+    var method = "click";  
+    fireEvent(ctw, method);	
+               
+               
+	}, 1000);
+
+       
+	function fireEvent(element,event) {
+	
+			jQuery('#attribute395  > option').each(function() {
+           
+					var ctwsele = jQuery(this).val();
+					if(ctwsele == ctw){
+                     
+                       
+						var select = document.querySelector('#attribute395');
+					   
+						select.value = ctw;
+						select.dispatchEvent(new Event('change'));
+   			}
+               
+           
+           });
+             
+       
+		      
+	}
+
+
+
+});
+</script>
+
+
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        jQuery("#inline_2").click(function () {
+            jQuery("#inline_content_2").toggle("fast");
+            jQuery("#inline_content_2").toggleClass("formopen");
+        });
+    });
+</script>
+<link href="<?php echo $this->getSkinUrl() . 'css/font-awesome.css'; ?>" rel='stylesheet'>
+
+
+<link href="<?php echo $this->getSkinUrl() . 'css/jquery.accordion.css'; ?>" rel='stylesheet'>
+<script type="text/javascript" src="<?php echo $this->getBaseUrl() . 'js/jquery.accordion.js'; ?>"></script>
+
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     rwd_default
+ * @copyright   Copyright (c) 2014 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+ * Product view template
+ *
+ * @see Mage_Catalog_Block_Product_View
+ * @see Mage_Review_Block_Product_View
+ */
+?>
+<?php //$theme = Ideal_Evolved_Block_Evolved::getConfig(); ?>
+
+<?php
+
+$evolvedmethod = new Ideal_Evolved_Block_Evolved();
+if (method_exists($evolvedmethod, 'getBlockConfig')) {
+    $evolved_form_productdetails_attribute_table_tab = $evolvedmethod->getBlockConfig('evolved_form_productdetails_attribute_table_tab');
+    $evolved_form_productdetails_attribute = $evolvedmethod->getBlockConfig('evolved_form_productdetails_attribute')['productdetails_tab_enable'];
+    $theme = array_merge($evolved_form_productdetails_attribute_table_tab);
+}
+if (count($theme) == 0) {
+    $theme = Mage::helper('evolved')->getThemeConfig();
+    $evolved_form_productdetails_attribute = $theme['productdetails_tab_enable'];
+}
+?>
+
+<?php $_helper = $this->helper('catalog/output'); ?>
+<?php $_product = $this->getProduct(); ?>
+<?php $_helper = $this->helper('catalog/output'); ?>
+<?php $_product = $this->getProduct(); ?>
+<?php 
+
+$sku = $_product->getSku();
+$productId = $_product->getId();
+
+
+
+?>
+<script type="text/javascript">
+    var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
+</script>
+
+<?php
+if (Mage::getSingleton('customer/session')->isLoggedIn()) {
+    ?>
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            jQuery(".product-view .product-options select").addClass("required-entry");
+            jQuery(".product-view .product-options label").addClass("required");
+        });
+    </script>
+    <?php
+}
+?>
+
+<div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
+<?php echo $this->getChildHtml('breadcrumbs') ?>
+
+
+<?php
+
+if ($_product->getProductType() != 158) {
+    ?> 
+
+		<?php 
+
+		$selectSetting = false;
+		$addRingToCart = false;
+
+		if($_category = Mage::registry('current_category')) {
+			$_category = Mage::getSingleton('catalog/category')->load($_category->getId());
+			$categoryId = $_category->getId();			
+			if($_category->getRingbuilderEnabled()) { // only applied for Ringbuilder Enabled categories
+				$selectSetting = true;
+			} else {
+				$addRingToCart = true;
+			}
+		} else {
+			$addRingToCart = true;
+		}
+	
+	
+ 
+		//a semi mount engagment ring should always add this ring to the engagement ring builder. This ring is somehow not part of the ring builder, perhaps its from a search we need to make sure we set this up to always have semi mounts always having the ring builder, thats the task.
+		if(trim($_product->getAttributeText('sub_class')) == 'Engage - SEMI') {
+			$selectSetting = true;
+			$addRingToCart = false;
+		}
+
+		$ringbuilderData = Mage::getSingleton('checkout/session')->getRingbuilderData();
+		
+		
+		$ringProductId = $ringbuilderData['settings']['id'];		
+		//echo "<pre>"; print_r($ringbuilderData); echo "</pre>";exit;
+		if(isset($ringbuilderData['diamond']) && isset($ringbuilderData['settings']) && $productId == $ringProductId) {
+			
+			$addRingToCart = true;
+			$selectSetting = false;
+			$dsku = $ringbuilderData['diamond']['sku'];
+		   
+			/* $tableName = Mage::getSingleton("core/resource")->getTableName('uploadtool_diamonds_inventory');
+			$connection = Mage::getSingleton('core/resource')->getConnection('core_read');
+			$sql        = 'select * from '.$tableName.' where `lotno` = "'.$dsku.'"';
+			$rows       = $connection->fetchAll($sql); */
+			
+			$diamond = Mage::helper('ringbuilder')->loadDiamondBySku($dsku);
+			
+				$carat = number_format($diamond->getCarat(), 2, '.', '');
+				$cut = $diamond->getCut();
+			   if($cut){
+					if($cut == "EX"){
+						$cut = "Excellent"; 
+					}
+					elseif ($cut == "VG") {
+						$cut = "Very Good";
+					}
+					elseif ($cut == "G") {
+						$cut = "Good";   
+					}
+					else{
+						$cut = "Fair";          
+					}
+				}
+				if($diamond->getShape() ==  "Round"){
+					$diamondproductName = " With a GIA Certified ".$carat . " " . $diamond->getColor() . " " . $diamond->getClarity() ." " . $cut . " " . "Cut " . $diamond->getShape() . " Diamond " ;
+				}
+				else
+				{
+					$diamondproductName = " With a GIA Certified ".$carat . " " . $diamond->getColor() . " " . $diamond->getClarity() ." " . $cut . " " . $diamond->getShape() . " Diamond " ;
+				}
+
+
+			
+		  
+		 
+		}
+		$diamondPrice = $ringbuilderData['diamond']['price'];
+		$settingsPrice = $ringbuilderData['settings']['price'];
+		//$diamondurl = $ringbuilderData['diamond']['view_url'];
+		$repnetid = $ringbuilderData['diamond']['rapnetid'];
+		$diamondurl = Mage::getBaseUrl().'diamondsearch/index/view/id/'.$repnetid.'/';
+		
+
+		?>
+    <div class="product-view jew-view">
+        <div class="product-essential">
+            <form action="<?php echo $this->getSubmitUrl($_product) ?>" method="post"
+                  id="product_addtocart_form"<?php if ($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+                <?php echo $this->getBlockHtml('formkey') ?>
+               <input type="hidden" name="diamondurl" value="<?php echo $diamondurl; ?>" /> 
+                <div class="no-display">
+                    <input type="hidden" name="product" value="<?php echo $_product->getId() ?>"/>
+                    <input type="hidden" name="related_product" id="related-products-field" value=""/>
+                </div>
+
+                <div class="product-img-box">
+                    <div class="product-name">
+                        <h1><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
+                    </div>
+                    <?php echo $this->getChildHtml('media') ?>
+
+                </div>
+                <div class="product-right">
+                    <div class="product-shop">
+                        <div class="product-name">
+                            <h1 class="h1"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
+                        </div>
+                        <div class="product-sku">
+                            <span
+                                class="h1">SKU:&nbsp;<?php echo $_helper->productAttribute($_product, $_product->getSku(), 'sku') ?></span>
+                        </div>
+
+                        <div class="price-info">						
+						 <?php if($addRingToCart == true && $diamondPrice && $settingsPrice && $productId == $ringProductId): ?>
+
+                     	<div class="price-box">																			
+                        	<span id="product-price-ringbilder-<?php echo $_product->getId() ?>" class="regular-price">								
+								<?php $diamondPrice = preg_replace('/[^0-9\-]/', '', $diamondPrice); ?>
+                            	<span class="price"><?php echo Mage::helper('core')->currency($diamondPrice+$settingsPrice, true, false); ?></span>
+                            </span>
+
+						</div>
+
+                    <?php else: ?>
+
+                     	    <?php echo $this->getPriceHtml($_product); ?>
+                            <?php echo $this->getChildHtml('bundle_prices') ?>
+                            <?php echo $this->getTierPriceHtml() ?>
+
+                    <?php endif; ?>
+                         
+                        </div>
+                        <div class="Bank-wire-price-info">
+                            <?php
+                            //	echo "456";
+                            $_attributeLabel = $_product->getResource()->getAttribute('bank_wire_price')->getFrontendLabel();
+                            $_attributeValue = $_product->getResource()->getAttribute('bank_wire_price')->getFrontend()->getValue($_product);
+                            $_symbol = Mage::app()->getLocale()->currency(Mage::app()->getStore()->getCurrentCurrencyCode())->getSymbol();
+
+                            if ($_attributeValue == "Yes"):
+
+                                //echo "123";
+                                ?>
+                                <div class="Wire-price-label">
+                                    <?php echo $_attributeLabel; ?>:
+                                    <div class="Wire-price-value">
+                                        <?php echo $_symbol;
+                                        $_fiinalPrice = $_product->getFinalPrice();
+                                        $_discountWirePrice = (($_fiinalPrice * 3) / 100);
+                                        $_fiinalWirePrice = $_fiinalPrice - $_discountWirePrice;
+                                        echo $formattedPrice = number_format($_fiinalWirePrice, 2, '.', ',');
+
+                                        ?>
+                                        <a class="btn" data-popup-open="popup-1" href="#"><i
+                                                class="fa fa-exclamation-circle" aria-hidden="true"></i></a>
+
+                                        <div class="popup" data-popup="popup-1">
+                                            <div class="popup-inner">
+                                                <h2>Bank Wire Price</h2>
+                                                <center><p>This information will be included on your invoice and
+                                                        email.</p></center>
+                                                </br><p>A Bank Wire (or Bank Transfer) is the method of payment which is
+                                                    done between two banks electronically. It can be completed at your
+                                                    local financial institution branch or electronically online
+                                                    depending on the services available from your banking institution.
+                                                    The Bank Wire Price is a 3% discount off of the regular price. To
+                                                    select this option, add the item to your basket and proceed to
+                                                    checkout. You can then choose Bank Transfer as your payment method.
+                                                    You will receive an email with the information required to complete
+                                                    the transfer along with your invoice.</p></br><p> Once you have
+                                                    completed the Bank Wire, please email us for confirmation and we
+                                                    will begin processing your order as soon as the transfer has
+                                                    cleared.</p></br><p>Feel free to contact us with any questions.</p>
+                                                <!--	<p><a data-popup-close="popup-1" href="#">Close</a></p>-->
+                                                <a class="popup-close" data-popup-close="popup-1" href="#">x</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                        <div class="extra-info">
+                            <?php //echo $this->getReviewsSummaryHtml($_product, 'default', false)
+                            ?>
+                            <?php //echo $this->getChildHtml('product_type_availability');
+                            ?>
+                        </div>
+
+                        <?php echo $this->getChildHtml('alert_urls') ?>
+
+                        <?php if ($_product->getShortDescription()): ?>
+                            <div class="short-description">
+                                <div
+                                    class="std"><?php echo $_helper->productAttribute($_product, nl2br($_product->getDescription()), 'description') ?></div>
+                            </div>
+                        <?php endif; ?>
+
+                        <?php echo $this->getChildHtml('other'); ?>
+
+                        <?php if ($_product->isSaleable() && $_product['has_options']): ?>
+                            <?php echo $this->getChildChildHtml('container1', '', true, true) ?>
+                        <?php endif; ?>
+
+                    </div>
+						    <?php if($addRingToCart == true) { ?> 
+							<div class="<?php if($addRingToCart == true){ echo "custom-ring";} ?>">
+						<?php if ($_product->isSaleable() && $_product['has_options']):?>
+							<?php //echo $this->getChildChildHtml('container2', '', true, true) ?>
+							 <?php echo $this->getChildChildHtml('product_options_wrapper') ?>
+						 <?php endif;  ?>
+						 </div>
+						 <?php } ?>
+						
+						
+
+                    <div class="add-to-cart-wrapper">
+                        <?php echo $this->getChildHtml('product_type_data') ?>
+                        <?php echo $this->getChildHtml('extrahint') ?>
+
+                        <?php //if (!$_product->hasOptions()):
+                        ?>
+                        <?php if (!$_product->hasOptions()): ?>
+                            <div class="add-to-box">
+                                <?php if ($_product->isSaleable()): ?>
+                                    <?php echo $this->getChildHtml('addtocart') ?>
+                                    <?php // echo $this->getChildHtml('addto') ?>
+                                    <script type="text/javascript"
+                                            src="<?php echo $this->getBaseUrl() . 'js/calendar/calendar.js'; ?>"></script>
+                                    <script type="text/javascript"
+                                            src="<?php echo $this->getBaseUrl() . 'js/calendar/calendar-setup.js'; ?>"></script>
+                                    <link type="text/css"
+                                          href="<?php echo $this->getBaseUrl() . 'js/calendar/calendar-win2k-1.css'; ?>"
+                                          rel="stylesheet"></link>
+                                    <link rel="stylesheet"
+                                          href="<?php echo $this->getSkinUrl(); ?>css/customcontactnew/customcontactnew.css"
+                                          type="text/css">
+                                    <?php /*
+	                            <div class="make-apointment">
+	                            	<a class='inline_2' id="inline_2" > <!--href="#inline_content_2" -->Inquire about this item</a>
+	                            </div>
+	                         	    <div class="messages_s" style="display: none; color:#009772; ">
+							       		<?php //echo $this->getLayout()->createBlock('cms/block')->setBlockId('messages_s')->toHtml(); ?>
+				                        <b style="font-size:16px">Thank You For Your Inquiry
+				                        We will respond to you within 24 hours.
+				                        </b>
+							       </div>
+						    	<div class="apoinmt-form" id="inline_content_2" style="display:none;" >
+							        <?php echo $this->getLayout()->createBlock('customcontactnew/customcontactnew')->setTemplate('customcontactnew/customcontact_detail.phtml')->toHtml(); ?>
+							        <?php //echo $this->getLayout()->createBlock('cms/block')->setBlockId('customcontact_new')->toHtml() ?> 
+							    </div>
+							    */ ?>
+
+                                    <?php /* if( $this->helper('wishlist')->isAllow() || $_compareUrl=$this->helper('catalog/product_compare')->getAddUrl($_product)): ?>
+	                                <span class="or"><?php echo $this->__('OR') ?></span>
+	                            <?php endif; */ ?>
+                                <?php endif; ?>
+                                <?php // echo $this->getChildHtml('addto') ?>
+                                <?php //echo $this->getChildHtml('sharing') ?>
+                            </div>
+                            <?php echo $this->getChildHtml('extra_buttons') ?>
+                        <?php elseif (!$_product->isSaleable()): ?>
+                            <div class="add-to-box">
+                                <?php // echo $this->getChildHtml('addto') ?>
+                                <?php //echo $this->getChildHtml('sharing') ?>
+                            </div>
+                        <?php endif; ?>
+
+                    </div>
+
+                    <?php //echo $this->getChildHtml('related_products')
+                    ?>
+
+                    <?php /* <div class="clearer"></div>
+                    <?php if ($_product->isSaleable() && $_product['has_options']): ?>
+                        <?php echo $this->getChildChildHtml('container2', '', true, true) ?>
+                    <?php endif; ?> */ ?>
+                    
+                    <div class="clearer"></div>
+					<?php if ($_product->isSaleable() && $_product->hasOptions()):?>
+						<?php echo $this->getChildChildHtml('container2', '', true, true) ?>
+					<?php endif; ?>			
+                    <div class="clearer"></div>
+                    
+        
+					
+					<?php 
+					
+					/*
+						$dw = date( "w");
+					
+						if ($dw == 7 || $dw == 0) {
+							$datetime = new DateTime('today');
+							if ($dw == 6) {
+								$datetime->modify('+2 day');
+							} else {
+								$datetime->modify('+1 day');
+							}
+							echo "Contact us again at: " . $datetime->format('Y-m-d');
+						} else {
+							echo "Today is: " . date('l')."<br/>";
+							$datetime = new DateTime('today');
+							$datetime->modify('+2 day');
+							echo "Tomorrow is: ". $datetime->format('l') ."<br/>";
+						}
+						
+		
+						*/
+
+						?>
+						
+						
+						
+						
+					
+					
+						<?php /*
+						
+						$dw = date( "l");
+								
+								if($dw =='Friday'){
+								
+								$date = date("l"); $d=strtotime("+3 days"); echo date("l F-d-Y", $d); 
+								
+								} else if ($dw =='Saturday') {
+									
+									$date = date("l"); $d=strtotime("+2 days"); echo date("l F-d-Y", $d); 
+									
+								} else if ($dw =='Sunday') {
+									
+									$date = date("l"); $d=strtotime("+1 days"); echo date("l F-d-Y", $d); 
+									
+								} else {
+									
+									
+									$date = date("l"); $d=strtotime("+2 days"); echo date("l F-d-Y", $d); 
+									
+								}
+						
+						*/?>
+						
+								
+							
+							
+							
+
+                    <div class="prod-labels">
+                        <ul>
+                            <li><img src="<?php echo $this->getSkinUrl('images/auth.png') ?>"/><span>Authenticity Promise</span>
+                            </li>
+                            <li><img src="<?php echo $this->getSkinUrl('images/deliver.png') ?>"/><span>Free Shipping DELIVERED BY <span
+                                        class="peod-del-date">
+                         <?php 
+							
+
+							if ($_product->isAvailable()): 
+							/*
+							$today =   new Zend_Date();
+						
+                            $today->addDay('2');
+                            $date = Mage::helper('core')->formatDate($today, Mage_Core_Model_Locale::FORMAT_TYPE_FULL, false);
+                            echo $date; */
+								$date11 = strtotime("+14 day");
+								echo date('l F d Y', $date11);
+								//~ $dw = date( "l",$date11);
+								//~ 
+								//~ if($dw =='Friday'){
+								//~ 
+								//~ $date = date("l"); $d=strtotime("+3 days"); echo date("l F d Y", $d); 
+								//~ 
+								//~ } else if ($dw =='Saturday') {
+									//~ 
+									//~ $date = date("l"); $d=strtotime("+2 days"); echo date("l F d Y", $d); 
+									//~ 
+								//~ } else if ($dw =='Sunday') {
+									//~ 
+									//~ $date = date("l"); $d=strtotime("+1 days"); echo date("l F d Y", $d); 
+									//~ 
+								//~ } else {
+									//~ 
+									//~ 
+									//~ $date = date("l"); $d=strtotime("+2 days"); echo date("l F d Y", $d); 
+									//~ 
+								//~ }
+						
+						?>
+               
+						
+						
+						
+						
+						
+    
+							
+
+<?php else: ?>
+
+<a href="tel:(213) 985-4730">Call For Delivery</a>
+<?php endif; ?>
+
+						  
+                                        </span></span></li>
+                            <li><img src="<?php echo $this->getSkinUrl('images/expert.png') ?>"/><span>Speak to an expert 213-817-5489</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <?php echo $this->getChildHtml('sharing') ?>
+                </div>
+
+                <?php if ($evolved_form_productdetails_attribute == 'yes'): ?>
+                    <div class="product-essential product-collateral toggle-content tabs">
+                        <?php if ($detailedInfoGroup = $this->getChildGroup('detailed_info', 'getChildHtml')): ?>
+                            <dl id="collateral-tabs" class="collateral-tabs">
+                                <?php foreach ($detailedInfoGroup as $alias => $html): ?>
+                                    <?php if (($alias == "additional") && ($theme['productdetails_tab_attribute_option'] == 'outside')): ?>
+                                        <?php continue; ?>
+                                    <?php else: ?>
+                                        <dt class="tab">
+                                            <span><?php echo $this->escapeHtml($this->getChildData($alias, 'title')) ?></span>
+                                        </dt>
+                                        <dd class="tab-container">
+                                            <div class="tab-content"><?php echo $html ?></div>
+                                        </dd>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                            </dl>
+                        <?php endif; ?>
+                    </div>
+                <?php endif; ?>
+                <?php if ($theme['productdetails_tab_attribute_option'] == 'outside'): ?>
+                    <div class="pro_attribute">
+
+                        <?php echo $this->getChildHtml('additional') ?>
+                    </div>
+                <?php endif; ?>
+
+            </form>
+            <script type="text/javascript">
+                //<![CDATA[
+                var productAddToCartForm = new VarienForm('product_addtocart_form');
+                productAddToCartForm.submit = function (button, url) {
+                    if (this.validator.validate()) {
+                        var form = this.form;
+                        var oldUrl = form.action;
+
+                        if (url) {
+                            form.action = url;
+                        }
+                        var e = null;
+                        try {
+                            this.form.submit();
+                        } catch (e) {
+                        }
+                        this.form.action = oldUrl;
+                        if (e) {
+                            throw e;
+                        }
+
+                        if (button && button != 'undefined') {
+                            button.disabled = true;
+                        }
+                    }
+                }.bind(productAddToCartForm);
+
+                productAddToCartForm.submitLight = function (button, url) {
+                    if (this.validator) {
+                        var nv = Validation.methods;
+                        delete Validation.methods['required-entry'];
+                        delete Validation.methods['validate-one-required'];
+                        delete Validation.methods['validate-one-required-by-name'];
+                        // Remove custom datetime validators
+                        for (var methodName in Validation.methods) {
+                            if (methodName.match(/^validate-datetime-.*/i)) {
+                                delete Validation.methods[methodName];
+                            }
+                        }
+
+                        if (this.validator.validate()) {
+                            if (url) {
+                                this.form.action = url;
+                            }
+                            this.form.submit();
+                        }
+                        Object.extend(Validation.methods, nv);
+                    }
+                }.bind(productAddToCartForm);
+                //]]>
+            </script>
+        </div>
+        <?php echo $this->getChildHtml('awautorelated2') ?>
+        <?php echo $this->getChildHtml('related_products') ?>
+        <?php echo $this->getChildHtml('product_recently_viewed') ?>
+        <?php echo $this->getChildHtml('upsell_products') ?>
+        <?php echo $this->getChildHtml('product_additional_data') ?>
+
+    </div>
+
+<?php } else { ?>
+    <?php /* ****************************** jewelry end ****************************************************/ ?>
+
+
+    <?php /* ****************************** watch start ****************************************************/ ?>
+<?php echo $this->getChildHtml('breadcrumbs') ?>
+
+
+    <div class="product-view watch-view">
+
+        <div class="product-essential" id="watch-vw-blk">
+            <form action="<?php echo $this->getSubmitUrl($_product) ?>" method="post"
+                  id="product_addtocart_form"<?php if ($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+                <?php echo $this->getBlockHtml('formkey') ?>
+                <div class="no-display">
+                    <input type="hidden" name="product" value="<?php echo $_product->getId() ?>"/>
+                    <input type="hidden" name="related_product" id="related-products-field" value=""/>
+                </div>
+
+
+                <div class="product-img-box">
+
+                    <?php echo $this->getChildHtml('media') ?>
+                </div>
+                <div class="product-right" id="watch-product">
+                    <div class="product-shop">
+						                <div class="product-name">
+                     <h1 class="h1"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
+                </div>
+                        <div class="brand_watch"><span
+                                class="brand-watch">Brand:&nbsp;</span><?php echo $_product->getAttributeText("manufacturer") ?>
+                        </div>
+                        <div class="product-sku">
+                            <span class="h1"><span
+                                    class="wti">Product Code:&nbsp;</span><?php echo $_helper->productAttribute($_product, $_product->getSku(), 'sku') ?></span>
+                        </div>
+
+                        <?php if (!empty($_product->getMsrp()) && $_product->getMsrp() != 0) : ?>
+                        <p class="msrp-price"><?php echo $this->helper('core')->currency($_product->getMsrp(),true,true); ?></p>
+                        <?php endif; ?>
+                        <div class="price-info">
+                            <?php echo $this->getPriceHtml($_product); ?>
+                            <?php echo $this->getChildHtml('bundle_prices') ?>
+                            <?php echo $this->getTierPriceHtml() ?>
+                            <?php //echo $_product->getPrice(); ?>
+                            <?php //echo $_product->getFinalPrice(); ?>
+                        </div>
+                        <?php if (in_array(8, $_product->getCategoryIds()) === true) : ?>
+                            <script>
+//                                if (jQuery('#watch-product .msrp-price .price').length !== 0) {
+//                                    var priceContainer = jQuery('#watch-product .regular-price .price');
+//                                    var mrspPriceContainer = jQuery('#watch-product .msrp-price .price');
+//
+//                                    var price = priceContainer.html();
+//                                    var mrsp = mrspPriceContainer.html();
+//
+//                                    if (mrsp == '$0') {
+//                                        mrspPriceContainer.parent().hide();
+//                                    } else {
+//                                        priceContainer.html(mrsp);
+//                                        mrspPriceContainer.html(price);
+//                                    }
+//                                }
+
+//                                if (jQuery('#watch-product .msrp-price .price').length !== 0) {
+//                                    var mrspPriceContainer = jQuery('#watch-product .msrp-price .price');
+//                                    var mrsp = mrspPriceContainer.html();
+//
+//                                    if (mrsp == '$0') {
+//                                        mrspPriceContainer.parent().hide();
+//                                    }
+//                                }
+                            </script>
+                        <?php endif; ?>
+                        <div class="Bank-wire-price-info">
+                            <?php
+                            //	echo "456";
+                            $_attributeLabel = $_product->getResource()->getAttribute('bank_wire_price')->getFrontendLabel();
+                            $_attributeValue = $_product->getResource()->getAttribute('bank_wire_price')->getFrontend()->getValue($_product);
+                            $_symbol = Mage::app()->getLocale()->currency(Mage::app()->getStore()->getCurrentCurrencyCode())->getSymbol();
+
+                            if ($_attributeValue == "Yes"):
+
+                                //echo "123";
+                                ?>
+                                <div class="Wire-price-label">
+                                    <?php echo $_attributeLabel; ?>:
+                                    <div class="Wire-price-value">
+                                        <?php echo $_symbol;
+                                        $_fiinalPrice = $_product->getFinalPrice();
+                                        $_discountWirePrice = (($_fiinalPrice * 3) / 100);
+                                        $_fiinalWirePrice = $_fiinalPrice - $_discountWirePrice;
+                                        echo $formattedPrice = number_format($_fiinalWirePrice, 2, '.', ',');
+
+                                        ?>
+
+                                        <a class="btn" data-popup-open="popup-1" href="#"><i
+                                                class="fa fa-exclamation-circle" aria-hidden="true"></i></a>
+
+                                        <div class="popup" data-popup="popup-1">
+                                            <div class="popup-inner">
+                                                <h2>Bank Wire Price</h2>
+                                                <center><p>This information will be included on your invoice and
+                                                        email.</p></center>
+                                                </br>
+                                                <p>The Bank Wire Price is the price of the item if you pay via Bank Wire
+                                                    or Bank Transfer. A Bank Wire is the method of payment which is done
+                                                    between two banks. It can be completed at your local financial
+                                                    institution branch or electronically online depending on the
+                                                    services available from your banking institution.</p>
+                                                <p>The Bank Wire Price is a 3.0% discount off of the regular credit card
+                                                    price. To select this option, add the item to your basket and
+                                                    Proceed to Checkout. You can then choose Bank Transfer as your
+                                                    payment method. You will receive an email with the information
+                                                    required to complete the transfer as well as a copy of your
+                                                    invoice.</p>
+                                                <p>Once you have completed the Bank Wire, email us for confirmation and
+                                                    we will begin processing your order as soon as the transfer has
+                                                    cleared. Once your order has shipped, we will email you the tracking
+                                                    number so that you can check the status of your shipment online.</p>
+                                                <p><b>International Orders</b><br/>Stein Diamonds gladly accepts
+                                                    international orders on all of our products. We only accept Bank
+                                                    Wires or Transfers as the payment method. The 3% Bank Wire Discount
+                                                    does not apply to international orders. Shipping for international
+                                                    orders is $150.00 and there is no tax paid to Stein Diamonds. In
+                                                    order to place an international order, please contact us via email,
+                                                    phone, or chat to place your order. Please be prepared to provide us
+                                                    with the item number of the product you are interested in
+                                                    purchasing, as well as the name, address, and phone number you will
+                                                    be shipping to. Feel free to contact us with any questions.</p>
+                                                <!--	<p><a data-popup-close="popup-1" href="#">Close</a></p>-->
+                                                <a class="popup-close" data-popup-close="popup-1" href="#">x</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                        <div class="extra-info">
+                            <?php //echo $this->getReviewsSummaryHtml($_product, 'default', false)?>
+                            <?php //echo $this->getChildHtml('product_type_availability'); ?>
+                        </div>
+
+                        <?php echo $this->getChildHtml('alert_urls') ?>
+
+                        <?php if ($_product->getShortDescription()): ?>
+                            <div class="short-description">
+                                <div
+                                    class="std"><?php echo $_helper->productAttribute($_product, nl2br($_product->getDescription()), 'description') ?></div>
+                            </div>
+                        <?php endif; ?>
+
+                        <?php echo $this->getChildHtml('other'); ?>
+
+                        <?php if ($_product->isSaleable() && $_product['has_options']): ?>
+                            <?php echo $this->getChildChildHtml('container1', '', true, true) ?>
+                        <?php endif; ?>
+
+                    </div>
+
+
+                    <div class="qty-block">
+
+                        <input type="text" name="quantity" size="2" value="1" data-min-value="1"
+                               autocomplete="off"></span>
+
+                    </div>
+
+                    <div class="add-to-cart-wrapper" id="watch-add">
+                        <?php echo $this->getChildHtml('product_type_data') ?>
+                        <?php echo $this->getChildHtml('extrahint') ?>
+
+                        <?php //if (!$_product->hasOptions()):?>
+                        <?php if (!$_product['has_options']): ?>
+                            <div class="add-to-box">
+                                <?php if ($_product->isSaleable()): ?>
+                                    <?php echo $this->getChildHtml('addtocart') ?>
+                                    <?php // echo $this->getChildHtml('addto') ?>
+                                    <script type="text/javascript"
+                                            src="<?php echo $this->getBaseUrl() . 'js/calendar/calendar.js'; ?>"></script>
+                                    <script type="text/javascript"
+                                            src="<?php echo $this->getBaseUrl() . 'js/calendar/calendar-setup.js'; ?>"></script>
+                                    <link type="text/css"
+                                          href="<?php echo $this->getBaseUrl() . 'js/calendar/calendar-win2k-1.css'; ?>"
+                                          rel="stylesheet"></link>
+                                    <link rel="stylesheet"
+                                          href="<?php echo $this->getSkinUrl(); ?>css/customcontactnew/customcontactnew.css"
+                                          type="text/css">
+                                    
+
+                                    <?php /* if( $this->helper('wishlist')->isAllow() || $_compareUrl=$this->helper('catalog/product_compare')->getAddUrl($_product)): ?>
+	                                <span class="or"><?php echo $this->__('OR') ?></span>
+	                            <?php endif; */ ?>
+                                <?php endif; ?>
+                                <?php // echo $this->getChildHtml('addto') ?>
+                                <?php //echo $this->getChildHtml('sharing') ?>
+                            </div>
+                            <?php echo $this->getChildHtml('extra_buttons') ?>
+                        <?php elseif (!$_product->isSaleable()): ?>
+                            <div class="add-to-box">
+                                <?php // echo $this->getChildHtml('addto') ?>
+                                <?php //echo $this->getChildHtml('sharing') ?>
+                            </div>
+                        <?php endif; ?>
+
+                    </div>
+
+                    <?php //echo $this->getChildHtml('related_products') ?>
+
+
+                    <div class="clearer"></div>
+
+                    <?php if ($_product->isSaleable() && $_product['has_options']): ?>
+                        <?php echo $this->getChildChildHtml('container2', '', true, true) ?>
+                    <?php endif; ?>
+
+                    <div class="clearer"></div>
+
+                    <div class="watch-prod-labels">
+                        <ul>
+                            <li>
+								<div class="img-"><img src="<?php echo $this->getSkinUrl('images/auth.png') ?>"/></div>
+								<div class="text-"><span>Authenticity Promise</span></div>
+                            </li>
+                            <li>
+								<div class="img-"><img class="wt-icon" src="<?php echo $this->getSkinUrl('images/deliver.png') ?>"/></div>
+								<div class="text-"><span>Free 2nd Day Shipping<br><!--<span class="peod-del-date-watch">Usually ships			<!--</span>within<br> 3-5 business days<a href="#">Needit sooner ?</a></span>--><br></div>
+							</li>
+                            <li>
+								<div class="img-"><img class="wt-icon" src="<?php echo $this->getSkinUrl('images/expert.png') ?>"/></div>
+								<div class="text-"><span>Speak to an expert 213-817-5489</span></div>
+                            </li>
+                        </ul>
+                    </div>
+				
+			<span class="soc-links">					
+				  <a href="<?php echo $this->helper('wishlist')->getAddUrl($_product) ?>" class="link-wishlist"><i
+						  class="fa fa-heart" aria-hidden="true"></i><?php echo $this->__('Add to Wishlist') ?></a>
+				  <a href="<?php echo $_compareUrl ?>" class="link-compare"><i class="fa fa-refresh"
+																			   aria-hidden="true"></i><?php echo $this->__('Add to Compare') ?>
+				  </a>
+				  <!--<div class="make-apointment">-->
+				  <a class='inline_2 make-apointment' id="inline_2"><i class="fa fa-refresh" aria-hidden="true"></i><!--href="#inline_content_2" -->Get Price Alert</a>
+				  <!--   </div>-->
+				  <div class="messages_s" style="display: none; color:#009772; ">
+						<?php //echo $this->getLayout()->createBlock('cms/block')->setBlockId('messages_s')->toHtml(); ?>
+				           <b style="font-size:16px">Thank You For Your Inquiry. We will respond to you within 24 hours.
+							</b>
+					</div>
+					<div class="apoinmt-form" id="inline_content_2" style="display:none;" >
+						 <?php echo $this->getLayout()->createBlock('customcontactnew/customcontactnew')->setTemplate('customcontactnew/customcontact_detail.phtml')->toHtml(); ?>
+						   <?php //echo $this->getLayout()->createBlock('cms/block')->setBlockId('customcontact_new')->toHtml() ?> 
+					</div>
+			</span>
+					
+                    <?php echo $this->getLayout()->createBlock('catalog/product_view')->setTemplate('catalog/product/view/watchsharing.phtml')->toHtml(); ?>
+
+
+                </div>
+
+                <?php if ($evolved_form_productdetails_attribute == 'yes'): ?>
+                    <div class="product-essential product-collateral toggle-content tabs">
+                        <?php if ($detailedInfoGroup = $this->getChildGroup('detailed_info', 'getChildHtml')): ?>
+                            <dl id="collateral-tabs" class="collateral-tabs">
+                                <?php foreach ($detailedInfoGroup as $alias => $html): ?>
+                                    <?php if (($alias == "additional") && ($theme['productdetails_tab_attribute_option'] == 'outside')): ?>
+                                        <?php continue; ?>
+                                    <?php else: ?>
+                                        <dt class="tab">
+                                            <span><?php echo $this->escapeHtml($this->getChildData($alias, 'title')) ?></span>
+                                        </dt>
+                                        <dd class="tab-container">
+                                            <div class="tab-content"><?php echo $html ?></div>
+                                        </dd>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                            </dl>
+                        <?php endif; ?>
+                    </div>
+                <?php endif; ?>
+                <div class="container">
+
+                    <ul class="tabs">
+                        <li class="tab-link current" data-tab="tab-1">Specification</li>
+                        <li class="tab-link" data-tab="tab-2">Description</li>
+                        <li class="tab-link" data-tab="tab-3">Shipping & Return</li>
+                        <li class="tab-link" data-tab="tab-4">Guarantee</li>
+                    </ul>
+                    <!-- group of attribute (watches) -->
+
+                    <div id="tab-1" class="tab-content current">
+                        <div class="watch-spec-blk">
+                            <?php
+
+                            $setId = $_product->getAttributeSetId(); // Attribute set Id
+                            $groups = Mage::getModel('eav/entity_attribute_group')
+                                ->getResourceCollection()
+                                ->setAttributeSetFilter($setId)
+                                ->setSortOrder()
+                                ->load();
+
+                            $attributeCodes = array();
+                            ?>
+
+                            <?php
+                            foreach ($groups as $group) {
+                                if ($group->getAttributeGroupName() == 'Watch Type') { // set name
+                                    $groupName = $group->getAttributeGroupName();
+                                    $groupId = $group->getAttributeGroupId();
+                                    ?>
+                                    <?php
+                                    $html = "";
+                                    ?>
+                                    <?php
+                                    $attributes = Mage::getResourceModel('catalog/product_attribute_collection')
+                                        ->setAttributeGroupFilter($group->getId())
+                                        ->addVisibleFilter()
+                                        ->checkConfigurableProducts()
+                                        ->load();
+
+                                    if ($attributes->getSize() > 0) {
+                                        $i = 0;
+
+                                        foreach ($attributes->getItems() as $attribute) {
+                                            /* @var $child Mage_Eav_Model_Entity_Attribute */
+                                            $attributeCodes[] = $attribute->getAttributeCode();
+                                            $attributeCodes1[] = $attribute->getIsVisibleOnFront();
+                                            $attrfrontname[] = $attribute->getFrontendLabel();
+                                            //echo $attribute->getFrontendInput();
+                                            ?>
+                                            <?php //$attributesetting = $_helper->productAttribute($_product, $_product->$attributeCodes[$i], $attributeCodes[$i]);
+                                            if ($attribute->getFrontendInput() == 'text') {
+                                                $attributesetting = $_helper->productAttribute($_product, $_product->$attributeCodes[$i], $attributeCodes[$i]);
+                                            } else if ($attribute->getFrontendInput() == 'multiselect') {
+                                                $attributesetting = $_product->getAttributeText($attributeCodes[$i]);
+                                                if (is_array($attributesetting)) {
+                                                    $attributesetting = implode(',', $attributesetting);
+                                                    $attributesetting = str_replace('Most Popular', '', $attributesetting);
+                                                    $attributesetting = rtrim($attributesetting, ',');
+                                                }
+                                            } else {
+                                                $attributesetting = $_product->getAttributeText($attributeCodes[$i]);
+                                            }
+                                            ?>
+
+                                            <?php
+
+                                            if ($attributeCodes1[$i] == 1 && $attributesetting != "" && $attributesetting != 'No') { ?>
+                                                <?php
+                                                $html .= '<div class="main-specification">' . '<div class="sub-specification">' . $attrfrontname[$i] . '</div><div class="value-sub">' . $attributesetting . '</div>'. '</div>';
+                                                ?>
+                                            <?php } ?>
+                                            <?php $i++;
+                                        }
+                                    }
+                                }
+                            } ?>
+                            <?php
+                            if ($html != "") { ?>
+                                <div id="spec-column-one" style="float:left; width: 100%;">
+                                    <div class="sub-spec">
+                                        <div class="title-specification"><span>Watch Type</span></div> <?php echo $html; ?>
+                                    </div>
+                            <?php } ?>
+
+
+                            <?php
+                            foreach ($groups as $group) {
+                                if ($group->getAttributeGroupName() == 'Watch Dial') { // set name
+                                    $groupName = $group->getAttributeGroupName();
+                                    $groupId = $group->getAttributeGroupId();
+                                    ?>
+                                    <?php $html = ""; ?>
+                                    <?php
+                                    $attributes = Mage::getResourceModel('catalog/product_attribute_collection')
+                                        ->setAttributeGroupFilter($group->getId())
+                                        ->addVisibleFilter()
+                                        ->checkConfigurableProducts()
+                                        ->load();
+
+                                    if ($attributes->getSize() > 0) {
+                                        $i = 0;
+
+                                        foreach ($attributes->getItems() as $attribute) {
+                                            /* @var $child Mage_Eav_Model_Entity_Attribute */
+                                            $attributeCodesSide[] = $attribute->getAttributeCode();
+                                            $attributeCodesSide1[] = $attribute->getIsVisibleOnFront();
+                                            $attrfrontnameside[] = $attribute->getFrontendLabel();
+                                            ?>
+                                            <?php //$attributesetting = $_helper->productAttribute($_product, $_product->$attributeCodes[$i], $attributeCodes[$i]);
+                                            if ($attribute->getFrontendInput() == 'text') {
+                                                $attributesettingside = $_helper->productAttribute($_product, $_product->$attributeCodesSide[$i], $attributeCodesSide[$i]);
+                                            } else {
+                                                $attributesettingside = $_product->getAttributeText($attributeCodesSide[$i]);
+                                            }
+                                            ?>
+
+
+                                            <?php if ($attributeCodesSide1[$i] == 1 && $attributesettingside != "" && $attributesettingside != 'No') { ?>
+                                                <?php
+                                                 $html .= '<div class="main-specification">' . '<div class="sub-specification">' . $attrfrontnameside[$i] . '</div><div class="value-sub">' . $attributesettingside . '</div>'. '</div>';
+                                                ?>
+
+                                            <?php } ?>
+                                            <?php $i++;
+                                        }
+                                    }
+                                }
+                            }
+                            if ($html != "") { ?>
+                                <div class="sub-spec">
+                                    <div class="title-specification"><span>Watch Dial</span></div> <?php echo $html; ?>
+                                    </div>
+                                </div><?php } ?>
+
+
+
+                            <?php
+                            foreach ($groups as $group) {
+                                if ($group->getAttributeGroupName() == 'Watch Case and Bracelet') { // set name
+                                    $groupName = $group->getAttributeGroupName();
+                                    $groupId = $group->getAttributeGroupId();
+                                    ?>
+                                    <?php $html = ""; ?>
+                                    <?php
+                                    $attributes1 = Mage::getResourceModel('catalog/product_attribute_collection')
+                                        ->setAttributeGroupFilter($group->getId())
+                                        ->addVisibleFilter()
+                                        ->checkConfigurableProducts()
+                                        ->load();
+                                    if ($attributes1->getSize() > 0) { ?>
+
+                                        <?php
+                                        $i = 0;
+                                        foreach ($attributes1->getItems() as $attribute) {
+                                            /* @var $child Mage_Eav_Model_Entity_Attribute */
+                                            $attributeCodesGemstone[] = $attribute->getAttributeCode();
+                                            $attributeCodesGemstone1[] = $attribute->getIsVisibleOnFront();
+                                            $attrfrontnameGemstone[] = $attribute->getFrontendLabel();
+                                            ?>
+                                            <?php //$attributesetting = $_helper->productAttribute($_product, $_product->$attributeCodes[$i], $attributeCodes[$i]);
+                                            if ($attribute->getFrontendInput() == 'text') {
+                                                $attributesettinggemstone = $_helper->productAttribute($_product, $_product->$attributeCodesGemstone[$i], $attributeCodesGemstone[$i]);
+                                            } else {
+                                                $attributesettinggemstone = $_product->getAttributeText($attributeCodesGemstone[$i]);
+                                            }
+                                            ?>
+
+                                            <?php if ($attributeCodesGemstone1[$i] == 1 && $attributesettinggemstone != "" && $attributesettinggemstone != 'No') { ?>
+                                                <?php
+												$html .= '<div class="main-specification">' . '<div class="sub-specification">' . $attrfrontnameGemstone[$i] . '</div><div class="value-sub">' . $attributesettinggemstone . '</div>'. '</div>';
+                                                ?>
+                                            <?php } ?>
+                                            <?php $i++;
+                                        }
+                                    }
+                                }
+                            }
+                            if ($html != "") { ?>
+                                <div class="spec-column-two" style="float:right; width: 100%;">
+                                    <div class="sub-spec ring-builder-spe first <?php echo $groupName; ?>">
+                                    <div class="title-specification"><span>Watch Case and Bracelet</span>
+                                    </div> <?php echo $html; ?>    </div><?php } ?>
+
+                            <?php
+                            foreach ($groups as $group) {
+                                if ($group->getAttributeGroupName() == 'Warranty, Resistance and Miscellaneous') { // set name
+                                    $groupName1 = $group->getAttributeGroupName();
+                                    $groupId = $group->getAttributeGroupId();
+                                    ?>
+                                    <?php $html = ""; ?>
+                                    <?php
+                                    $attributes2 = Mage::getResourceModel('catalog/product_attribute_collection')
+                                        ->setAttributeGroupFilter($group->getId())
+                                        ->addVisibleFilter()
+                                        ->checkConfigurableProducts()
+                                        ->load();
+                                    if ($attributes2->getSize() > 0) { ?>
+
+                                        <?php
+                                        $i = 0;
+                                        foreach ($attributes2->getItems() as $attribute) {
+                                            /* @var $child Mage_Eav_Model_Entity_Attribute */
+                                            $attributeCodesWarranty[] = $attribute->getAttributeCode();
+                                            $attributeCodesWarranty1[] = $attribute->getIsVisibleOnFront();
+                                            $attrfrontnameWarranty[] = $attribute->getFrontendLabel();
+                                            ?>
+                                            <?php //$attributesetting = $_helper->productAttribute($_product, $_product->$attributeCodes[$i], $attributeCodes[$i]);
+                                            if ($attribute->getFrontendInput() == 'text') {
+                                                $attributesettinggemstone1 = $_helper->productAttribute($_product, $_product->$attributeCodesWarranty[$i], $attributeCodesWarranty[$i]);
+                                            } else {
+                                                $attributesettinggemstone1 = $_product->getAttributeText($attributeCodesWarranty[$i]);
+                                            }
+                                            ?>
+
+                                            <?php if ($attributeCodesWarranty1[$i] == 1 && $attributesettinggemstone1 != "" && $attributesettinggemstone1 != 'No') { ?>
+                                                <?php
+													$html .= '<div class="main-specification">' . '<div class="sub-specification">' . $attrfrontnameWarranty[$i] . '</div><div class="value-sub">' . $attributesettinggemstone1 . '</div>'. '</div>';
+                                                ?>
+                                            <?php } ?>
+                                            <?php $i++;
+                                        }
+                                    }
+                                }
+                            }
+                            if ($html != "") { ?>
+                                <div class="sub-spec ring-builder-spe first <?php echo $groupName1; ?>">
+                                <div class="title-specification"><span>Warranty, Resistance and Miscellaneous</span>
+                                </div> <?php echo $html; ?>    </div>
+                            </div><?php } ?>
+
+
+                        </div>
+
+
+                    </div>
+                    <div id="tab-2" class="tab-content">
+                        <div
+                            class="wdesc"><?php echo $_helper->productAttribute($_product, nl2br($_product->getDescription()), 'description') ?></div>
+                    </div>
+                    <div id="tab-3" class="tab-content">
+                        <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('shippingandreturn')->toHtml(); ?>
+                    </div>
+                    <div id="tab-4" class="tab-content">
+                        <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('guarantee')->toHtml();
+                        ?>
+                    </div>
+                    <?php //echo $this->getLayout()->createBlock('core/template')->setTemplate('catalog/product/list.phtml')->toHtml(); ?>
+                </div>
+
+
+                <div class="container_mobile">
+
+                    <section id="demo" data-accordion-group>
+                        <section data-accordion>
+                            <li data-control><a href="#">Specification</a></li>
+                            <div data-content>
+
+                                <div class="watch-spec-blk">
+                                    <?php
+
+                                    $setId = $_product->getAttributeSetId(); // Attribute set Id
+                                    $groups = Mage::getModel('eav/entity_attribute_group')
+                                        ->getResourceCollection()
+                                        ->setAttributeSetFilter($setId)
+                                        ->setSortOrder()
+                                        ->load();
+
+                                    $attributeCodes = array();
+                                    ?>
+
+                                    <?php
+                                    foreach ($groups as $group) {
+                                        if ($group->getAttributeGroupName() == 'Watch Type') { // set name
+                                            $groupName = $group->getAttributeGroupName();
+                                            $groupId = $group->getAttributeGroupId();
+                                            ?>
+                                            <?php
+                                            $html = "";
+                                            ?>
+                                            <?php
+                                            $attributes = Mage::getResourceModel('catalog/product_attribute_collection')
+                                                ->setAttributeGroupFilter($group->getId())
+                                                ->addVisibleFilter()
+                                                ->checkConfigurableProducts()
+                                                ->load();
+
+                                            if ($attributes->getSize() > 0) {
+                                                $i = 0;
+
+                                                foreach ($attributes->getItems() as $attribute) {
+                                                    /* @var $child Mage_Eav_Model_Entity_Attribute */
+                                                    $attributeCodes[] = $attribute->getAttributeCode();
+                                                    $attributeCodes1[] = $attribute->getIsVisibleOnFront();
+                                                    $attrfrontname[] = $attribute->getFrontendLabel();
+                                                    //echo $attribute->getFrontendInput();
+                                                    ?>
+                                                    <?php //$attributesetting = $_helper->productAttribute($_product, $_product->$attributeCodes[$i], $attributeCodes[$i]);
+                                                    if ($attribute->getFrontendInput() == 'text') {
+                                                        $attributesetting = $_helper->productAttribute($_product, $_product->$attributeCodes[$i], $attributeCodes[$i]);
+                                                    } else if ($attribute->getFrontendInput() == 'multiselect') {
+                                                        $attributesetting = $_product->getAttributeText($attributeCodes[$i]);
+                                                        if (is_array($attributesetting)) {
+                                                            $attributesetting = implode(',', $attributesetting);
+                                                            $attributesetting = str_replace('Most Popular', '', $attributesetting);
+                                                            $attributesetting = rtrim($attributesetting, ',');
+                                                        }
+                                                    } else {
+                                                        $attributesetting = $_product->getAttributeText($attributeCodes[$i]);
+                                                    }
+                                                    ?>
+
+                                                    <?php
+
+                                                    if ($attributeCodes1[$i] == 1 && $attributesetting != "" && $attributesetting != 'No') { ?>
+                                                        <?php
+                                                        $html .= '<div class="main-specification">' . '<div class="sub-specification">' . $attrfrontname[$i] . '</div><div class="value-sub">' . $attributesetting . '</div>'. '</div>';
+                                                        ?>
+                                                    <?php } ?>
+                                                    <?php $i++;
+                                                }
+                                            }
+                                        }
+                                    } ?>
+                                    <?php
+                                    if ($html != "") { ?>
+                                        <div class="sub-spec">
+                                            <div class="title-specification"><span>Watch Type</span>
+                                            </div> <?php echo $html; ?></div> <?php } ?>
+
+
+                                    <?php
+                                    foreach ($groups as $group) {
+                                        if ($group->getAttributeGroupName() == 'Watch Dial') { // set name
+                                            $groupName = $group->getAttributeGroupName();
+                                            $groupId = $group->getAttributeGroupId();
+                                            ?>
+                                            <?php $html = ""; ?>
+                                            <?php
+                                            $attributes = Mage::getResourceModel('catalog/product_attribute_collection')
+                                                ->setAttributeGroupFilter($group->getId())
+                                                ->addVisibleFilter()
+                                                ->checkConfigurableProducts()
+                                                ->load();
+
+                                            if ($attributes->getSize() > 0) {
+                                                $i = 0;
+
+                                                foreach ($attributes->getItems() as $attribute) {
+                                                    /* @var $child Mage_Eav_Model_Entity_Attribute */
+                                                    $attributeCodesSide[] = $attribute->getAttributeCode();
+                                                    $attributeCodesSide1[] = $attribute->getIsVisibleOnFront();
+                                                    $attrfrontnameside[] = $attribute->getFrontendLabel();
+                                                    ?>
+                                                    <?php //$attributesetting = $_helper->productAttribute($_product, $_product->$attributeCodes[$i], $attributeCodes[$i]);
+                                                    if ($attribute->getFrontendInput() == 'text') {
+                                                        $attributesettingside = $_helper->productAttribute($_product, $_product->$attributeCodesSide[$i], $attributeCodesSide[$i]);
+                                                    } else {
+                                                        $attributesettingside = $_product->getAttributeText($attributeCodesSide[$i]);
+                                                    }
+                                                    ?>
+
+
+                                                    <?php if ($attributeCodesSide1[$i] == 1 && $attributesettingside != "" && $attributesettingside != 'No') { ?>
+                                                        <?php
+                                                        $html .= '<div class="main-specification">' . '<div class="sub-specification">' . $attrfrontnameside[$i] . '</div><div class="value-sub">' . $attributesettingside . '</div>'. '</div>';
+                                                        
+                                                        ?>
+
+                                                    <?php } ?>
+                                                    <?php $i++;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    if ($html != "") { ?>
+                                        <div class="sub-spec">
+                                        <div class="title-specification"><span>Watch Dial</span>
+                                        </div> <?php echo $html; ?> </div><?php } ?>
+
+
+
+                                    <?php
+                                    foreach ($groups as $group) {
+                                        if ($group->getAttributeGroupName() == 'Watch Case and Bracelet') { // set name
+                                            $groupName = $group->getAttributeGroupName();
+                                            $groupId = $group->getAttributeGroupId();
+                                            ?>
+                                            <?php $html = ""; ?>
+                                            <?php
+                                            $attributes1 = Mage::getResourceModel('catalog/product_attribute_collection')
+                                                ->setAttributeGroupFilter($group->getId())
+                                                ->addVisibleFilter()
+                                                ->checkConfigurableProducts()
+                                                ->load();
+                                            if ($attributes1->getSize() > 0) { ?>
+
+                                                <?php
+                                                $i = 0;
+                                                foreach ($attributes1->getItems() as $attribute) {
+                                                    /* @var $child Mage_Eav_Model_Entity_Attribute */
+                                                    $attributeCodesGemstone[] = $attribute->getAttributeCode();
+                                                    $attributeCodesGemstone1[] = $attribute->getIsVisibleOnFront();
+                                                    $attrfrontnameGemstone[] = $attribute->getFrontendLabel();
+                                                    ?>
+                                                    <?php //$attributesetting = $_helper->productAttribute($_product, $_product->$attributeCodes[$i], $attributeCodes[$i]);
+                                                    if ($attribute->getFrontendInput() == 'text') {
+                                                        $attributesettinggemstone = $_helper->productAttribute($_product, $_product->$attributeCodesGemstone[$i], $attributeCodesGemstone[$i]);
+                                                    } else {
+                                                        $attributesettinggemstone = $_product->getAttributeText($attributeCodesGemstone[$i]);
+                                                    }
+                                                    ?>
+
+                                                    <?php if ($attributeCodesGemstone1[$i] == 1 && $attributesettinggemstone != "" && $attributesettinggemstone != 'No') { ?>
+                                                        <?php
+													$html .= '<div class="main-specification">' . '<div class="sub-specification">' . $attrfrontnameGemstone[$i] . '</div><div class="value-sub">' . $attributesettinggemstone . '</div>'. '</div>';
+                                                        ?>
+                                                    <?php } ?>
+                                                    <?php $i++;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    if ($html != "") { ?>
+                                        <div class="sub-spec ring-builder-spe first <?php echo $groupName; ?>">
+                                        <div class="title-specification"><span>Watch Case and Bracelet</span>
+                                        </div> <?php echo $html; ?>    </div><?php } ?>
+
+                                    <?php
+                                    foreach ($groups as $group) {
+                                        if ($group->getAttributeGroupName() == 'Warranty, Resistance and Miscellaneous') { // set name
+                                            $groupName1 = $group->getAttributeGroupName();
+                                            $groupId = $group->getAttributeGroupId();
+                                            ?>
+                                            <?php $html = ""; ?>
+                                            <?php
+                                            $attributes2 = Mage::getResourceModel('catalog/product_attribute_collection')
+                                                ->setAttributeGroupFilter($group->getId())
+                                                ->addVisibleFilter()
+                                                ->checkConfigurableProducts()
+                                                ->load();
+                                            if ($attributes2->getSize() > 0) { ?>
+
+                                                <?php
+                                                $i = 0;
+                                                foreach ($attributes2->getItems() as $attribute) {
+                                                    /* @var $child Mage_Eav_Model_Entity_Attribute */
+                                                    $attributeCodesWarranty[] = $attribute->getAttributeCode();
+                                                    $attributeCodesWarranty1[] = $attribute->getIsVisibleOnFront();
+                                                    $attrfrontnameWarranty[] = $attribute->getFrontendLabel();
+                                                    ?>
+                                                    <?php //$attributesetting = $_helper->productAttribute($_product, $_product->$attributeCodes[$i], $attributeCodes[$i]);
+                                                    if ($attribute->getFrontendInput() == 'text') {
+                                                        $attributesettinggemstone1 = $_helper->productAttribute($_product, $_product->$attributeCodesWarranty[$i], $attributeCodesWarranty[$i]);
+                                                    } else {
+                                                        $attributesettinggemstone1 = $_product->getAttributeText($attributeCodesWarranty[$i]);
+                                                    }
+                                                    ?>
+
+                                                    <?php if ($attributeCodesWarranty1[$i] == 1 && $attributesettinggemstone1 != "" && $attributesettinggemstone1 != 'No') { ?>
+                                                        <?php
+														$html .= '<div class="main-specification">' . '<div class="sub-specification">' . $attrfrontnameWarranty[$i] . '</div><div class="value-sub">' . $attributesettinggemstone1 . '</div>'. '</div>';
+                                                        ?>
+                                                    <?php } ?>
+                                                    <?php $i++;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    if ($html != "") { ?>
+                                        <div class="sub-spec ring-builder-spe first <?php echo $groupName1; ?>">
+                                        <div class="title-specification">
+                                            <span>Warranty, Resistance and Miscellaneous</span>
+                                        </div> <?php echo $html; ?>    </div><?php } ?>
+
+
+                                </div>
+
+
+                            </div>
+                        </section>
+                        <section data-accordion>
+                            <li data-control>Description</li>
+                            <div data-content>
+                                <div
+                                    class="wdesc"><?php echo $_helper->productAttribute($_product, nl2br($_product->getDescription()), 'description') ?></div>
+                            </div>
+                        </section>
+
+                        <section data-accordion>
+                            <li data-control>Shipping & Return</li>
+                            <div data-content>
+                                <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('shippingandreturn')->toHtml(); ?>
+
+                            </div>
+                        </section>
+
+                        <section data-accordion>
+                            <li data-control>Guarantee</li>
+                            <div data-content>
+                                <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('guarantee')->toHtml(); ?>
+                            </div>
+                        </section>
+
+                    </section>
+
+
+                    <script>
+                        jQuery(document).ready(function () {
+                            jQuery('#demo [data-accordion]').accordion();
+                        });
+
+                        jQuery(document).ready(function () {
+                            jQuery('#demo [data-accordion]').accordion({
+// Transition speed on miliseconds.
+                                transitionSpeed: 300,
+
+// CSS value for easing
+                                transitionEasing: 'ease',
+
+// CSS selector for the element acting as a button inside accordions.
+                                controlElement: '[data-control]',
+
+// CSS selector for the element containing hide/show content.
+                                contentElement: '[data-content]',
+
+// CSS selector for a parent element containing a group of accordions.
+                                groupElement: '[data-accordion-group]',
+
+// Opens a single accordion a time. 
+// If false, multiple accordions can be open a time.
+                                singleOpen: true
+                            });
+                        });
+
+
+                    </script>
+
+                </div>
+
+
+            </form>
+            <script type="text/javascript">
+                //<![CDATA[
+                var productAddToCartForm = new VarienForm('product_addtocart_form');
+                productAddToCartForm.submit = function (button, url) {
+                    if (this.validator.validate()) {
+                        var form = this.form;
+                        var oldUrl = form.action;
+
+                        if (url) {
+                            form.action = url;
+                        }
+                        var e = null;
+                        try {
+                            this.form.submit();
+                        } catch (e) {
+                        }
+                        this.form.action = oldUrl;
+                        if (e) {
+                            throw e;
+                        }
+
+                        if (button && button != 'undefined') {
+                            button.disabled = true;
+                        }
+                    }
+                }.bind(productAddToCartForm);
+
+                productAddToCartForm.submitLight = function (button, url) {
+                    if (this.validator) {
+                        var nv = Validation.methods;
+                        delete Validation.methods['required-entry'];
+                        delete Validation.methods['validate-one-required'];
+                        delete Validation.methods['validate-one-required-by-name'];
+                        // Remove custom datetime validators
+                        for (var methodName in Validation.methods) {
+                            if (methodName.match(/^validate-datetime-.*/i)) {
+                                delete Validation.methods[methodName];
+                            }
+                        }
+
+                        if (this.validator.validate()) {
+                            if (url) {
+                                this.form.action = url;
+                            }
+                            this.form.submit();
+                        }
+                        Object.extend(Validation.methods, nv);
+                    }
+                }.bind(productAddToCartForm);
+                //]]>
+            </script>
+        </div>
+        <?php echo $this->getChildHtml('awautorelated2') ?>
+        <?php echo $this->getChildHtml('related_products') ?>
+        <?php echo $this->getChildHtml('product_recently_viewed') ?>
+        <?php echo $this->getChildHtml('upsell_products') ?>
+        <?php echo $this->getChildHtml('product_additional_data') ?>
+
+        <div class="social-bottom">
+            <ul>
+                <li><a target="_blank" href="https://www.facebook.com/steindiamonds"><i class="fa fa-facebook"
+                                                                                        aria-hidden="true"></i></a></li>
+                <li><a target="_blank" href="https://www.pinterest.com/steindiamonds/"><i class="fa fa-pinterest-p"
+                                                                                          aria-hidden="true"></i></a>
+                </li>
+                <li><a target="_blank" href="https://www.instagram.com/steindiamonds/"><i class="fa fa-instagram"
+                                                                                          aria-hidden="true"></i></a>
+                </li>
+                <li><a target="_blank" href="http://www.yelp.com/biz/stein-diamonds-los-angeles"><i class="fa fa-yelp"
+                                                                                                    aria-hidden="true"></i></a>
+                </li>
+            </ul>
+        </div>
+
+
+    </div>
+
+<?php } ?>
+
+
+
+<?php /* ****************************** watch end ****************************************************/ ?>
+<script>if ($('.product-info .image .label-outofstock').length) {
+        $("#button-cart").addClass('button-disable').attr('disabled', 'disabled');
+    }</script>
+
+<script>
+    /* quantity buttons */
+
+
+    var $input = jQuery('.qty-block > input');
+    function up() {
+        var val = parseInt($input.val(), 10) + 1 || parseInt($input.attr('data-min-value'), 10);
+        $input.val(val);
+    }
+    function down() {
+        var val = parseInt($input.val(), 10) - 1 || 0;
+        var min = parseInt($input.attr('data-min-value'), 10) || 1;
+        $input.val(Math.max(val, min));
+    }
+    jQuery('<a href="javascript:;" class="journal-stepper">-</a>').insertBefore($input).click(down);
+    jQuery('<a href="javascript:;" class="journal-stepper">+</a>').insertAfter($input).click(up);
+    $input.keydown(function (e) {
+        if (e.which === 38) {
+            up();
+            return false;
+        }
+        if (e.which === 40) {
+            down();
+            return false;
+        }
+    });
+</script>
+<script>
+    /* ******************************wire price popup ****************************************************/
+    jQuery(function () {
+        //----- OPEN
+        jQuery('[data-popup-open]').on('click', function (e) {
+            var targeted_popup_class = jQuery(this).attr('data-popup-open');
+            jQuery('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
+
+            e.preventDefault();
+        });
+
+        //----- CLOSE
+        jQuery('[data-popup-close]').on('click', function (e) {
+            var targeted_popup_class = jQuery(this).attr('data-popup-close');
+            jQuery('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
+
+            e.preventDefault();
+        });
+    });
+</script>
+
+ <div class="proloading" style="display: none">
+				<div class="center">
+					<img alt="" src="<?php echo $this->getSkinUrl('images/loading.gif'); ?>" />
+				</div> 
+			</div>
+			
+

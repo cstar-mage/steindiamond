@@ -1,0 +1,329 @@
+<?php 
+$currentModule = Mage::app()->getRequest()->getModuleName();
+$controller = Mage::app()->getRequest()->getControllerName();
+
+
+
+if($_GET['dsreset']){
+$dreset =   $_GET['dsreset'];
+}
+if($currentModule != 'diamondsearch' && $currentModule != 'catalog' && $currentModule != 'ringbuilder') {
+	return;
+}
+
+$currentCategory = false;
+$ringBuilderSteps = false;
+$_helper    = $this->helper('catalog/output');
+
+if($_category = Mage::registry('current_category')) {
+    
+	$currentCategory = true;
+	$_category = Mage::getSingleton('catalog/category')->load($_category->getId());
+	
+	if($_category->getLevel() == 2 && !$_category->getRingbuilderEnabled()) {
+		return;
+	}
+	if($_category->getRingbuilderEnabled()) { // only applied for Ringbuilder Enabled categories
+		$ringBuilderSteps = true;
+	}
+}
+$current_elite_name = Mage::getModel('catalog/layer')->getCurrentCategory()->getParentCategory()->getName(); 
+$cat_no_see_less = Mage::getModel('catalog/layer')->getCurrentCategory()->getId();
+
+$ringbuilderData = Mage::getSingleton('checkout/session')->getRingbuilderData();
+//echo "<pre>"; print_r($ringbuilderData); echo "</pre>";
+
+  
+
+$diamondStepUrl = $this->getUrl('diamondsearch');
+$settingStepUrl = $this->getUrl('engagement-rings.html'); 
+if((isset($ringbuilderData['settings'])) && $ringbuilderData['settings']['shape'] != '') {
+	$reviewStepUrl = $this->getUrl('ringbuilder/index/review',array('diamond'=>$ringbuilderData['diamond']['sku'],'settings'=>$ringbuilderData['settings']['sku']));
+} else {
+	$reviewStepUrl = $this->getUrl('ringbuilder/index/review');
+}
+
+$steps = array('1'=>array('type'=>'diamond','title'=>'PICK A DIAMOND','class'=>'se-diamond','selected'=>true,'step_url'=>$diamondStepUrl),
+			   '2'=>array('type'=>'settings','title'=>'PICK A SETTING','class'=>'re-ring','selected'=>false,'step_url'=>$settingStepUrl),
+			   '3'=>array('type'=>'review','title'=>'COMPLETE YOUR RING','class'=>'checkout','selected'=>false,'step_url'=>$reviewStepUrl),
+			);
+
+//TASK  Created on 09/20/16 by Kunal : Rosi Results Page: Step Builders should always be present
+if($currentModule == 'diamondsearch' && $controller == "index") {
+	
+	$ringBuilderSteps = true;
+}
+if(count($ringbuilderData['steps']) > 0){
+	
+	if($ringbuilderData['steps']['sname'] == 'setting') {
+		if($currentModule == 'catalog') {
+			$steps = array( '1'=>array('type'=>'settings','title'=>'PICK A SETTING','class'=>'re-ring','selected'=>true,'step_url'=>$settingStepUrl),
+						'2'=>array('type'=>'diamond','title'=>'PICK A DIAMOND','class'=>'se-diamond','selected'=>false,'step_url'=>$diamondStepUrl),								
+						'3'=>array('type'=>'review','title'=>'COMPLETE YOUR RING','class'=>'checkout','selected'=>false,'step_url'=>$reviewStepUrl),
+			);
+		}else if($currentModule == 'diamondsearch'){
+			$steps = array( '1'=>array('type'=>'settings','title'=>'PICK A SETTING','class'=>'re-ring','selected'=>false,'step_url'=>$settingStepUrl),
+						'2'=>array('type'=>'diamond','title'=>'PICK A DIAMOND','class'=>'se-diamond','selected'=>true,'step_url'=>$diamondStepUrl),								
+						'3'=>array('type'=>'review','title'=>'COMPLETE YOUR RING','class'=>'checkout','selected'=>false,'step_url'=>$reviewStepUrl),
+			);
+		}else{
+			$steps = array( '1'=>array('type'=>'settings','title'=>'PICK A SETTING','class'=>'re-ring','selected'=>false,'step_url'=>$settingStepUrl),
+						'2'=>array('type'=>'diamond','title'=>'PICK A DIAMOND','class'=>'se-diamond','selected'=>false,'step_url'=>$diamondStepUrl),								
+						'3'=>array('type'=>'review','title'=>'COMPLETE YOUR RING','class'=>'checkout','selected'=>true,'step_url'=>$reviewStepUrl),
+			);
+		}
+		
+	}else{
+		if($currentModule == 'catalog') {
+			$steps = array('1'=>array('type'=>'diamond','title'=>'PICK A DIAMOND','class'=>'se-diamond','selected'=>false,'step_url'=>$diamondStepUrl),
+				   '2'=>array('type'=>'settings','title'=>'PICK A SETTING','class'=>'re-ring','selected'=>true,'step_url'=>$settingStepUrl),
+				   '3'=>array('type'=>'review','title'=>'COMPLETE YOUR RING','class'=>'checkout','selected'=>false,'step_url'=>$reviewStepUrl),
+				);
+		}else if($currentModule == 'diamondsearch'){
+				$steps = array('1'=>array('type'=>'diamond','title'=>'PICK A DIAMOND','class'=>'se-diamond','selected'=>true,'step_url'=>$diamondStepUrl),
+				   '2'=>array('type'=>'settings','title'=>'PICK A SETTING','class'=>'re-ring','selected'=>false,'step_url'=>$settingStepUrl),
+				   '3'=>array('type'=>'review','title'=>'COMPLETE YOUR RING','class'=>'checkout','selected'=>false,'step_url'=>$reviewStepUrl),
+				);
+		}else{
+			$steps = array('1'=>array('type'=>'diamond','title'=>'PICK A DIAMOND','class'=>'se-diamond','selected'=>false,'step_url'=>$diamondStepUrl),
+				   '2'=>array('type'=>'settings','title'=>'PICK A SETTING','class'=>'re-ring','selected'=>false,'step_url'=>$settingStepUrl),
+				   '3'=>array('type'=>'review','title'=>'COMPLETE YOUR RING','class'=>'checkout','selected'=>true,'step_url'=>$reviewStepUrl),
+				);
+		}
+		
+	}
+	
+}else{
+	if($currentModule == 'catalog') {
+	
+			    $steps = array( '1'=>array('type'=>'settings','title'=>'PICK A SETTING','class'=>'re-ring','selected'=>true,'step_url'=>$settingStepUrl),
+					'2'=>array('type'=>'diamond','title'=>'PICK A DIAMOND','class'=>'se-diamond','selected'=>false,'step_url'=>$diamondStepUrl),								
+					'3'=>array('type'=>'review','title'=>'COMPLETE YOUR RING','class'=>'checkout','selected'=>false,'step_url'=>$reviewStepUrl),
+	);
+	}else{
+		
+		$steps = array('1'=>array('type'=>'diamond','title'=>'PICK A DIAMOND','class'=>'se-diamond','selected'=>true,'step_url'=>$diamondStepUrl),
+				   '2'=>array('type'=>'settings','title'=>'PICK A SETTING','class'=>'re-ring','selected'=>false,'step_url'=>$settingStepUrl),
+				   '3'=>array('type'=>'review','title'=>'COMPLETE YOUR RING','class'=>'checkout','selected'=>false,'step_url'=>$reviewStepUrl),
+				);
+	}	
+}
+/*if($currentModule == 'diamondsearch' && count($ringbuilderData['settings']) > 0) {
+
+	// $steps = default steps
+	$ringBuilderSteps = true;
+	
+	$steps = array('1'=>array('type'=>'diamond','title'=>'PICK A DIAMOND','dreset'=>$dreset ,'class'=>'se-diamond','selected'=>true,'step_url'=>$diamondStepUrl),
+				   '2'=>array('type'=>'settings','title'=>'PICK A SETTING','dreset'=>$dreset ,'class'=>'re-ring','selected'=>false,'step_url'=>$settingStepUrl),
+			  	 	'3'=>array('type'=>'review','title'=>'COMPLETE YOUR RING','dreset'=>$dreset ,'class'=>'checkout','selected'=>false,'step_url'=>$reviewStepUrl),
+			);
+}
+
+if($currentModule == 'catalog' && count($ringbuilderData['settings']) > 0 && count($ringbuilderData['diamond']) > 0) {
+	
+	$steps = array('1'=>array('type'=>'diamond','title'=>'PICK A DIAMOND','class'=>'se-diamond','selected'=>false,'step_url'=>$diamondStepUrl),
+					'2'=>array('type'=>'settings','title'=>'PICK A SETTING','class'=>'re-ring','selected'=>true,'step_url'=>$settingStepUrl),			
+				'3'=>array('type'=>'review','title'=>'COMPLETE YOUR RING','class'=>'checkout','selected'=>false,'step_url'=>$reviewStepUrl),
+	);
+	
+} else if($currentModule == 'catalog' && count($ringbuilderData['diamond']) > 0) {
+	
+	$steps = array('1'=>array('type'=>'diamond','title'=>'PICK A DIAMOND','class'=>'se-diamond','selected'=>false,'step_url'=>$diamondStepUrl),
+			   '2'=>array('type'=>'settings','title'=>'PICK A SETTING','class'=>'re-ring','selected'=>true,'step_url'=>$settingStepUrl),
+			   '3'=>array('type'=>'review','title'=>'COMPLETE YOUR RING','class'=>'checkout','selected'=>false,'step_url'=>$reviewStepUrl),
+			);
+	
+} else if($currentModule == 'catalog') {
+  
+	$steps = array('1'=>array('type'=>'diamond','title'=>'PICK A DIAMOND','class'=>'se-diamond','selected'=>false,'step_url'=>$diamondStepUrl),
+					'2'=>array('type'=>'settings','title'=>'PICK A SETTING','class'=>'re-ring','selected'=>true,'step_url'=>$settingStepUrl),			
+					'3'=>array('type'=>'review','title'=>'COMPLETE YOUR RING','class'=>'checkout','selected'=>false,'step_url'=>$reviewStepUrl),
+	);
+}
+
+
+if($currentModule == 'ringbuilder') {
+	
+	
+	$ringBuilderSteps = true;
+	
+	$steps = array('1'=>array('type'=>'diamond','title'=>'PICK A DIAMOND','class'=>'se-diamond','selected'=>false,'step_url'=>$diamondStepUrl),
+			'2'=>array('type'=>'settings','title'=>'PICK A SETTING','class'=>'re-ring','selected'=>false,'step_url'=>$settingStepUrl),
+			'3'=>array('type'=>'review','title'=>'COMPLETE YOUR RING','class'=>'checkout','selected'=>true,'step_url'=>$reviewStepUrl),
+
+
+			
+	);
+}
+else if($currentModule == 'ringbuilder' && $currentModule == 'catalog' && $controller == "category") {
+	
+	$ringBuilderSteps = true;
+	
+	$steps = array('1'=>array('type'=>'diamond','title'=>'PICK A DIAMOND','class'=>'se-diamond','selected'=>false,'step_url'=>$diamondStepUrl),
+			'2'=>array('type'=>'settings','title'=>'PICK A SETTING','class'=>'re-ring','selected'=>true,'step_url'=>$settingStepUrl),
+			'3'=>array('type'=>'review','title'=>'COMPLETE YOUR RING','class'=>'checkout','selected'=>false,'step_url'=>$reviewStepUrl),
+	);
+}
+else{
+	
+}*/
+
+?>
+<?php if($current_elite_name != 'Elite') { ?>
+ 
+	
+	<?php if($currentModule == 'diamondsearch' && $controller == 'index'): ?>
+			<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('walter_search_top_banner')->toHtml();?>
+			
+	<?php elseif($currentModule == 'diamondsearch'): ?>						
+			<?php if(Mage::getStoreConfig("diamondsearch/general_settings/header_text")): ?>
+		      <?php echo Mage::getStoreConfig("diamondsearch/general_settings/header_text"); ?>
+		  <?php endif; ?>
+		  
+	<?php elseif($controller == 'product'): ?>
+			
+	<?php else: ?>
+	
+		
+		 
+		
+	<?php endif; ?>	
+	<?php //echo "<pre>"; print_r($steps); exit; ?>
+	<?php if($ringBuilderSteps == true): ?>
+	<div class="ringbuilder slide_show desktop-cat-list" id="checkclass">  
+		<div class="shadowsteps">
+			<div class="liststep">
+				
+				<ol>	
+					<?php $i = 0; ?>
+		
+						<li class="createring"><h2>CREATE YOUR RING</h2></li>
+					<?php
+					//~ echo "<pre>";
+					//~ print_r($ringbuilderData);
+					//~ exit;
+					?>
+					<?php foreach($steps as $stepNo => $step): ?>
+							<?php
+							$stepClass = $step['class'];
+							$selectedStep = $step['selected'];
+							$stepTitle = $step['title'];
+							$type = $step['type'];
+							$dreset = $step['dreset'];						
+							
+							$diamondPrice = $ringbuilderData['diamond']['price'];
+							//$diamondType = $ringbuilderData['diamond']['type'];						
+							$settingsPrice = $ringbuilderData['settings']['price'];
+							?>
+							  
+							  <?php 
+								$available = "";
+								  if($diamondPrice != "" && $settingsPrice != "" && $type=="review"){ 
+									$available =  "available"; 
+								  } elseif($diamondPrice != "" && $type=="diamond"){
+									$available =  "available";  
+								  }  elseif($settingsPrice != "" && $type=="settings"){ 
+									 $available =  "available"; 
+								  }else{									  
+								  
+								  } 
+								?>
+							
+							<li class="<?php echo $available." "; ?><?php echo $stepClass; ?><?php if($dreset == true): ?> dreset <?php endif; ?> <?php if($selectedStep == true): ?> selected <?php endif; ?><?php if(!isset($ringbuilderData[$type])): ?>defaultmiddle<?php endif; ?> <?php if($diamondPrice && $settingsPrice) { ?>defaultmiddle3<?php } ?>">
+							<div class="stepdesk"> 
+								<span class="stepborder_main"><span><?php echo $stepNo; ?></span></span>					
+								<div class="hhh">
+								<a href="<?php echo $step['step_url']; ?>"><?php echo $stepTitle; ?></a>	
+								</div>
+								
+								<?php if(isset($diamondPrice) && $type == "diamond"){ ?>
+									<a class="stepeditlink" href="<?php echo $step['step_url']; ?>">Edit</a>						
+								<?php }elseif(isset($settingsPrice) && $type == "settings"){ ?>
+									<a class="stepeditlink" href="<?php echo $step['step_url']; ?>">Edit</a>						
+								<?php }elseif(isset($settingsPrice) && isset($diamondPrice) && $type="review"){ ?>
+									<a class="stepeditlink" href="<?php echo $step['step_url']; ?>">Edit</a>						
+								<?php } ?>
+								<div class="stepborder"></div>
+									
+									<?php if(isset($ringbuilderData[$type])): ?>
+										<?php $typeData = $ringbuilderData[$type]; ?>
+										<?php if(is_numeric($typeData['price'])){ ?>
+											<div class="price-select"><?php echo $typeData['name']." - ".Mage::helper('core')->currency($typeData['price'], true, false); ?></div>
+										<?php } else {  ?>
+											<div class="price-select"><?php echo $typeData['name']." - ".$typeData['price']; ?></div>
+										<?php } ?>
+												 
+										<?php /* <div class="steps-div">
+											<a href="<?php echo $typeData['view_url']; ?>">View</a>
+											<a href="<?php echo $typeData['change_url']; ?>">Change</a>
+										</div> */ ?>
+									<?php else: ?>
+									
+										
+										<?php if($diamondPrice && $settingsPrice): ?>
+											<?php $diamondPrice = preg_replace('/[^0-9\-]/', '', $diamondPrice); ?>
+											<div class="price-select"><?php echo "Total Price : ".Mage::helper('core')->currency($diamondPrice+$settingsPrice, true, false); ?></div>
+											<?php /* <div class="steps-div">
+												<a href="<?php echo $step['step_url']; ?>">View</a>
+											</div> */ ?>
+									
+										<?php endif; ?>
+									<?php endif; ?> 
+								</div>
+								<div class="stepmob">
+									<a class="stepmoblink" href="<?php echo $step['step_url']; ?>"><img src="<?php echo $this->getSkinUrl('images/build_diamondring1.png'); ?>" /></a>
+								</div>
+								
+							</li>
+						<?php $i++; ?>
+					<?php endforeach; ?>
+				</ol>
+			</div>
+		</div>
+	</div> 
+	<?php endif; ?>
+	
+
+<?php } ?>
+
+<script>
+
+jQuery(window).scroll(function() {    
+    var scroll1 = jQuery(window).scrollTop();     
+    //for categorty list page 
+    var stickyheader =  jQuery("#header").height();	    
+	var catname = jQuery(".cat_name").height(); 
+	var totalstick = stickyheader + catname; 
+    // for diamond list page
+	var bannertext = jQuery(".banner_text").height() - 45;
+	var totaldiamond = stickyheader + bannertext;
+	if(jQuery(window).width() >= 768){
+		if(scroll1 >= totaldiamond){
+			 jQuery(".diamondsearch-intelligence-index .shadowsteps").addClass("sticky-ring-builder-list");					
+		}
+		else{
+			 jQuery(".diamondsearch-intelligence-index .shadowsteps").removeClass("sticky-ring-builder-list");						
+		}
+		if(jQuery('#checkclass').hasClass('productdetail')){
+			if (scroll1 >= stickyheader) {
+				jQuery(".ringbuilder.desktop-cat-list.productdetail").addClass("sticky-ring-builder");
+			} else {
+				jQuery(".ringbuilder.desktop-cat-list.productdetail").removeClass("sticky-ring-builder");
+			}
+		}
+	  	else{	    
+				if(scroll1 >= totalstick){
+					jQuery(".catalog-category-view .shadowsteps").addClass("sticky-ring-builder-list");					
+				}
+				else {
+				   jQuery(".catalog-category-view .shadowsteps").removeClass("sticky-ring-builder-list");			 
+				}
+			
+		}
+	}
+});
+
+jQuery(document).ready(function(){
+//	jQuery("#checkclass").insertBefore(".main-container");
+});
+</script>

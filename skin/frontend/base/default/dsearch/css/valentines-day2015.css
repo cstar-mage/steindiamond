@@ -1,0 +1,44 @@
+/* header */
+.site-top-alert .vday-birds{ height:10px; display:inline-block; vertical-align:middle;}
+.site-top-alert .vday-birds img{ vertical-align:top; margin-top:-17px;}
+@media(max-width:767px){
+ .site-top-alert .alert{ text-align:left;padding-top:7px;padding-left:62px; height:44px; overflow:hidden;}
+ .site-top-alert .vday-birds{ height:auto; position:absolute; left:10px; top:8px;}
+ .site-top-alert .glyphicon-heart{ display:none;}
+ .site-top-alert .vday-birds img{margin:0; width:50px;}
+ .site-top-alert .see{ display:block;}
+}
+@media(max-width:400px){
+ .site-top-alert .alert{padding-top:10px;white-space:nowrap;}
+}
+/* base */
+.title-gr-larger .h1 { color: white; font-size: 10px; font-weight: normal; text-align: center; margin: 0; }
+.title-gr-larger .h1 small { color: white; line-height: 20px; font-size: 160%; }
+.title-gr-larger .h1 .s1 { display: block; }
+.title-gr-larger .h1 .text { font-size: 900%; font-family: "GreatVibes-Regular"; text-transform: capitalize; display: block; line-height: 1em; padding: 4px 0; }
+.title-gr-larger .h1 .s2 { display: block; line-height: 14px; }
+.title-gr-larger.inverse .h1 .text, .title-gr-larger.inverse .h1 small { color: black; }
+.title-gr-large .h1 { color: white; font-size: 10px; font-weight: normal; margin-bottom: 20px; margin-top: 0; text-align: center; }
+.title-gr-large .h1 small { color: white; line-height: 20px; font-size: 120%; }
+.title-gr-large .h1 .s1 { display: block; padding-bottom: 8px; }
+.title-gr-large .h1 .text { font-size: 720%; font-family: "GreatVibes-Regular"; text-transform: capitalize; display: block; line-height: 32px; padding-bottom: 26px; }
+.title-gr-large .h1 .s2 { display: block; line-height: 14px; }
+.title-gr-large.inverse .h1 .text, .title-gr-large.inverse .h1 small { color: black; }
+.title-gr-medium .h1 { color: white; font-size: 10px; font-weight: normal; text-align: center; }
+.title-gr-medium .h1 small { color: white; line-height: 20px; font-size: 120%; }
+.title-gr-medium .h1 .s1 { display: block; }
+.title-gr-medium .h1 .text { font-family: "GreatVibes-Regular"; text-transform: capitalize; display: block; }
+.title-gr-medium .h1 .s2 { display: block; }
+.title-gr-medium.inverse .h1 .text, .title-gr-medium.inverse .h1 small { color: black; }
+.channer-gateway-banner .title-gr-larger .s1{padding-bottom:0.6em;}
+.channer-gateway-banner .title-gr-larger .h1 small{ line-height:1.5em;}
+@media (max-width: 479px) {
+.channer-banner .title-gr-larger .h1 .text { font-size: 380%; }
+}
+/* gateway */
+@media (max-width: 991px) {
+.channer-banner .title-gr-larger .h1 .text { font-size: 400%; }
+}
+@media (max-width: 479px) {
+.channer-banner .title-gr-larger .h1 { font-size: 6px; }
+}

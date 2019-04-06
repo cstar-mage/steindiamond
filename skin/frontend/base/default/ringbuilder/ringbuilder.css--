@@ -1,0 +1,360 @@
+.ringbuilder.slide_show.mobile-cat-list{
+ display: none;
+}
+.ringbuilder.slide_show.desktop-cat-list {
+  position: relative;
+  width: 100%;
+}
+.ringbuilder .liststep {
+  max-width: 909px;
+  padding: 0 10px;margin: 0 auto;
+}
+.ringbuilder.liststep li{
+  display: inline-block;
+}
+.ringbuilder.slide_show.desktop-cat-list .liststep ol {
+  position: absolute;
+  bottom: 0;
+}
+.ringbuilder .liststep li.se-diamond {
+  /* background: url(../images/selectdiamomd1st.png); */
+  background: url(../images/1stdiamond.png);
+  background-repeat: no-repeat;
+  background-position-x: 2px;
+   font-style: italic;
+  padding: 10px 0px 9px 44px;
+  float: left;
+  width: 303px;
+  position: relative;
+  font-size: 14px;
+  height: 84px;
+  margin: 0;
+}
+.ringbuilder .liststep li.se-diamond{
+ background: url(../images/1stdiamond_1.png);
+  background-repeat: no-repeat;
+  background-position-x: 2px;
+   font-style: italic;
+  padding: 10px 0px 9px 44px;
+  float: left;
+  width: 303px;
+  position: relative;
+  font-size: 14px;
+  height: 84px;
+  margin: 0;
+}
+
+.ringbuilder .liststep li.se-diamond.selected {
+  /* background: url(../images/selectdiamomd1st.png); */
+  background: url(../images/1stdiamond.png);
+  background-repeat: no-repeat;
+  background-position-x: 2px;
+   font-style: italic;
+  padding: 10px 0px 9px 44px;
+  float: left;
+  width: 303px;
+  position: relative;
+  font-size: 14px;
+  height: 84px;
+  margin: 0;
+}
+
+.ringbuilder .liststep li.re-ring {  
+  background: url(../images/2nddiamond.png);
+  background-position-x: 0px;
+  background-repeat: no-repeat;
+  font-style: italic;
+  padding: 10px 0px 9px 44px;
+  float: left;
+  width: 299px;
+  position: relative;
+  font-size: 14px;
+  height: 84px;
+  margin: 0;
+}
+.ringbuilder .liststep li.re-ring.selected{
+background: url(../images/2nddiamond_1.png);
+}
+.ringbuilder .liststep li.checkout {
+  background: url(../images/3rdunselected.png);
+  background-position-x: -3px;
+  background-repeat: no-repeat;
+  padding: 10px 0px 9px 44px;
+  font-style: italic;
+  float: left;
+  width: 301px;
+  position: relative;
+  font-size: 14px;
+  height: 84px;
+  margin: 0;
+}
+.ringbuilder .liststep li.checkout.selected{
+background: url(../images/3rdunselected+_1.png);
+}
+.ringbuilder .liststep li a, .ringbuilder .liststep li a:hover {
+  vertical-align: middle;
+  font-size: 16px;
+  font-weight: 400;
+  color: #fff !important;
+  font-family: 'Playfair Display', serif;
+  font-style: normal;
+  text-transform: uppercase;
+}
+.ringbuilder .liststep li.selected a, .ringbuilder .liststep li.selected a:hover {
+  vertical-align: middle;
+  font-size: 16px;
+  font-weight: 400;
+  color: #41395f !important;
+  font-family: 'Playfair Display', serif;
+  font-style: normal;
+  text-transform: uppercase;
+}
+
+
+.ringbuilder .steps-div a{
+font-size: 12px !important;
+  color: #fff !important;
+  font-style: italic !important;
+  padding-right: 5%;
+  text-transform: capitalize !important;
+  text-decoration: underline !important;
+  }
+.ringbuilder .liststep li.selected span {
+  position: absolute;
+  bottom: 0;
+  left: 6px;
+  top: 0px;
+  right: unset;
+  color: #41395f;
+  font-size: 60px;
+  line-height: 1;
+  font-family: 'Playfair Display', serif;
+}
+
+.ringbuilder .liststep li.re-ring > a {
+  color: #fff;
+}
+.ringbuilder .liststep li.selected .price-select {
+  min-height: 15px;
+  color: #41395f;
+}
+.ringbuilder .liststep li .price-select {
+  min-height: 15px;
+  color: #fff;
+}
+
+.ringbuilder .liststep li span {
+  position: absolute;
+  bottom: 0;
+  left: 6px;
+  top: 0px;
+  right: unset;
+  color: #fff;
+  font-size: 60px;
+  line-height: 1;
+  font-family: 'Playfair Display', serif;
+}
+.ringbuilder .liststep li span {
+  position: absolute;
+  bottom: 0;
+  left: 6px;
+  top: 0px;
+  right: unset;
+  color: #fff;
+  font-size: 60px;
+  line-height: 1;
+  font-family: 'Playfair Display', serif;
+}
+.ringbuilder .liststep li.checkout > a {
+  color: #fff;
+}
+@media only screen and (max-width: 770px){
+.slide_show.desktop-cat-list img{
+width:100%;
+}
+.ringbuilder .steps-div a {
+  color: #41395f !important;
+  font-size: 16px !important;
+}
+.ringbuilder.mobile-cat-list .liststep ol {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0px;
+}
+.ringbuilder.slide_show.mobile-cat-list{
+ display: block;position: relative;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.ringbuilder.slide_show.desktop-cat-list{
+ display: none;
+}
+.ringbuilder .cat_name_list {
+  display: block;
+  font-size: 20px;
+  font-family: 'Playfair Display', serif;
+  color: #41395f !important;
+  text-align: center;
+  padding-top: 30px;  
+  padding-bottom: 30px;
+  font-style: italic;
+  letter-spacing: 1px;
+}
+.ringbuilder.mobile-cat-list li.se-diamond-res{
+ width: 33%;
+  height: 84px;  
+  float: left;
+  margin: 0;
+  padding: 5px;
+  position: relative;
+  border: 3px solid #ccc;
+  background: #6d6d6e;
+  opacity: 0.8;
+}
+.ringbuilder.mobile-cat-list li.se-diamond-res.selected,.ringbuilder.mobile-cat-list li.re-ring-res.selected,.ringbuilder.mobile-cat-list li.checkout-res.selected {
+  width: 33%;
+  height: 84px;
+  float: left;
+  margin: 0;
+  background: #f5f4f8;
+  position: relative;
+  border: 3px solid #41395f;
+  padding: 5px;
+  opacity: 1;
+}
+.ringbuilder.mobile-cat-list li.selected > a {
+  color: #41395f !important;
+  width: 60%;
+  float: right;
+  text-align: right;
+  padding-right: 5%;
+}
+.ringbuilder .steps-div {
+  width: 100%;
+  text-align: right;
+}
+.ringbuilder .liststep li a, .ringbuilder .liststep li a:hover {
+  vertical-align: middle;
+  font-size: 16px;
+  font-weight: 400;
+  color: #41395f;
+  font-family: 'Playfair Display', serif;
+  font-style: normal;
+  text-transform: uppercase;
+}
+.ringbuilder .liststep li.selected a, .ringbuilder .liststep li.selected a:hover {
+  vertical-align: middle;
+  font-size: 16px;
+  font-weight: 400;
+  color: #41395f;
+  font-family: 'Playfair Display', serif;
+  font-style: normal;
+  text-transform: uppercase;
+}
+
+.ringbuilder.mobile-cat-list li.selected span {
+  position: absolute;
+  bottom: unset;
+  left: 1px;
+  top: 0px;
+  right: unset;
+  color: #41395f !important;
+  font-size: 55.64px;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+    line-height: 1;
+}
+.ringbuilder.mobile-cat-list li.re-ring-res {
+  width: 33%;
+  height: 84px;  
+  float: left;
+  margin: 0;
+  padding: 5px;
+  position: relative;
+  border: 3px solid #ccc;
+  background: #6d6d6e;
+  opacity: 0.8;
+    
+}
+
+.ringbuilder.mobile-cat-list li.re-ring-res > a {
+  color: #fff;
+  width: 60%;
+  float: right;
+  text-align: right;
+  padding-right: 5%;
+}
+.ringbuilder.mobile-cat-list li.se-diamond-res > a {
+  color: #fff;
+  width: 60%;
+  float: right;
+  text-align: right;
+  padding-right: 5%;
+}
+.ringbuilder.mobile-cat-list li.re-ring-res span {
+  position: absolute;
+  bottom: unset;
+  top: 0px;
+  left: 1px;
+  right: unset;
+  color: #fff;
+  font-size: 55.64px;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;  line-height: 1;
+}
+.ringbuilder.mobile-cat-list li.checkout-res {
+  width: 33%;
+  height: 84px;
+  padding: 5px;
+  float: left;
+  margin: 0;
+  position: relative;
+  border: 3px solid #ccc;
+  background: #6d6d6e;
+  opacity: 0.8;
+}
+.ringbuilder.mobile-cat-list li.checkout-res > a {
+  color: #fff;
+  width: 70%;
+  float: right;
+  text-align: right;
+  padding-right: 5%;
+}
+.ringbuilder.mobile-cat-list li.checkout-res span {
+  position: absolute;
+  bottom: unset;
+  top: 0px;
+  left: 1px;
+  right: unset;
+  color: #fff;
+  font-family: 'Playfair Display', serif;
+  font-size: 55.64px;
+  font-style: italic;  line-height: 1;
+}
+}
+
+@media only screen and (max-width: 480px){
+.ringbuilder.mobile-cat-list li.checkout-res,.ringbuilder.mobile-cat-list li.re-ring-res{ padding: 5px;}
+}
+
+@media only screen and (max-width: 414px){
+.ringbuilder .liststep li a, .ringbuilder .liststep li a:hover {
+  font-size: 13px !important;
+}
+.ringbuilder .liststep li.selected a, .ringbuilder .liststep li.selected a:hover{
+  font-size: 13px !important;
+}
+.ringbuilder.mobile-cat-list li.se-diamond-res {
+  padding: 5px;
+}
+.ringbuilder .liststep li a, .ringbuilder .liststep li a:hover{  font-size: 13px;}
+}
+@media only screen and (max-width: 320px){
+.ringbuilder .liststep li.selected a, .ringbuilder .liststep li.selected a:hover {
+  font-size: 11px !important;
+}
+.ringbuilder .liststep li a, .ringbuilder .liststep li a:hover {
+  font-size: 11px !important;
+}}

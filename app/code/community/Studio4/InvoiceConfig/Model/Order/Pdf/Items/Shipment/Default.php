@@ -1,0 +1,181 @@
+<?php
+
+/**
+ * Sales Order Invoice PDF model
+ *
+ * @category   Studio4
+ * @package    Studio4_InvoiceConfig
+ * @author     Studio4 <info@studio4.lt>
+ */
+ 
+class Studio4_InvoiceConfig_Model_Order_Pdf_Items_Shipment_Default extends Studio4_InvoiceConfig_Model_Order_Pdf_Items_Abstract
+{
+    /**
+     * Draw item line
+     */
+    public function draw($returnHeight = false)
+    {
+    	$commonHelper = Mage::helper('studio4_invoiceconfig/common');
+		
+		$mostOffset = 0;
+		
+        $item   = $this->getItem();
+        $pdf    = $this->getPdf();
+        $page   = $this->getPage();
+		
+		//if not only checking the height - let's check and set up page and background if needed
+        if (!$returnHeight)
+		{
+			$blockHeight = $this->draw(true);
+			
+			if ($pdf->y - $blockHeight < 12)
+            {
+				$page = $pdf->newPage(array('table_header' => true));
+                $this->setPage($page);
+            }
+			
+			if ($pdf->currentItemWithBg)
+			{
+				$page -> setFillColor(new Zend_Pdf_Color_Html('#' . $pdf -> params['lightBg']));
+				$page -> drawRectangle(18, $pdf -> y, $page->getWidth() - 18, $pdf -> y - $blockHeight, $fillType = Zend_Pdf_Page::SHAPE_DRAW_FILL);
+			}
+		}
+		
+		$topOffset = 10;
+		
+		if (!$returnHeight)
+		{
+			$page -> setFillColor(new Zend_Pdf_Color_Html('#' . $pdf -> params['textColor']));
+			$font = $pdf->_setFontRegular($page, 9);
+			
+			//ouput quantity
+			$page->drawText($item->getQty() * 1, 28, $pdf->y - $topOffset - 9, 'UTF-8');
+		}
+			
+        
+		
+		//slice product name into chunks
+		$font = $pdf->_setFontLight($page, 9);
+		//$nameParts = Mage::helper('core/string')->str_split($item->getName(), 54, true, true);
+		$nameParts = $commonHelper->sliceStringByPoints($item->getName(), 266, $font, 9);
+		
+		if (!$returnHeight)
+		{
+			$page -> setFillColor(new Zend_Pdf_Color_Html('#' . $pdf -> params['textColor']));
+		}
+		
+		$titleOffset = 0;
+		
+		//output product name
+		foreach ($nameParts as $key => $nPart)
+		{
+			$titleOffset = $topOffset + 9 + (13 * $key);
+			$y = $pdf->y - $titleOffset;
+			
+			if (!$returnHeight)
+				$page->drawText($nPart, 78, $y, 'UTF-8');
+		}
+		
+		if ($titleOffset > $mostOffset)
+			$mostOffset = $titleOffset;
+		
+		//check if any options are available and prepare them for output
+		$options = $this->getItemOptions();
+		$optionLines = array();
+		
+		if ($options) {
+			
+			$font = $pdf->_setFontLight($page, 7);
+			
+            foreach ($options as $option) {
+               $_printValue = '';
+               if ($option['value']) {
+                    if (isset($option['print_value'])) {
+                        $_printValue = $option['print_value'];
+                    } else {
+                        $_printValue = strip_tags($option['value']);
+                    }
+                }
+			   
+               	end($optionLines);
+				$lastLine = key($optionLines);
+				if (is_null($lastLine))
+					$lastLineVal = '';
+				else
+					$lastLineVal = $optionLines[$lastLine];
+				
+                $toOutput = strip_tags($option['label']).': '.$_printValue;
+				
+				$joinedLine = $lastLineVal . (!empty($lastLineVal)?', ':'') . $toOutput;
+				
+				$w = $pdf->widthForStringUsingFontSize($joinedLine, $font, 7);
+				
+				if ($w <= 266 && !is_null($lastLine))
+					$optionLines[$lastLine] = $joinedLine;
+				else
+				{
+					$optionLines = array_merge($optionLines, $commonHelper->sliceStringByPoints($toOutput, 266, $font, 7));
+					/*if (strlen($toOutput) > 70)
+					{
+						$slices = Mage::helper('core/string')->str_split($toOutput, 70);
+						foreach ($slices as $slice)
+							$optionLines[] = $slice;
+					}
+					else
+						$optionLines[] = $toOutput;*/
+				}
+            }
+        }
+		
+		if (!$returnHeight)
+			$font = $pdf->_setFontLight($page, 7);
+		
+		$optionsOffset = 0;
+		
+		//ouput options
+		foreach ($optionLines as $key => $line)
+		{
+			$optionsOffset = $titleOffset + 10 + (10 * $key);
+			$y = $pdf->y - $optionsOffset;
+			
+			if (!$returnHeight)
+				$page->drawText($line, 78, $y, 'UTF-8');
+		}
+		
+		if ($optionsOffset > $mostOffset)
+			$mostOffset = $optionsOffset;
+		
+		$font = $pdf->_setFontLight($page, 9);
+		
+		//slice SKU
+		//$skuParts = Mage::helper('core/string')->str_split($this->getSku($item), 44);
+		$skuParts = $commonHelper->sliceStringByPoints($this->getSku($item), 213, $font, 9);
+		$skuOffset = 0;
+		
+		//ouput SKU slices
+		foreach ($skuParts as $key => $sPart)
+		{
+			$skuOffset = $topOffset + 9 + (13 * $key);
+			$y = $pdf->y - $skuOffset;
+			
+			if (!$returnHeight)
+				$page->drawText($sPart, 354, $y, 'UTF-8');
+		}
+		
+		if ($skuOffset > $mostOffset)
+			$mostOffset = $skuOffset;
+		
+		//keep some whitespace under the info
+		$mostOffset += 12;
+
+		//if only height is needed - return it
+		if ($returnHeight)
+			return $mostOffset;
+		else
+		{
+			$pdf->y -= $mostOffset;
+        	$this->setPage($page);
+		}
+
+    }
+}

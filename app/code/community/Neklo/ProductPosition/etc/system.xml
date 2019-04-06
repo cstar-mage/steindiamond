@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<!--
+NOTICE OF LICENSE
+
+This source file is subject to the NekloEULA that is bundled with this package in the file ICENSE.txt.
+
+It is also available through the world-wide-web at this URL: http://store.neklo.com/LICENSE.txt
+
+Copyright (c)  Neklo (http://store.neklo.com/)
+-->
+<config>
+    <sections>
+        <neklo_productposition translate="label" module="neklo_productposition">
+            <label>Product Position</label>
+            <tab>neklo</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>150</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label">
+                    <label>General Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                     <fields>
+                        <is_enabled translate="label">
+                            <label>Is Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </is_enabled>
+                    </fields>
+                    <fields>					
+                        <hide_disabled_product translate="label">
+                            <label>Hide Disabled Product</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>11</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </hide_disabled_product>
+                    </fields>            
+                </general>
+                <grid translate="label">
+                    <label>Grid Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <per_page_count translate="label">
+                            <label>Products per Page on Grid</label>
+                            <config_path>catalog/frontend/grid_per_page</config_path>
+                            <frontend_type>select</frontend_type>
+                            <source_model>neklo_productposition_source/system_config_source_count</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </per_page_count>
+                        <column_count translate="label">
+                            <label>Column Count</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </column_count>
+                    </fields>
+                </grid>
+            </groups>
+        </neklo_productposition>
+    </sections>
+</config>

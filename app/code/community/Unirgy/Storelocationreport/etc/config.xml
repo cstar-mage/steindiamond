@@ -1,0 +1,122 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Unirgy_Storelocationreport>
+            <version>0.1.0</version>
+        </Unirgy_Storelocationreport>
+    </modules>
+    <!-- <frontend>
+        <routers>
+            <storelocationreport>
+                <use>standard</use>
+                <args>
+                    <module>Unirgy_Storelocationreport</module>
+                    <frontName>storelocationreport</frontName>
+                </args>
+            </storelocationreport>
+        </routers>
+        <layout>
+            <updates>
+                <storelocationreport>
+                    <file>storelocationreport.xml</file>
+                </storelocationreport>
+            </updates>
+        </layout>
+    </frontend> -->
+    <admin>
+        <routers>
+			<storelocationreport>
+				<use>admin</use>
+				<args>
+					<module>Unirgy_Storelocationreport</module>
+					<frontName>storelocationreport</frontName>
+				</args>
+			</storelocationreport>
+        </routers>
+    </admin>
+    <adminhtml>
+		<menu>
+			<report module="storelocationreport">
+				<children>
+					<storelocationreport module="storelocationreport">
+						<title>Store Locator Report</title>
+						<sort_order>100</sort_order>
+						<action>storelocationreport/adminhtml_storelocationreport</action>
+					</storelocationreport>
+				</children>
+			</report>
+		</menu>
+		<acl>
+			<resources>
+				<all>
+					<title>Allow Everything</title>
+				</all>
+				<admin>
+					<children>
+						<report module="storelocationreport">
+							<title>Storelocationreport</title>
+							<children>
+								<storelocationreport module="storelocationreport">
+									<title>Store Locator Report</title>
+								</storelocationreport>
+							</children>
+						</report>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+		<layout>
+			<updates>
+				<storelocationreport>
+					<file>storelocationreport.xml</file>
+				</storelocationreport>
+			</updates>
+		</layout>
+    </adminhtml>   
+    <global>
+        <models>
+            <storelocationreport>
+                <class>Unirgy_Storelocationreport_Model</class>
+                <resourceModel>storelocationreport_mysql4</resourceModel>
+            </storelocationreport>
+            <storelocationreport_mysql4>
+                <class>Unirgy_Storelocationreport_Model_Mysql4</class>
+                <entities>
+                    <storelocationreport>
+                        <table>ustorelocator_report</table>
+                    </storelocationreport>
+                </entities>
+            </storelocationreport_mysql4>
+        </models>
+        <resources>
+            <storelocationreport_setup>
+                <setup>
+                    <module>Unirgy_Storelocationreport</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </storelocationreport_setup>
+            <storelocationreport_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </storelocationreport_write>
+            <storelocationreport_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </storelocationreport_read>
+        </resources>
+        <blocks>
+            <storelocationreport>
+                <class>Unirgy_Storelocationreport_Block</class>
+            </storelocationreport>
+        </blocks>
+        <helpers>
+            <storelocationreport>
+                <class>Unirgy_Storelocationreport_Helper</class>
+            </storelocationreport>
+        </helpers>
+    </global>
+</config>
